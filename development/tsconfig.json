@@ -1,0 +1,22 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "outDir": "src/ng2-dynamic-dialog",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "declaration": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "watch": true,
+        "diagnostics": false,
+        "listFiles": false,
+        "pretty": false
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

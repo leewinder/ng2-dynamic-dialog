@@ -1,0 +1,95 @@
+/* Full dialog layout properties */
+.ng2-dynamic-dialog-modal{
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 20px;
+
+    border: 7px solid;
+}
+
+/* Dialog body style */
+.ng2-dynamic-dialog-body {
+    opacity: 1.0;
+}
+
+/* Title positioning */
+.ng2-dynamic-dialog-modal-title{
+
+    position: relative;
+    text-align: center;
+
+    top: -15px;
+}
+
+/* Close button properties */
+.ng2-dynamic-dialog-modal-button-close{
+
+    width: 25px;
+    height: 25px;
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+/* Inidiviual button properties */
+.ng2-dynamic-dialog-modal-button{
+
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+
+    border: 2px solid;
+}
+
+/* Button 1 (bottom left) */
+.ng2-dynamic-dialog-modal-button-button1{
+
+    position: absolute;
+
+    bottom: 10px;
+    left: 10px;
+
+
+}
+
+/* Button 2 (bottom right) */
+.ng2-dynamic-dialog-modal-button-button2{
+
+    position: absolute;
+
+    bottom: 10px;
+    right: 10px;
+
+}
+
+/* Button 3 (bottom) */
+.ng2-dynamic-dialog-modal-button-button3{
+
+    position: absolute;
+    width: auto;
+
+    bottom: 10px;
+
+    right: 10px;
+    left: 10px;
+}
+
+/* Text on all buttons */
+.ng2-dynamic-dialog-modal-button-text{
+
+    position: relative;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Any selectable option properties */
+.ng2-dynamic-dialog-selectable-option {
+    cursor: pointer;
+}

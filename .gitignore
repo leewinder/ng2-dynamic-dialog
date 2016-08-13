@@ -1,0 +1,7 @@
+development/node_modules
+.editorconfig
+development/typings
+settings.json
+development/src/**/*.js.map
+development/src/**/*.js
+development/src/**/*.d.ts
