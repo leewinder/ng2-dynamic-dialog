@@ -1,0 +1,28 @@
+# Language
+language: node_js
+node_js:
+  - "node"
+  - "iojs"
+
+
+# Branches to build
+branches:
+  only:
+    - master
+    - develop
+
+install:
+  - npm install
+
+# What to run
+script:
+  - tsc -p ./development/tsconfig-ci.json
+  - echo done
+
+# Notifications
+notifications:
+  email:
+    recipients:
+      - lee.winder@gmail.com
+      on_success: change
+      on_failure: change
