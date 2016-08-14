@@ -1,31 +1,50 @@
 {
-  "name": "ng2-dynamic-dialog",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
-    "lite": "lite-server",
-    "postinstall": "typings install",
-    "lint": "tslint \"source/**/*.ts\"",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "@angular/core": "2.0.0-rc.4",
-    "@angular/common": "2.0.0-rc.4",
-    "@angular/compiler": "2.0.0-rc.4",
-    "@angular/platform-browser": "2.0.0-rc.4",
-    "systemjs": "0.19.27",
-    "core-js": "^2.4.0",
-    "rxjs": "5.0.0-beta.6",
-    "zone.js": "^0.6.12"
-  },
-  "devDependencies": {
-    "concurrently": "^2.0.0",
-    "typescript": "^1.8.10",
-    "typings":"^1.0.4",
-    "codelyzer": "0.0.20",
-    "tslint": "3.11.0"
-  }
+    "name": "ng2-dynamic-dialog",
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "A dynamically updating modal dialog for use in Angular 2 applications",
+    "readmeFilename": "../README.md",
+    "private": true,
+    "homepage": "https://github.com/leewinder/ng2-dynamic-dialog",
+    "author": {
+        "name": "Lee Winder",
+        "email": "lee.winder@gmail.com",
+        "url": "www.leewinder.co.uk"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/leewinder/ng2-dynamic-dialog.git"
+    },
+    "bugs": {
+        "url": "https://github.com/leewinder/ng2-dynamic-dialog/issues"
+    },
+    "keywords": [
+        "angular2",
+        "angular 2",
+        "ng2",
+        "typescript",
+        "dialog",
+        "modal"
+    ],
+    "scripts": {
+        "postinstall": "typings install",
+        "typings": "typings"
+    },
+    "dependencies": {
+        "@angular/core": "2.0.0-rc.4",
+        "@angular/common": "2.0.0-rc.4",
+        "@angular/compiler": "2.0.0-rc.4",
+        "@angular/platform-browser": "2.0.0-rc.4",
+        "systemjs": "0.19.27",
+        "core-js": "^2.4.0",
+        "rxjs": "5.0.0-beta.6",
+        "zone.js": "^0.6.12"
+    },
+    "devDependencies": {
+        "concurrently": "^2.0.0",
+        "typescript": "^1.8.10",
+        "typings": "^1.0.4",
+        "codelyzer": "0.0.20",
+        "tslint": "3.11.0"
+    }
 }
