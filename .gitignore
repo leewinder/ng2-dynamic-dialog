@@ -4,3 +4,4 @@ settings.json
 development/src/**/*.js.map
 development/src/**/*.js
 development/src/**/*.d.ts
+release

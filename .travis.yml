@@ -18,7 +18,9 @@ install:
 # What to run
 script:
   - tsc -p tsconfig-ci.json
-  - echo done
+  - cd "../automation"
+  - python prepare_distribution_package.py
+  - python create_local_package.py
 
 # Notifications
 notifications:
