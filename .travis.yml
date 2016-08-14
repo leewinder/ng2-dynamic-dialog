@@ -12,11 +12,12 @@ branches:
     - develop
 
 install:
+  - cd "development"
   - npm install
 
 # What to run
 script:
-  - tsc -p ./development/tsconfig-ci.json
+  - tsc -p tsconfig-ci.json
   - echo done
 
 # Notifications
