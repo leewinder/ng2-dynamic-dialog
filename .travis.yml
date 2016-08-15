@@ -20,8 +20,7 @@ script:
   - tsc -p tsconfig-ci.json
   - cd "../automation"
   - python prepare_distribution_package.py
-  - python create_local_package.py
-  - python publish_release_package.py
+  - python create_local_package.py && python publish_release_package.py
 
 # Notifications
 notifications:
