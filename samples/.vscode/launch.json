@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Lite-Server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/lite-server/bin/lite-server",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/src/",
+            "cwd": "${workspaceRoot}"
+        }
+    ]
+}
