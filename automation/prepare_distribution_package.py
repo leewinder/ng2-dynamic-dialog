@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+#
+# Builds up a release package ready to be built or distributed by NPM.  The distributable content
+# is taken from the development folder to make it easier to strip out unneeded package content.
+#
+
 # Imports
 import shutil, os
 import distutils.dir_util

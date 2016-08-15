@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+#
+# Creates a local NPM package for testing using the output generated 
+# from 'prepare_distribution_package.py'
+#
+
 # Imports
 import shutil, os
 import subprocess
