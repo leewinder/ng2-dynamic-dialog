@@ -6,10 +6,13 @@
 # Note that this script relies on the use of Travis CI environment variables, meaning
 # this script can only be run as part of a Travis CI build process
 #
+# It also requires npm-cli-login and NPM_USER, NPM_PASS and NPM_EMAIL present in the envvars
+# npm install -g npm-cli-login
+#
 
 # Imports
-import shutil, os
-import subprocess
+import os
+import cli
 
 
 #
@@ -23,9 +26,9 @@ def get_package_folder():
 
 
 #
-# Main entry function
+# Verifies the branch we're on
 #
-def main():
+def verify_branch_name():
 
     # Do we have the Environment variable to detect the branch?
     # We only run this script on the master branch
@@ -35,44 +38,46 @@ def main():
     except KeyError:
         print "Unable to access the 'TRAVIS_BRANCH' environment variable\n"
 
+    # We only run on master
     if (branch_name.lower() != 'master'):
 
         # Output the message
         print "Publishing packages can only be carried out on the 'master' branch"
         print "The branch being built is '" + branch_name + "' so this step will be skipped'" 
 
-        # This is fine, so exit with 0
+        return False
+
+    # We're good
+    return True
+
+
+#
+# Main entry function
+#
+def main():
+
+    # Check we're on a branch we can run on
+    branch_valid = verify_branch_name()
+    if (branch_valid == False):
         exit(0)
 
     # Get our folder and remove existing packages
     package_path = get_package_folder()
+    
+    # Log in
+    return_code, std_out, std_err = cli.run_command_line(package_path, "npm-cli-login", None)
+    if (return_code != 0):
+        exit(return_code)
 
-    # Build our package
-    os.chdir(package_path)
-    proc = subprocess.Popen(["npm", "publish"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    std_out, std_err = proc.communicate()
-
-    # Output the comment results
-    if (len(std_out) != 0):
-        print "\n*** Output ***"
-        print std_out + "\n"
-
-    if (len(std_err) != 0):
-        print "\n\n*** Error ***"
-        print std_err + "\n"
-
-    # Did we succeed?
-    if (proc.returncode != 0):
-        print "npm publish failed with a return code of " + str(proc.returncode)
-        exit(proc.returncode)
-
-    # Move the file we just created
-    shutil.move(package_path + std_out.strip(), package_path + '../')
+    
+    # Publish our package
+    return_code, std_out, std_err = cli.run_command_line(package_path, "npm", ["publish"])
+    if (return_code != 0):
+        exit(return_code)
 
     # Done
-    print "Successfully created package file " + std_out.strip()
+    print "Successfully published package file"
     
-
 
 #
 # Main entry point

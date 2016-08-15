@@ -9,6 +9,7 @@
 import shutil, os
 import distutils.dir_util
 
+
 #
 # Gets the main package folder
 #
@@ -42,7 +43,6 @@ def main():
 
     # Copy over all the source files
     distutils.dir_util.copy_tree(root_folder + 'development/src/ng2-dynamic-dialog', distribution_folder)
-
     
 
 #

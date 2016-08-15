@@ -14,6 +14,7 @@ branches:
 install:
   - cd "development"
   - npm install
+  - npm install -g npm-cli-login
 
 # What to run
 script:

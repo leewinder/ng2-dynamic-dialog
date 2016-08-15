@@ -7,8 +7,8 @@
 
 # Imports
 import shutil, os
-import subprocess
 import glob
+import cli
 
 #
 # Gets the main package folder
@@ -41,24 +41,10 @@ def main():
     remove_existing_packages(destination_path)
 
     # Build our package
-    os.chdir(package_path)
-    proc = subprocess.Popen(["npm", "pack"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    std_out, std_err = proc.communicate()
-
-    # Output the comment results
-    if (len(std_out) != 0):
-        print "\n*** Output ***"
-        print std_out + "\n"
-
-    if (len(std_err) != 0):
-        print "\n\n*** Error ***"
-        print std_err + "\n"
-
-    # Did we succeed?
-    if (proc.returncode != 0):
-        print "npm pack failed with a return code of " + str(proc.returncode)
-        exit(proc.returncode)
-
+    return_code, std_out, std_err = cli.run_command_line(package_path, "npm", ["pack"])
+    if (return_code != 0):
+        exit(return_code)
+        
     # Move the file we just created
     shutil.move(package_path + std_out.strip(), package_path + '../')
 
