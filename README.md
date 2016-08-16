@@ -195,7 +195,7 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
 In the above example, we are creating an instance of 'LogInComponent' which can be seen in [custom-component-dialog/content/login](https://github.com/leewinder/ng2-dynamic-dialog/tree/master/samples/src/dialogs/custom-component-dialog/content/login).  Once running, the 'LogInComponent' will then run as any other component.
 
 ### Transitioning Between Dialogs
-<img src="https://cloud.githubusercontent.com/assets/1649415/17703280/06a1fb92-63c9-11e6-8d52-d751fa4fec6f.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17703280/06a1fb92-63c9-11e6-8d52-d751fa4fec6f.gif" width="400""/>
+<img src="https://cloud.githubusercontent.com/assets/1649415/17707331/d338c5ba-63d7-11e6-80e6-80ac1c87dd47.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17707331/d338c5ba-63d7-11e6-80e6-80ac1c87dd47.gif" width="400""/>
 
 You can use ng2-dynamic-dialog to automatically to transition between different dialogs by changing the content of 'Ng2DynamicDialogContent' once the dialog is already being rendered.  A simple example of this can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
