@@ -44,6 +44,8 @@ ng2-dynamic-dialog is developed in [Visual Studio Code](https://code.visualstudi
 If you are not using Visual Studio Code, browse to the './samples' folder and run `tsc` to build the application.  Then open your local server of choice pointing to ./samples as the root directory.
 
 ### Triggering Basic Dialogs
+<img src="https://cloud.githubusercontent.com/assets/1649415/17703006/123c9a58-63c8-11e6-9acd-df1bde4dd555.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17703006/123c9a58-63c8-11e6-9acd-df1bde4dd555.gif" width="400""/>
+
 The simplest way to show a dialog is to use the custom style and simply provide custom HTML which will fill in the content of the dialog.  This can be seen in [default-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/default-with-html-dialog/default-with-html-dialog.component.ts).
 
 ```TypeScript
@@ -112,6 +114,8 @@ export class DefaultWithHtmlDialogComponent {
 ```
 
 ### Triggering Dialogs With Custom Style
+<img src="https://cloud.githubusercontent.com/assets/1649415/17703101/6fe8ac50-63c8-11e6-8c4c-8f0321143e77.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17703101/6fe8ac50-63c8-11e6-8c4c-8f0321143e77.gif" width="400""/>
+
 Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customise how the dialog looks.  This can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
 ```TypeScript
@@ -155,6 +159,8 @@ Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customi
 Once shown, the dialog will use the defined styles to present the dialog as required.  The available options can be seen in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts)
 
 ### Triggering Dialogs With Custom Components
+<img src="https://cloud.githubusercontent.com/assets/1649415/17703216/d6144b42-63c8-11e6-8f1f-a1dc86ca4227.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17703216/d6144b42-63c8-11e6-8f1f-a1dc86ca4227.gif" width="400""/>
+
 If you have dialog content that is more complicated than standard HTML can provide, or you need to provide internal behaviour within the dialog, you can pass components to the dialog to be rendered.  This will create an instance of your component within the dialog's HTML tree and behaves like any other instantiated component.
 
 Passing a custom component can be seen in [custom-component-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/custom-component-dialog/custom-component-dialog.component.ts).
@@ -189,6 +195,8 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
 In the above example, we are creating an instance of 'LogInComponent' which can be seen in [samples/src/dialogs/custom-component-dialog/content/login)](https://github.com/leewinder/ng2-dynamic-dialog/tree/develop/samples/src/dialogs/custom-component-dialog/content/login).  Once running, the 'LogInComponent' will then run as any other component.
 
 ### Transitioning Between Dialogs
+<img src="https://cloud.githubusercontent.com/assets/1649415/17703280/06a1fb92-63c9-11e6-8d52-d751fa4fec6f.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17703280/06a1fb92-63c9-11e6-8d52-d751fa4fec6f.gif" width="400""/>
+
 You can use ng2-dynamic-dialog to automatically to transition between different dialogs by changing the content of 'Ng2DynamicDialogContent' once the dialog is already being rendered.  A simple example of this can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
 ```TypeScript
