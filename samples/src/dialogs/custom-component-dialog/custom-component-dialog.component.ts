@@ -92,7 +92,7 @@ export class CustomComponentDialogComponent implements OnInit {
         // Dialog style
         dialogStyle.dialogBorderColor = '#005E5A';
 
-        dialogStyle.dialogFontFamily = 'Karla, sans-serif';
+        dialogStyle.dialogFontFamily = 'Architects Daughter, cursive';
         dialogStyle.dialogFontSize = '18';
 
         // Button style

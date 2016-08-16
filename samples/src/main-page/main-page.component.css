@@ -9,6 +9,10 @@
        font-size: 60px;
 }
 
+.samples-screen-body-text {
+       font-size: 14px;
+}
+
 .samples-screen-frame {
 
     position: fixed;
