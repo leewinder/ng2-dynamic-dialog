@@ -1,0 +1,44 @@
+
+.signup-option-profile-picture {
+
+    margin: 0 auto;
+
+    width: 130px;
+    height: 130px;
+
+    text-align: center;
+}
+
+.signup-option-profile-picture-image {
+
+    width: 100%;
+    height: 100%;
+}
+
+.signup-option-profile-picture-instructions {
+
+    margin: 0 auto;
+
+    position: relative;
+    color: #979797;
+
+    font-size: 12px;
+
+    top: -75px;
+    width: 80%;
+}
+
+.signup-option-profile-picture-limitations {
+
+    text-align: center;
+    color: #979797;
+
+    font-size: 12px;
+
+    padding-top:5px;
+}
+
+signup-option-profile-group {
+
+    margin: 0 auto;
+}

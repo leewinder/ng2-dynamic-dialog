@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SamplesComponent } from '../samples/samples.component';
+
+import { MainPageComponent } from '../main-page/main-page.component';
 
 @Component({
 
@@ -9,6 +10,6 @@ import { SamplesComponent } from '../samples/samples.component';
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
 
-    directives: [SamplesComponent],
+    directives: [MainPageComponent],
 })
 export class AppComponent { }
