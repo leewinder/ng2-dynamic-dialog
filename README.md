@@ -253,3 +253,7 @@ When the user clicks either the 2nd or 3rd button (when they are visible) the ca
 Note the format of the how the callbacks are assigned, this is due to how 'this' is [scoped in the transpiled JavaScript](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-does-this-get-orphaned-in-my-instance-methods).
 
 The available callbacks can be seen in [ng2-dynamic-dialog/styles/callbacks.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/development/src/ng2-dynamic-dialog/styles/callbacks.ts)
+
+### Modifying a dialogs behaviour
+
+The overall behaviour of the dialog can be specified by using 'Ng2DynamicDialogBehaviour', and the available options can be seen in [ng2-dynamic-dialog/styles/behaviour.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/development/src/ng2-dynamic-dialog/styles/behaviour.ts).
