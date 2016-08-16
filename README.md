@@ -187,3 +187,44 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
 ```
 
 In the above example, we are creating an instance of 'LogInComponent' which can be seen in [samples/src/dialogs/custom-component-dialog/content/login)](https://github.com/leewinder/ng2-dynamic-dialog/tree/develop/samples/src/dialogs/custom-component-dialog/content/login).  Once running, the 'LogInComponent' will then run as any other component.
+
+### Transitioning Between Dialogs
+You can use ng2-dynamic-dialog to automatically to transition between different dialogs by changing the content of 'Ng2DynamicDialogContent' once the dialog is already being rendered.  A simple example of this can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
+
+```TypeScript
+  // Shows the default dialog content
+  private showDefaultDialogContent() {
+
+      let dialogContent = new Ng2DynamicDialogContent();
+
+      dialogContent.height = 300;
+      dialogContent.width = 450;
+
+      dialogContent.title = 'Custom Style Dialog';
+      dialogContent.button3 = 'Show More Content';
+
+      dialogContent.safeHtmlContent = this._sanitizer.bypassSecurityTrustHtml(this.defaultHtmlContent);
+
+      this.modalDialog.show(dialogContent);
+  }
+
+  // Shows the default dialog content
+  private showSwitchedDialogContent() {
+
+      let dialogContent = new Ng2DynamicDialogContent();
+
+      dialogContent.height = 230;
+      dialogContent.width = 450;
+
+      dialogContent.title = 'Custom Style Dialog';
+      dialogContent.button2 = 'Cancel';
+
+      dialogContent.safeHtmlContent = this._sanitizer.bypassSecurityTrustHtml(this.switchedToHtmlContent);
+
+      this.modalDialog.show(dialogContent);
+  }
+```
+
+When 'showDefaultDialogContent' is called, it will present the dialog with the default content.  When the button 'Show More Content' is pressed, showSwitchedDialogContent is called and the dialog is show again.  As it is already visible, the content and dimensions automatically transition between the two states.
+
+Automatic transitioning of states works for both HTML and custom component content.
