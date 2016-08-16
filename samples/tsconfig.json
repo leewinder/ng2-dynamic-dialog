@@ -1,16 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "outDir": "src/",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false,
-    "watch": true,
-    "diagnostics": true,
-    "listFiles": true
-  }
+    "compilerOptions": {
+        "target": "es5",
+        "rootDir": "src/",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "watch": true
+    }
 }
