@@ -192,7 +192,7 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
   }
 ```
 
-In the above example, we are creating an instance of 'LogInComponent' which can be seen in [samples/src/dialogs/custom-component-dialog/content/login)](https://github.com/leewinder/ng2-dynamic-dialog/tree/master/samples/src/dialogs/custom-component-dialog/content/login).  Once running, the 'LogInComponent' will then run as any other component.
+In the above example, we are creating an instance of 'LogInComponent' which can be seen in [custom-component-dialog/content/login](https://github.com/leewinder/ng2-dynamic-dialog/tree/master/samples/src/dialogs/custom-component-dialog/content/login).  Once running, the 'LogInComponent' will then run as any other component.
 
 ### Transitioning Between Dialogs
 <img src="https://cloud.githubusercontent.com/assets/1649415/17703280/06a1fb92-63c9-11e6-8d52-d751fa4fec6f.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17703280/06a1fb92-63c9-11e6-8d52-d751fa4fec6f.gif" width="400""/>
@@ -258,7 +258,7 @@ The dialog provides hooks to various events within the dialogs lifecycle using '
 
 When the user clicks either the 2nd or 3rd button (when they are visible) the callbacks are automatically raised and the dialog can respond as needed.  In the above case, the buttons are used to transition between different dialog states.
 
-Note the format of the how the callbacks are assigned, this is due to how 'this' is [scoped in the transpiled JavaScript](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-does-this-get-orphaned-in-my-instance-methods).
+Note the format of the how the callbacks are assigned, this is due to how `this` is [scoped in the transpiled JavaScript](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-does-this-get-orphaned-in-my-instance-methods).
 
 The available callbacks can be seen in [ng2-dynamic-dialog/styles/callbacks.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/callbacks.ts)
 
