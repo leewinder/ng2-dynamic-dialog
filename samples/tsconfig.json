@@ -8,7 +8,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
-        "declaration": true,
+        "declaration": false,
         "removeComments": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,

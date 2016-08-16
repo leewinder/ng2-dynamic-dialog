@@ -50,12 +50,15 @@ export class CustomComponentDialogComponent implements OnInit {
         // Show our dialog
         dialogContent.title = 'Log In or Sign Up';
 
+        // We need to use both buttons for this dialog
         dialogContent.button1 = 'Log In';
         dialogContent.button2 = 'Sign Up';
 
+        // Set the dimensions to adequatly cover the components render area
         dialogContent.height = 300;
         dialogContent.width = 300;
 
+        // Pass through the type of component you wish to be rendered inside the dialog
         dialogContent.componentContent = LogInComponent;
 
         this.modalDialog.show(dialogContent);
