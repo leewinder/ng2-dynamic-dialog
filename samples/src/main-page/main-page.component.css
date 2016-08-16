@@ -1,16 +1,17 @@
 .samples-screen-title {
-       text-align: center;
-       padding: 0px;
+    text-align: center;
+    padding: 0px;
 
-       width: 100%;
+    width: 100%;
 }
 
 .samples-screen-title-text {
-       font-size: 60px;
+    padding-top: 30px;
+    font-size: 60px;
 }
 
 .samples-screen-body-text {
-       font-size: 14px;
+    font-size: 14px;
 }
 
 .samples-screen-frame {
