@@ -1,6 +1,28 @@
 # ng2-dynamic-dialog
 
-A dynamically adjusting, extensible dialog component for use with Angular 2 supporting raw HTML content and injected custom components.  Contains no dependancies except Angular 2 and those packages required by Angular 2.
+## Build Status
+**Master Branch**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+**Develop Branch**
+
+[![Build Status](https://travis-ci.org/leewinder/ng2-dynamic-dialog.svg?branch=master)](https://travis-ci.org/leewinder/ng2-dynamic-dialog) 
+[![Dependency Status](https://dependencyci.com/github/leewinder/ng2-dynamic-dialog/badge)](https://dependencyci.com/github/leewinder/ng2-dynamic-dialog)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Build Status](https://travis-ci.org/leewinder/ng2-dynamic-dialog.svg?branch=develop)](https://travis-ci.org/leewinder/ng2-dynamic-dialog) 
+
+<br>
+
+## Overview
+
+A dynamically adjusting, extensible dialog component for use with Angular 2 supporting raw HTML content and injected custom components.
+
+Contains no dependancies except Angular 2 and those packages required by Angular 2.
 
 <img src="https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif" width="400""/>
 
