@@ -42,3 +42,148 @@ Check out the repository, browse to the './samples' folder and run `npm install`
 ng2-dynamic-dialog is developed in [Visual Studio Code](https://code.visualstudio.com/) so once `npm install` has finished you should be able to open the './samples' folder in VS Code and it will run out of the box (by default it uses lite-server which is installed as part of `npm install`).
 
 If you are not using Visual Studio Code, browse to the './samples' folder and run `tsc` to build the application.  Then open your local server of choice pointing to ./samples as the root directory.
+
+### Triggering Basic Dialogs
+The simplest way to show a dialog is to use the custom style and simply provide custom HTML which will fill in the content of the dialog.  This can be seen in [default-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/default-with-html-dialog/default-with-html-dialog.component.ts).
+
+```TypeScript
+// default-with-html-dialog.component.ts
+
+import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
+import { Ng2DynamicDialogContent } from 'ng2-dynamic-dialog';
+
+...
+
+export class DefaultWithHtmlDialogComponent {
+
+  ...
+  // Shows the dialog
+  show() {
+
+      // Create an instance of the dialog content to specify what will be shown
+      let dialogContent = new Ng2DynamicDialogContent();
+
+      // Set the custom content of the dialog
+      dialogContent.title = 'Default Style Dialog';
+      dialogContent.unsafeHtmlContent = `<center>A dialog using out-of-the-box styles.<br><br>
+      The content is specified using 'Ng2DynamicDialogContent'.<br><br>
+
+      By default there is no exit button, and the user needs to click outside the dialog to close it.<br><br><br>
+
+      Note that raw HTML will be sanitized by default.</center>`;
+
+      // This can be left out to allow the dialog to resize based on the size of the host window
+      dialogContent.width = 450;
+      dialogContent.height = 220;
+
+      // Show the dialog on screen
+      this.modalDialog.show(dialogContent);
+  }
+}
+```
+
+To extract the dialog to show, the examples simply added the component tag to the HTML, and use `@ViewChild` to keep a local copy of the component, though this is not required and can be done however you prefer.
+
+```HTML
+<!-- default-with-html-dialog.component.html -->
+<ng2-dynamic-dialog-modal></ng2-dynamic-dialog-modal>
+```
+
+```TypeScript
+// default-with-html-dialog.component.ts
+
+@Component({
+
+    moduleId: module.id,
+    selector: 'default-with-html-dialog',
+
+    templateUrl: 'default-with-html-dialog.component.html',
+    styleUrls: ['default-with-html-dialog.component.css'],
+
+    directives: [Ng2DynamicDialogComponent],
+})
+export class DefaultWithHtmlDialogComponent {
+
+    @ViewChild(Ng2DynamicDialogComponent)
+    private modalDialog: Ng2DynamicDialogComponent;
+    
+    ...
+}
+```
+
+### Triggering Dialogs With Custom Style
+Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customise how the dialog looks.  This can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
+
+```TypeScript
+    // Sets the style of the dialog
+    private setDialogStyles() {
+
+        // Initialise the style of the dialog
+        let dialogStyle = new Ng2DynamicDialogStyle();
+
+        // Dialog style
+        dialogStyle.dialogBorderColor = '#44086C';
+
+        dialogStyle.dialogFontFamily = 'Architects Daughter, cursive';
+        dialogStyle.dialogFontSize = '14';
+
+        dialogStyle.dialogBorderRadius = 20;
+
+        // Button style
+        dialogStyle.buttonBackgroundColor = '#611F8E';
+        dialogStyle.buttonBorderColor = '#44086C';
+        dialogStyle.buttonHoverColor = dialogStyle.buttonBorderColor;
+
+        dialogStyle.buttonBorderRadius = 10;
+
+        dialogStyle.buttonFontFamily = dialogStyle.dialogFontFamily;
+        dialogStyle.buttonFontSize = dialogStyle.dialogFontSize;
+
+        dialogStyle.buttonFontColor = '#ffffff';
+
+        // Title style
+        dialogStyle.titleFontFamily = dialogStyle.dialogFontFamily;
+
+        // Other buttons
+        dialogStyle.closeButtonImage = 'assets/close.png';
+
+        // Set it
+        this.modalDialog.setStyle(dialogStyle);
+    }
+```
+
+Once shown, the dialog will use the defined styles to present the dialog as required.  The available options can be seen in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts)
+
+### Triggering Dialogs With Custom Components
+If you have dialog content that is more complicated than standard HTML can provide, or you need to provide internal behaviour within the dialog, you can pass components to the dialog to be rendered.  This will create an instance of your component within the dialog's HTML tree and behaves like any other instantiated component.
+
+Passing a custom component can be seen in [custom-component-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/custom-component-dialog/custom-component-dialog.component.ts).
+
+```TypeScript
+  // Shows the sign in dialog
+  requestUserSignIn() {
+
+      ...
+
+      // Set the content
+      let dialogContent = new Ng2DynamicDialogContent();
+
+      // Show our dialog
+      dialogContent.title = 'Log In or Sign Up';
+
+      // We need to use both buttons for this dialog
+      dialogContent.button1 = 'Log In';
+      dialogContent.button2 = 'Sign Up';
+  
+      // Set the dimensions to adequatly cover the components render area
+      dialogContent.height = 300;
+      dialogContent.width = 300;
+
+      // Pass through the type of component you wish to be rendered inside the dialog
+      dialogContent.componentContent = LogInComponent;
+
+      this.modalDialog.show(dialogContent);
+  }
+```
+
+In the above example, we are creating an instance of 'LogInComponent' which can be seen in [samples/src/dialogs/custom-component-dialog/content/login)](https://github.com/leewinder/ng2-dynamic-dialog/tree/develop/samples/src/dialogs/custom-component-dialog/content/login).  Once running, the 'LogInComponent' will then run as any other component.
