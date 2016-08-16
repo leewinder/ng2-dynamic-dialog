@@ -4,6 +4,8 @@ A dynamically adjusting, extensible dialog component for use with Angular 2 supp
 
 <img src="https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif" data-canonical-src="https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif" width="400""/>
 
+<br>
+
 ## Installation
 1. Add the package to your 'dependencies' list in `package.json` and run `npm install`
 
@@ -31,6 +33,7 @@ A dynamically adjusting, extensible dialog component for use with Angular 2 supp
   
 3. Optionally, add the `rootDir` option to `tsconfig.json` to make sure TypeScript's default root path algorithm doesn't pull in the `node_modules` folder
 
+<br>
 
 ## Usage
 
@@ -265,3 +268,15 @@ The available callbacks can be seen in [ng2-dynamic-dialog/styles/callbacks.ts](
 ### Modifying a dialogs behaviour
 
 The overall behaviour of the dialog can be specified by using 'Ng2DynamicDialogBehaviour', and the available options can be seen in [ng2-dynamic-dialog/styles/behaviour.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/behaviour.ts).
+
+<br>
+
+## Change Log
+
+### 0.0.3
+* Added samples application to repository
+* Updated all documentation
+* Switched to using rootDir rather than outDir to correctly build all .ts files
+
+### 0.0.2
+* Initial release
