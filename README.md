@@ -228,3 +228,28 @@ You can use ng2-dynamic-dialog to automatically to transition between different 
 When 'showDefaultDialogContent' is called, it will present the dialog with the default content.  When the button 'Show More Content' is pressed, showSwitchedDialogContent is called and the dialog is show again.  As it is already visible, the content and dimensions automatically transition between the two states.
 
 Automatic transitioning of states works for both HTML and custom component content.
+
+### Responding to events
+
+The dialog provides hooks to various events within the dialogs lifecycle using 'Ng2DynamicDialogCallbacks' and can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
+
+```TypeScript
+  // Sets the callbacks of the dialog
+  private setDialogCallbacks() {
+
+      // Initialise the style of the dialog
+      let dialogCallbacks = new Ng2DynamicDialogCallbacks();
+
+      // Set the local callbacks for the buttons we are using
+      dialogCallbacks.onButton2Clicked = () => this.onButton2Selected();
+      dialogCallbacks.onButton3Clicked = () => this.onButton3Selected();
+
+      this.modalDialog.setCallbacks(dialogCallbacks);
+  }
+```
+
+When the user clicks either the 2nd or 3rd button (when they are visible) the callbacks are automatically raised and the dialog can respond as needed.  In the above case, the buttons are used to transition between different dialog states.
+
+Note the format of the how the callbacks are assigned, this is due to how 'this' is [scoped in the transpiled JavaScript](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-does-this-get-orphaned-in-my-instance-methods).
+
+The available callbacks can be seen in [ng2-dynamic-dialog/styles/callbacks.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/development/src/ng2-dynamic-dialog/styles/callbacks.ts)
