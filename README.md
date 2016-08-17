@@ -1,6 +1,9 @@
 # ng2-dynamic-dialog
 
 ## Build Status
+
+[![npm version](https://badge.fury.io/js/ng2-dynamic-dialog.svg)](https://badge.fury.io/js/ng2-dynamic-dialog)
+
 **Master Branch**
 
 [![Build Status](https://travis-ci.org/leewinder/ng2-dynamic-dialog.svg?branch=master)](https://travis-ci.org/leewinder/ng2-dynamic-dialog) 
