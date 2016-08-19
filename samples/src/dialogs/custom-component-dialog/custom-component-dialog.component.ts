@@ -19,8 +19,10 @@ import { SignUpComponent } from './content/signup/signup.component';
     templateUrl: 'custom-component-dialog.component.html',
     styleUrls: ['custom-component-dialog.component.css'],
 
-    directives: [Ng2DynamicDialogComponent],
+    directives: [Ng2DynamicDialogComponent, SignUpComponent, LogInComponent],
     providers: [UserDetailsService],
+
+    entryComponents: [SignUpComponent, LogInComponent],
 })
 export class CustomComponentDialogComponent implements OnInit {
 
