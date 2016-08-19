@@ -15,9 +15,11 @@ import cli
 #
 def get_package_folder():
 
+    project_path = cli.get_project_root()
+
     # Get the path to the distribution package
-    package_path = os.getcwd() + '/../release/package/'
-    destination_path = os.getcwd() + '/../release/' 
+    package_path = project_path + '/release/package/'
+    destination_path = project_path + '/release/' 
     return package_path, destination_path
 
 

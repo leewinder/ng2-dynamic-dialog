@@ -12,19 +12,6 @@ import distutils.dir_util
 import cli
 
 #
-# Gets the current root directory of the project
-# 
-def get_project_root():
-
-    # Get the path to our source
-    file_name = os.path.basename(__file__)
-    script_root = os.path.realpath(__file__).replace(file_name, '')
-
-    source_folder = script_root + '..'
-    return source_folder
-
-
-#
 # Finds all files with a specific extension
 #
 def remove_all_files(directory, extension):
@@ -42,7 +29,7 @@ def remove_all_files(directory, extension):
 def clean_build_files():
 
     # Get our path
-    source_folder = get_project_root() + '/development/src'
+    source_folder = cli.get_project_root() + '/development/src'
 
     remove_all_files(source_folder, '*.js')
     remove_all_files(source_folder, '*.js.map')
@@ -53,7 +40,7 @@ def clean_build_files():
 #
 def build_project():
 
-    config_root = get_project_root() + '/development/'
+    config_root = cli.get_project_root() + '/development/'
 
     return_code, std_out, std_err = cli.run_command_line(config_root, "tsc", ['-p', 'tsconfig-ci.json'])
     if (return_code != 0):
@@ -65,14 +52,14 @@ def build_project():
 def create_package_folder():
 
     # Get the path to the distribution package
-    root_path = os.getcwd() + '/../release'
+    root_path = cli.get_project_root() + '/release'
     if os.path.exists(root_path):
         shutil.rmtree(root_path)
     distribution_folder = '/{}/package'.format(root_path)
     os.makedirs(distribution_folder)
 
     # Send it back with the root folder
-    return os.getcwd() + '/../', distribution_folder + '/'
+    return cli.get_project_root() + '/', distribution_folder + '/'
 
 
 #
@@ -80,7 +67,7 @@ def create_package_folder():
 #
 def main():
 
-    # Clean up our current build files
+    # Clean up our current build files 
     clean_build_files()
 
     # Build the project

@@ -8,6 +8,18 @@
 import os
 import subprocess
 
+#
+# Gets the current root directory of the project
+# 
+def get_project_root():
+
+    # Get the path to our source
+    file_name = os.path.basename(__file__)
+    script_root = os.path.realpath(__file__).replace(file_name, '')
+
+    source_folder = script_root + '..'
+    return source_folder
+
 
 #
 # Runs a command line program
