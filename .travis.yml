@@ -15,18 +15,13 @@ branches:
 # We're also doing the install step here too, as we need
 # the results of previous builds to install future builds
 script:
-  - cd "development"
-    && npm install
-    && npm install -g npm-cli-login
-    && tsc -p tsconfig-ci.json \
-    && cd "../automation" \
-    && python prepare_distribution_package.py \
-    && python create_local_package.py \
-    && cd "../samples"
-    && npm install
-    && tsc -p tsconfig-ci.json \
-    && cd "../automation" \
-    && python publish_release_package.py
+  - cd "development" 
+  - npm install
+  - npm install -g npm-cli-login
+  - tsc -p tsconfig-ci.json && cd "../automation" && python prepare_distribution_package.py && python create_local_package.py
+  - cd "../samples"
+  - npm install
+  - tsc -p tsconfig-ci.json && cd "../automation" && python publish_release_package.py
 
 # Notifications
 notifications:
