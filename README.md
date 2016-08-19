@@ -19,7 +19,7 @@
 
 A dynamically adjusting, extensible dialog component for use with Angular 2 supporting raw HTML content and injected custom components.
 
-Contains no dependancies except Angular 2 and those packages required by Angular 2 and is currently built against Angular 2 RC 5.
+Contains no dependancies except Angular 2 and those packages required by Angular 2.  Currently built against Angular 2 RC 5.
 
 ![](https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif)
 
