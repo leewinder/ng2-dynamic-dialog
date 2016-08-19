@@ -65,6 +65,31 @@ ng2-dynamic-dialog is developed in [Visual Studio Code](https://code.visualstudi
 
 If you are not using Visual Studio Code, browse to the './samples' folder and run `tsc` to build the application.  Then open your local server of choice pointing to ./samples as the root directory.
 
+### Importing The 'ng2-dynamic-dialog' Module
+To use ng2-dynamic-dialog, you need to import the Ng2DynamicDialogModule into the relevent module in your application.  In the sample application this is done in the entry module - [app.module.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/app.module.ts)
+
+```TypeScript
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { Ng2DynamicDialogModule }  from 'ng2-dynamic-dialog';
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        
+        Ng2DynamicDialogModule,
+    ],
+
+    bootstrap: [
+        AppComponent,
+    ],
+})
+export class AppModule { }
+```
+
+
 ### Triggering Basic Dialogs
 ![](https://cloud.githubusercontent.com/assets/1649415/17703006/123c9a58-63c8-11e6-9acd-df1bde4dd555.gif)
 
@@ -123,8 +148,6 @@ To identify the dialog to show, the example simply added the component tag to th
 
     templateUrl: 'default-with-html-dialog.component.html',
     styleUrls: ['default-with-html-dialog.component.css'],
-
-    directives: [Ng2DynamicDialogComponent],
 })
 export class DefaultWithHtmlDialogComponent {
 
@@ -196,16 +219,7 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
       // Set the content
       let dialogContent = new Ng2DynamicDialogContent();
 
-      // Show our dialog
-      dialogContent.title = 'Log In or Sign Up';
-
-      // We need to use both buttons for this dialog
-      dialogContent.button1 = 'Log In';
-      dialogContent.button2 = 'Sign Up';
-  
-      // Set the dimensions to adequatly cover the components render area
-      dialogContent.height = 300;
-      dialogContent.width = 300;
+      ...
 
       // Pass through the type of component you wish to be rendered inside the dialog
       dialogContent.componentContent = LogInComponent;
@@ -215,6 +229,28 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
 ```
 
 In the above example, we are creating an instance of 'LogInComponent' which can be seen in [custom-component-dialog/content/login](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/custom-component-dialog/content/login/login.component.ts).  Once running, the 'LogInComponent' will then run as any other component.
+
+Note that for ng2-dynamic-dialog to successfully create an instance of your custom component, your component must be declared in the relevant modules 'entryComponents'.  
+
+In the sample application this is done in the entry module - [app.module.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/app.module.ts)
+
+```TypeScript
+import { LogInComponent } from './components/dialogs/custom-component-dialog/content/login/login.component';
+import { SignUpComponent } from './components/dialogs/custom-component-dialog/content/signup/signup.component';
+
+@NgModule({
+    ...
+
+    entryComponents: [
+        SignUpComponent,
+        LogInComponent,
+    ],
+    
+    ...
+})
+export class AppModule { }
+```
+
 
 ### Transitioning Between Dialogs
 ![](https://cloud.githubusercontent.com/assets/1649415/17707331/d338c5ba-63d7-11e6-80e6-80ac1c87dd47.gif)
