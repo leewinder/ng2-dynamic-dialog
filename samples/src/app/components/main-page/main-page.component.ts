@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { CustomComponentDialogComponent } from '../../../dialogs/custom-component-dialog/custom-component-dialog.component';
-import { DefaultWithHtmlDialogComponent } from '../../../dialogs/default-with-html-dialog/default-with-html-dialog.component';
-import { StyledWithHtmlDialogComponent } from '../../../dialogs/styled-with-html-dialog/styled-with-html-dialog.component';
+import { CustomComponentDialogComponent } from '../dialogs/custom-component-dialog/custom-component-dialog.component';
+import { DefaultWithHtmlDialogComponent } from '../dialogs/default-with-html-dialog/default-with-html-dialog.component';
+import { StyledWithHtmlDialogComponent } from '../dialogs/styled-with-html-dialog/styled-with-html-dialog.component';
 
 @Component({
 

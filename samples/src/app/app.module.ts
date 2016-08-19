@@ -6,14 +6,14 @@ import { FormsModule }   from '@angular/forms';
 import { AppComponent }  from './components/app/app.component';
 import { MainPageComponent }  from './components/main-page/main-page.component';
 
-import { CustomComponentDialogComponent } from '../dialogs/custom-component-dialog/custom-component-dialog.component';
-import { DefaultWithHtmlDialogComponent } from '../dialogs/default-with-html-dialog/default-with-html-dialog.component';
-import { StyledWithHtmlDialogComponent } from '../dialogs/styled-with-html-dialog/styled-with-html-dialog.component';
+import { CustomComponentDialogComponent } from './components/dialogs/custom-component-dialog/custom-component-dialog.component';
+import { DefaultWithHtmlDialogComponent } from './components/dialogs/default-with-html-dialog/default-with-html-dialog.component';
+import { StyledWithHtmlDialogComponent } from './components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component';
 
-import { LogInComponent } from '../dialogs/custom-component-dialog/content/login/login.component';
-import { SignUpComponent } from '../dialogs/custom-component-dialog/content/signup/signup.component';
+import { LogInComponent } from './components/dialogs/custom-component-dialog/content/login/login.component';
+import { SignUpComponent } from './components/dialogs/custom-component-dialog/content/signup/signup.component';
 
-import { UserDetailsService } from '../dialogs/custom-component-dialog/content/user-details/user-details.service';
+import { UserDetailsService } from './components/dialogs/custom-component-dialog/content/user-details/user-details.service';
 
 import { Ng2DynamicDialogModule }  from 'ng2-dynamic-dialog';
 
