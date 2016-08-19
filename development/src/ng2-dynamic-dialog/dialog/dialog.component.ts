@@ -1,7 +1,6 @@
 // Imports
-import { Component, ViewChild, AfterViewChecked, OnInit } from '@angular/core';
+import { Component, AfterViewChecked, OnInit } from '@angular/core';
 
-import { Ng2DynamicDialogWrapperComponent } from '../wrapper/wrapper.component';
 import { Ng2DynamicDialogIntervals } from '../utilities/intervals';
 import { Ng2DynamicDialogLerp } from '../utilities/lerp';
 
@@ -9,8 +8,6 @@ import { Ng2DynamicDialogContent } from '../styles/content';
 import { Ng2DynamicDialogStyle } from '../styles/style';
 import { Ng2DynamicDialogBehaviour } from '../styles/behaviour';
 import { Ng2DynamicDialogCallbacks } from '../styles/callbacks';
-
-import { Ng2DynamicDialogBackgroundComponent } from '../background/background.component';
 
 //
 // Main dialog component
@@ -22,8 +19,6 @@ import { Ng2DynamicDialogBackgroundComponent } from '../background/background.co
 
     templateUrl: 'dialog.component.html',
     styleUrls: ['dialog.component.css'],
-
-    directives: [Ng2DynamicDialogBackgroundComponent, Ng2DynamicDialogWrapperComponent],
 })
 export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
@@ -80,10 +75,6 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     // Background colour which changes on mouse events as we do not have :hover styles
     private buttonBackgroundColour: string[] = ['', '', ''];
 
-    // Child elements
-    @ViewChild(Ng2DynamicDialogBackgroundComponent)
-    private dialogBackground: Ng2DynamicDialogBackgroundComponent;
-
     //
     // Initialisation
     //
@@ -98,11 +89,6 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     // Called when the view changes
     //
     ngAfterViewChecked() {
-
-        // Pull out our child elements
-        if (this.dialogBackground) {
-            this.dialogBackground.modalDialog = this;
-        }
     }
 
     //

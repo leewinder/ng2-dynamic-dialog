@@ -17,6 +17,8 @@ import { Ng2DynamicDialogComponent } from '../dialog/dialog.component';
 export class Ng2DynamicDialogBackgroundComponent {
 
     // Dialog being rendered over this background
-    modalDialog: Ng2DynamicDialogComponent;
+    constructor (private modalDialog: Ng2DynamicDialogComponent) {
+
+    }
 
 }
