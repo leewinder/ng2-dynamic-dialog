@@ -3,8 +3,8 @@
 //
 
 // Imports
-import {Component, ComponentRef, Input, ViewContainerRef, ComponentResolver,
-    ComponentFactory, ViewChild, OnChanges, AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, ComponentRef, Input, ViewContainerRef, ComponentFactoryResolver,
+    ViewChild, OnChanges, OnInit, OnDestroy} from '@angular/core';
 
 //
 // Dynamic component loader component
@@ -13,7 +13,7 @@ import {Component, ComponentRef, Input, ViewContainerRef, ComponentResolver,
     selector: 'ng2-dynamic-dialog-wrapper',
     template: `<div #dynamicTarget></div>`,
 })
-export class Ng2DynamicDialogWrapperComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class Ng2DynamicDialogWrapperComponent implements OnChanges, OnInit, OnDestroy {
 
     // Private properties
     private componentReference: ComponentRef<any>;
@@ -22,31 +22,14 @@ export class Ng2DynamicDialogWrapperComponent implements OnChanges, AfterViewIni
     // Component input
     @ViewChild('dynamicTarget', { read: ViewContainerRef })
     private dynamicTarget: any;
+
     @Input()
     private componentType: any;
 
     //
     // Constructor
     //
-    constructor(private resolver: ComponentResolver) {
-    }
-
-    //
-    // Updates the view with the dynamically loaded component
-    //
-    updateComponent() {
-
-        if (!this.isViewInitialized) {
-            return;
-        }
-
-        if (this.componentReference) {
-            this.componentReference.destroy();
-        }
-
-        this.resolver.resolveComponent(this.componentType).then((factory: ComponentFactory<any>) => {
-            this.componentReference = this.dynamicTarget.createComponent(factory);
-        });
+    constructor(private resolver: ComponentFactoryResolver) {
     }
 
     //
@@ -59,7 +42,7 @@ export class Ng2DynamicDialogWrapperComponent implements OnChanges, AfterViewIni
     //
     // Called after the view has been initialised
     //
-    ngAfterViewInit() {
+    ngOnInit() {
         this.isViewInitialized = true;
         this.updateComponent();
     }
@@ -71,5 +54,22 @@ export class Ng2DynamicDialogWrapperComponent implements OnChanges, AfterViewIni
         if (this.componentReference) {
             this.componentReference.destroy();
         }
+    }
+
+    //
+    // Updates the view with the dynamically loaded component
+    //
+    private updateComponent() {
+
+        if (!this.isViewInitialized) {
+            return;
+        }
+
+        if (this.componentReference) {
+            this.componentReference.destroy();
+        }
+
+        let componentFactory = this.resolver.resolveComponentFactory(this.componentType);
+        this.componentReference = this.dynamicTarget.createComponent(componentFactory);
     }
 }
