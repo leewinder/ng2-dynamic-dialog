@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { MainPageComponent } from '../main-page/main-page.component';
-
 @Component({
 
     moduleId: module.id,
@@ -9,7 +7,5 @@ import { MainPageComponent } from '../main-page/main-page.component';
 
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
-
-    directives: [MainPageComponent],
 })
 export class AppComponent { }

@@ -10,8 +10,6 @@ import { Ng2DynamicDialogContent } from 'ng2-dynamic-dialog';
 
     templateUrl: 'default-with-html-dialog.component.html',
     styleUrls: ['default-with-html-dialog.component.css'],
-
-    directives: [Ng2DynamicDialogComponent],
 })
 export class DefaultWithHtmlDialogComponent {
 

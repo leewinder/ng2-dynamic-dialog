@@ -14,8 +14,6 @@ import { Ng2DynamicDialogBehaviour } from 'ng2-dynamic-dialog';
 
     templateUrl: 'styled-with-html-dialog.component.html',
     styleUrls: ['styled-with-html-dialog.component.css'],
-
-    directives: [Ng2DynamicDialogComponent],
 })
 export class StyledWithHtmlDialogComponent implements OnInit {
 

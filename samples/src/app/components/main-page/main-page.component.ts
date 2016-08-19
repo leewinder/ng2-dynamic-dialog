@@ -11,8 +11,6 @@ import { StyledWithHtmlDialogComponent } from '../../../dialogs/styled-with-html
 
     templateUrl: 'main-page.component.html',
     styleUrls: ['main-page.component.css'],
-
-    directives: [CustomComponentDialogComponent, DefaultWithHtmlDialogComponent, StyledWithHtmlDialogComponent],
 })
 export class MainPageComponent {
 
