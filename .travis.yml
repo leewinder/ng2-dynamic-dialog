@@ -10,17 +10,26 @@ branches:
     - master
     - develop
 
+# Install step for both library and samples
 install:
   - cd "development"
   - npm install
   - npm install -g npm-cli-login
+  - cd "../samples"
+  - npm install
+  - cd ".."
 
-# What to run
+# Build both library and samples
+# We want any of these steps to fail the entire build
 script:
-  - tsc -p tsconfig-ci.json
-  - cd "../automation"
-  - python prepare_distribution_package.py
-  - python create_local_package.py && python publish_release_package.py
+  - cd "development" \
+    && tsc -p tsconfig-ci.json \
+    && cd "../samples" \
+    && tsc -p tsconfig-ci.json \
+    && cd "../automation" \
+    && python prepare_distribution_package.py \
+    && python create_local_package.py \
+    && python publish_release_package.py
 
 # Notifications
 notifications:

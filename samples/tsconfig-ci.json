@@ -12,7 +12,10 @@
         "removeComments": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "watch": true
+        "watch": false,
+        "diagnostics": true,
+        "listFiles": true,
+        "pretty": false
     },
     "exclude": [
         "node_modules"
