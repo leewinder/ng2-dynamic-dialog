@@ -61,6 +61,8 @@ All the examples shown below are taken from the [samples application](https://gi
 ### Building and Running the Sample Application
 Check out the repository, browse to the './samples' folder and run `npm install` to install all the required dependancies.
 
+**Note**: Running `npm install` on the sample project requires that Python 2.7.x is available on the command line as it runs a couple of Python scripts to correctly set up the npm_modules folder.
+
 ng2-dynamic-dialog is developed in [Visual Studio Code](https://code.visualstudio.com/) so once `npm install` has finished you should be able to open the './samples' folder in VS Code and it will run out of the box (by default it uses lite-server which is installed as part of `npm install`).
 
 If you are not using Visual Studio Code, browse to the './samples' folder and run `tsc` to build the application.  Then open your local server of choice pointing to ./samples as the root directory.
@@ -230,7 +232,7 @@ Passing a custom component can be seen in [custom-component-dialog.component.ts]
 
 In the above example, we are creating an instance of 'LogInComponent' which can be seen in [custom-component-dialog/content/login](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/custom-component-dialog/content/login/login.component.ts).  Once running, the 'LogInComponent' will then run as any other component.
 
-Note that for ng2-dynamic-dialog to successfully create an instance of your custom component, your component must be declared in the relevant modules 'entryComponents'.  
+**Note**: For ng2-dynamic-dialog to successfully create an instance of your custom component, your component must be declared in the relevant modules 'entryComponents'.  
 
 In the sample application this is done in the entry module - [app.module.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/app.module.ts)
 
