@@ -48,10 +48,11 @@ def main():
         exit(return_code)
         
     # Move the file we just created
-    shutil.move(package_path + std_out.strip(), package_path + '../')
+    package_made = std_out.strip()
+    shutil.move(package_path + package_made, package_path + '../ng2-dynamic-dialog.tgz')
 
     # Done
-    print "Successfully created package file " + std_out.strip()
+    print "Successfully created package file " + package_made
     
 
 #
