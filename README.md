@@ -19,9 +19,15 @@
 
 A dynamically adjusting, extensible dialog component for use with Angular 2 supporting raw HTML content and injected custom components.
 
-Contains no dependancies except Angular 2 and those packages required by Angular 2.  Currently built against Angular 2 RC 5.
-
 ![](https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif)
+
+<br>
+
+## Dependancies
+Currently built against Angular 2 RC 5.
+
+ng2-dynamic-dialog has the following additional dependancies
+- [TsLerp](https://www.npmjs.com/package/tslerp): Typescript library for lerping single and multi-sample data sets over time
 
 <br>
 
@@ -39,6 +45,7 @@ Contains no dependancies except Angular 2 and those packages required by Angular
   ```javascript
   var map = {
     ...
+    'tslerp': 'node_modules/tslerp',
     'ng2-dynamic-dialog': 'node_modules/ng2-dynamic-dialog'
   };
   ```
@@ -46,6 +53,7 @@ Contains no dependancies except Angular 2 and those packages required by Angular
   ```javascript
   var packages = {
     ...
+    'tslerp': { main: 'index.js', defaultExtension: 'js' },
     'ng2-dynamic-dialog': { main: 'index.js', defaultExtension: 'js' },
   };
   ```
@@ -331,6 +339,9 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 <br>
 
 ## Change Log
+
+### 0.0.6
+* Added dependacy against [TsLerp](https://www.npmjs.com/package/tslerp) and removed the internal lerp/interval objects
 
 ### 0.0.5
 * Update library to RC 5

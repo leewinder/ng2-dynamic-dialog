@@ -1,6 +1,6 @@
 {
     "name": "ng2-dynamic-dialog",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "license": "MIT",
     "description": "A dynamically updating modal dialog for use in Angular 2 applications",
     "private": false,
@@ -37,7 +37,8 @@
         "systemjs": "0.19.27",
         "core-js": "^2.4.0",
         "rxjs": "5.0.0-beta.6",
-        "zone.js": "^0.6.12"
+        "zone.js": "^0.6.12",
+        "tslerp": "^0.0.1"
     },
     "devDependencies": {
         "concurrently": "^2.0.0",

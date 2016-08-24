@@ -1,8 +1,7 @@
 // Imports
 import { Component, AfterViewChecked, OnInit } from '@angular/core';
 
-import { Ng2DynamicDialogIntervals } from '../utilities/intervals';
-import { Ng2DynamicDialogLerp } from '../utilities/lerp';
+import { TsLerp, TsLerpTransition, TsLerpStyle } from 'tslerp';
 
 import { Ng2DynamicDialogContent } from '../styles/content';
 import { Ng2DynamicDialogStyle } from '../styles/style';
@@ -44,9 +43,6 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private dialogTransition = this.dialogTransitionStates.NONE;
     private contentTransition = this.contentTransitionStates.NONE;
 
-    // Transitions
-    private intervalUpdate = new Ng2DynamicDialogIntervals();
-
     // Style and behaviour
     private currentDialogContent: Ng2DynamicDialogContent;
     private nextDialogContent: Ng2DynamicDialogContent;
@@ -56,10 +52,11 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
     private dialogCallbacks: Ng2DynamicDialogCallbacks = new Ng2DynamicDialogCallbacks();
 
+    private lerpTransition: TsLerpTransition = TsLerpTransition.EaseOut;
+    private lerpStyle: TsLerpStyle = TsLerpStyle.Quadratic;
+
     // Transition lerps
-    private dialogTransitionLerp: Ng2DynamicDialogLerp = new Ng2DynamicDialogLerp();
-    private dimensionTransitionLerp: Ng2DynamicDialogLerp = new Ng2DynamicDialogLerp();
-    private contentTransitionLerp: Ng2DynamicDialogLerp = new Ng2DynamicDialogLerp();
+    private dialogTransitionLerp: TsLerp = new TsLerp();
 
     // Transition properties
     private dialogOpacity: number = 0;
@@ -210,13 +207,15 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
         // Should we start to fade?
         if (transitionState === this.dialogTransitionStates.TRANSITION_IN) {
-            this.dialogTransitionLerp.setSingleLerp(0, 1, this.dialogStyle.transitionTimeDialogs);
+            this.dialogTransitionLerp.define([[0, 1]], this.dialogStyle.transitionTimeDialogs, this.lerpTransition, this.lerpStyle);
         } else if (transitionState === this.dialogTransitionStates.TRANSITION_OUT) {
-            this.dialogTransitionLerp.setSingleLerp(1, 0, this.dialogStyle.transitionTimeDialogs);
+            this.dialogTransitionLerp.define([[1, 0]], this.dialogStyle.transitionTimeDialogs, this.lerpTransition, this.lerpStyle);
         }
 
-        // Trigger the interval update
-        this.intervalUpdate.trigger((thisDelta: number) => this.intervalCallback(thisDelta));
+        // Trigger the lerp update
+        this.dialogTransitionLerp.lerp((results: number[], time: number) => {
+            this.intervalCallback(results, time);
+        });
 
         // Save the new state
         this.dialogTransition = transitionState;
@@ -238,7 +237,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
             let lerpValues = [[this.currentDialogContent.width, this.nextDialogContent.width],
                 [this.currentDialogContent.height, this.nextDialogContent.height]];
-            this.dimensionTransitionLerp.setMultipleLerp(lerpValues, this.dialogStyle.transitionTimeContent);
+            this.dialogTransitionLerp.define(lerpValues, this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
             if (this.dialogCallbacks.onTransitionDimensions !== null) {
@@ -247,7 +246,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
         } else if (transitionState === this.contentTransitionStates.TRANSITION_OUT) {
 
-            this.contentTransitionLerp.setSingleLerp(1, 0, this.dialogStyle.transitionTimeContent);
+            this.dialogTransitionLerp.define([[1, 0]], this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
             if (this.dialogCallbacks.onTransitionContentHide !== null) {
@@ -256,7 +255,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
         } else if (transitionState === this.contentTransitionStates.TRANSITION_IN) {
 
-            this.contentTransitionLerp.setSingleLerp(0, 1, this.dialogStyle.transitionTimeContent);
+            this.dialogTransitionLerp.define([[0, 1]], this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
             if (this.dialogCallbacks.onTransitionContentShow !== null) {
@@ -264,8 +263,10 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
             }
         }
 
-        // Trigger the interval update
-        this.intervalUpdate.trigger((thisDelta: number) => this.intervalCallback(thisDelta));
+        // Trigger the lerp update
+        this.dialogTransitionLerp.lerp((results: number[], time: number) => {
+            this.intervalCallback(results, time);
+        });
 
         // Save the new state
         this.contentTransition = transitionState;
@@ -274,23 +275,20 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     //
     // Called during a transition
     //
-    private intervalCallback(thisDelta: number) {
+    private intervalCallback(results: number[], time: number) {
+
+        // We've finished if we've got to the end of the transition
+        let finished = time === 1;
 
         // Update any transitions
-        let finished = false;
         if (this.dialogTransition !== this.dialogTransitionStates.NONE) {
 
-            // Run our lerps
-            let lerpResult = this.dialogTransitionLerp.lerp(thisDelta);
-            finished = <boolean>lerpResult[lerpResult.length - 1] === true;
-
             // Update the opacity of the dialog
-            this.dialogOpacity = <number>lerpResult[0];
+            this.dialogOpacity = results[0];
 
             // If we're done, no more transition (end value is if all are finished)
             if (finished === true) {
 
-                // Finished?
                 if (this.dialogTransition === this.dialogTransitionStates.TRANSITION_OUT) {
 
                     // Turn the dialog off
@@ -311,23 +309,15 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
 
         } else if (this.contentTransition === this.contentTransitionStates.DIMENSIONS) {
 
-            // Update the opacity of the dialog, dialogs are just as they are
-            let lerpResult = this.dimensionTransitionLerp.lerp(thisDelta);
-            finished = <boolean>lerpResult[lerpResult.length - 1] === true;
-
             // Get our DIMENSIONS
-            this.dialogWidth = <number>lerpResult[0];
-            this.dialogHeight = <number>lerpResult[1];
+            this.dialogWidth = results[0];
+            this.dialogHeight = results[1];
 
         } else if (this.contentTransition === this.contentTransitionStates.TRANSITION_OUT ||
             this.contentTransition === this.contentTransitionStates.TRANSITION_IN) {
 
-            // Update the opacity of the content
-            let lerpResult = this.contentTransitionLerp.lerp(thisDelta);
-            finished = <boolean>lerpResult[lerpResult.length - 1] === true;
-
             // Save our opacity
-            this.contentOpacity = <number>lerpResult[0];
+            this.contentOpacity = results[0];
         }
 
         // If we finished, we're good
@@ -367,9 +357,6 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
                 this.currentDialogContent = this.nextDialogContent;
             }
         }
-
-        // Are we still in a state
-        return (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE);
     }
 
     //
