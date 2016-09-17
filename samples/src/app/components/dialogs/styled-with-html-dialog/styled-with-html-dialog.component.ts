@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
 import { Ng2DynamicDialogContent } from 'ng2-dynamic-dialog';
@@ -37,7 +37,7 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         This is all done with 'Ng2DynamicDialogStyle'`;
 
     // Constructor
-    constructor(private _sanitizer: DomSanitizationService) {
+    constructor(private _sanitizer: DomSanitizer) {
 
     }
 
