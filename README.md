@@ -24,7 +24,7 @@ A dynamically adjusting, extensible dialog component for use with Angular 2 supp
 <br>
 
 ## Dependancies
-Currently built against Angular 2 RC 5.
+Currently built against Angular 2.0.0.
 
 ng2-dynamic-dialog has the following additional dependancies
 - [TsLerp](https://www.npmjs.com/package/tslerp): Typescript library for lerping single and multi-sample data sets over time
@@ -34,7 +34,7 @@ ng2-dynamic-dialog has the following additional dependancies
 ## Installation
 1. Add the package to your 'dependencies' list in `package.json` and run `npm install`
 
-  `"ng2-dynamic-dialog": "^0.0.5"`
+  `"ng2-dynamic-dialog": "^0.1.0"`
   
   Optionally, you can manually install the package using the npm command line
 
@@ -339,6 +339,9 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 <br>
 
 ## Change Log
+
+### 0.1.0
+* Updated Angular dependancy to 2.0.0
 
 ### 0.0.6
 * Added dependacy against [TsLerp](https://www.npmjs.com/package/tslerp) and removed the internal lerp/interval objects
