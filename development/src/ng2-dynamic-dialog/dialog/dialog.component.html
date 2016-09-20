@@ -6,43 +6,34 @@
     <ng2-dynamic-dialog-background [style.opacity]="dialogOpacity"></ng2-dynamic-dialog-background>
 
     <!-- Main dialog body -->
-    <div class="ng2-dynamic-dialog-modal" [style.border-color]="dialogStyle.dialogBorderColor" [style.background]="dialogStyle.dialogBackgroundColor" [style.color]="dialogStyle.dialogFontColor"
-                              [style.width.px]="dialogWidth" [style.height.px]="dialogHeight"
-                              [style.opacity]="dialogOpacity" [style.border-radius.px]="dialogStyle.dialogBorderRadius">
+    <div class="ng2-dynamic-dialog-modal" [ngStyle]="setStyleModalDialog()">
 
-        <div class="ng2-dynamic-dialog-body" [style.font-family]="dialogStyle.dialogFontFamily"
-                                 [style.font-size.px]="dialogStyle.dialogFontSize" [style.font-style]="dialogStyle.dialogFontStyle"
-                                 [style.opacity]="contentOpacity">
+        <div [style.opacity]="contentOpacity">
 
             <!-- Dialog title -->
-            <div *ngIf="currentDialogContent.title" class="ng2-dynamic-dialog-modal-title"
-            [style.font-family]="dialogStyle.titleFontFamily" [style.font-size.px]="dialogStyle.titleFontSize"
-            [style.font-style]="dialogStyle.titleFontStyle" [style.color]="dialogStyle.titleFontColor">
+            <div *ngIf="currentDialogContent.title" class="ng2-dynamic-dialog-modal-title" [ngStyle]="setStyleTitle()">
                 {{currentDialogContent.title}}
             </div>
 
             <!-- Button 1, bottom left -->
-            <div *ngIf="currentDialogContent.button1" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button1 ng2-dynamic-dialog-selectable-option" (click)="onButtonClicked(0)"
-            [style.background-color]="buttonBackgroundColour[0]" [style.border-color]="dialogStyle.buttonBorderColor" [style.border-radius.px]="dialogStyle.buttonBorderRadius"
-            [style.font-family]="dialogStyle.buttonFontFamily" [style.font-size.px]="dialogStyle.buttonFontSize" [style.font-style]="dialogStyle.buttonFontStyle"
+            <div *ngIf="currentDialogContent.button1" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button1 ng2-dynamic-dialog-selectable-option"
+            (click)="onButtonClicked(0)" [ngStyle]="setStyleButton(0)"
             (mouseover)='onButtonMouseOver(0)' (mouseout)='onButtonMouseOut(0)'>
-                <div class="ng2-dynamic-dialog-modal-button-text" [style.color]="dialogStyle.buttonFontColor">{{currentDialogContent.button1}}</div>
+                <div class="ng2-dynamic-dialog-modal-button-text" >{{currentDialogContent.button1}}</div>
             </div>
 
             <!-- Button 2, bottom right -->
-            <div *ngIf="currentDialogContent.button2" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button2 ng2-dynamic-dialog-selectable-option" (click)="onButtonClicked(1)"
-            [style.background-color]="buttonBackgroundColour[1]" [style.border-color]="dialogStyle.buttonBorderColor" [style.border-radius.px]="dialogStyle.buttonBorderRadius"
-            [style.font-family]="dialogStyle.buttonFontFamily" [style.font-size.px]="dialogStyle.buttonFontSize" [style.font-style]="dialogStyle.buttonFontStyle"
+            <div *ngIf="currentDialogContent.button2" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button2 ng2-dynamic-dialog-selectable-option"
+            (click)="onButtonClicked(1)" [ngStyle]="setStyleButton(1)"
             (mouseover)='onButtonMouseOver(1)' (mouseout)='onButtonMouseOut(1)'>
-                <div class="ng2-dynamic-dialog-modal-button-text" [style.color]="dialogStyle.buttonFontColor">{{currentDialogContent.button2}}</div>
+                <div class="ng2-dynamic-dialog-modal-button-text">{{currentDialogContent.button2}}</div>
             </div>
 
             <!-- 3rd button, across the entire dialog -->
-            <div *ngIf="currentDialogContent.button3" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button3 ng2-dynamic-dialog-selectable-option" (click)="onButtonClicked(2)"
-            [style.background-color]="buttonBackgroundColour[2]" [style.border-color]="dialogStyle.buttonBorderColor" [style.border-radius.px]="dialogStyle.buttonBorderRadius"
-            [style.font-family]="dialogStyle.buttonFontFamily" [style.font-size.px]="dialogStyle.buttonFontSize" [style.font-style]="dialogStyle.buttonFontStyle"
+            <div *ngIf="currentDialogContent.button3" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button3 ng2-dynamic-dialog-selectable-option"
+            (click)="onButtonClicked(2)" [ngStyle]="setStyleButton(2)"
             (mouseover)='onButtonMouseOver(2)' (mouseout)='onButtonMouseOut(2)'>
-                <div class="ng2-dynamic-dialog-modal-button-text" [style.color]="dialogStyle.buttonFontColor">{{currentDialogContent.button3}}</div>
+                <div class="ng2-dynamic-dialog-modal-button-text">{{currentDialogContent.button3}}</div>
             </div>
 
             <!-- Stock exit button -->

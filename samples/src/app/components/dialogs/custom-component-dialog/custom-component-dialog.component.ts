@@ -90,23 +90,26 @@ export class CustomComponentDialogComponent implements OnInit {
         let dialogStyle = new Ng2DynamicDialogStyle();
 
         // Dialog style
-        dialogStyle.dialogBorderColor = '#005E5A';
+        dialogStyle.dialog['border-color'] = '#005E5A';
 
-        dialogStyle.dialogFontFamily = 'Architects Daughter, cursive';
-        dialogStyle.dialogFontSize = '18';
+        dialogStyle.dialog['font-family'] = 'Architects Daughter, cursive';
+        dialogStyle.dialog['font-size.px'] = 18;
 
         // Button style
-        dialogStyle.buttonBackgroundColor = '#00736F';
-        dialogStyle.buttonBorderColor = '#005E5A';
-        dialogStyle.buttonHoverColor = dialogStyle.buttonBorderColor;
+        // Button style
+        dialogStyle.button.idle['background-color'] = '#00736F';
+        dialogStyle.button.idle['color'] = '#FFFFFF';
 
-        dialogStyle.buttonFontFamily = dialogStyle.dialogFontFamily;
-        dialogStyle.buttonFontSize = dialogStyle.dialogFontSize;
+        dialogStyle.button.idle['border-color'] = '#005E5A';
 
-        dialogStyle.buttonFontColor = '#ffffff';
+        dialogStyle.button.idle['font-family'] = dialogStyle.dialog['font-family'];
+        dialogStyle.button.idle['font-size.px'] = dialogStyle.dialog['font-size.px'];
+        dialogStyle.button.idle['font-style'] = '#ffffff';
+
+        dialogStyle.button.hover['background-color'] = dialogStyle.button.idle['border-color'];
 
         // Title style
-        dialogStyle.titleFontFamily = dialogStyle.dialogFontFamily;
+        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
 
         // Other buttons
         dialogStyle.closeButtonImage = 'assets/close.png';

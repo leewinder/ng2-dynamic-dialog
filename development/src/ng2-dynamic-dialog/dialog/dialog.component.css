@@ -6,15 +6,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    padding: 20px;
-
-    border: 7px solid;
-}
-
-/* Dialog body style */
-.ng2-dynamic-dialog-body {
-    opacity: 1.0;
 }
 
 /* Title positioning */
@@ -43,8 +34,6 @@
     width: 130px;
     height: 40px;
     line-height: 40px;
-
-    border: 2px solid;
 }
 
 /* Button 1 (bottom left) */
@@ -54,8 +43,6 @@
 
     bottom: 10px;
     left: 10px;
-
-
 }
 
 /* Button 2 (bottom right) */
@@ -65,7 +52,6 @@
 
     bottom: 10px;
     right: 10px;
-
 }
 
 /* Button 3 (bottom) */

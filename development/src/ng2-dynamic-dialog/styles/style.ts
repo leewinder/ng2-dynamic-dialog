@@ -4,37 +4,62 @@
 //
 export class Ng2DynamicDialogStyle {
 
+    // Background style
+    background = {
+        'background': '#000000',
+        'opacity': 0.4,
+    };
+
     // Dialog style
-    dialogBackgroundColor = '#ffffff';
-    dialogBorderColor = '#000000';
+    dialog = {
+        'background-color': '#ffffff',
+        'color': '#000000',
 
-    dialogFontColor = '#000000';
+        'border-color': '#000000',
+        'border-radius.px': 15,
 
-    dialogFontFamily = '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif';
-    dialogFontSize = '14';
-    dialogFontStyle = 'normal';
+        'border-style': 'solid',
+        'border-width.px': 7,
 
-    dialogBorderRadius: number = 15;
+        'font-family': '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif',
+        'font-size.px': 14,
+        'font-style': 'normal',
+
+        'padding.px': 20,
+
+    };
 
     // Button style
-    buttonBackgroundColor = '#dddddd';
-    buttonBorderColor = '#000000';
-    buttonHoverColor = '#ffffff';
+    button = {
+        'idle': {
 
-    buttonFontColor = '#000000';
+            'background-color': '#dddddd',
+            'color': '#000000',
 
-    buttonFontFamily = '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif';
-    buttonFontSize = '14';
-    buttonFontStyle = 'normal';
+            'border-color': '#000000',
+            'border-radius.px': 5,
 
-    buttonBorderRadius: number = 5;
+            'border-style': 'solid',
+            'border-width.px': 2,
+
+            'font-family': '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif',
+            'font-size.px': 14,
+            'font-style': 'normal',
+
+        },
+        'hover': {
+            'background-color': '#ffffff',
+        },
+    };
 
     // Title style
-    titleFontColor = '#000000';
+    title = {
+        'color': '#000000',
 
-    titleFontFamily = '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif';
-    titleFontSize = '20';
-    titleFontStyle = 'normal';
+        'font-family': '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif',
+        'font-size.px': 20,
+        'font-style': 'normal',
+    };
 
     // Other buttons
     closeButtonImage: string;

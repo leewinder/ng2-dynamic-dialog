@@ -20,5 +20,4 @@ export class Ng2DynamicDialogBackgroundComponent {
     constructor (private modalDialog: Ng2DynamicDialogComponent) {
 
     }
-
 }

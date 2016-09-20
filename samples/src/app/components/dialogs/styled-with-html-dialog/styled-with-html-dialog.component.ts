@@ -101,27 +101,28 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         let dialogStyle = new Ng2DynamicDialogStyle();
 
         // Dialog style
-        dialogStyle.dialogBorderColor = '#44086C';
+        dialogStyle.dialog['border-color'] = '#44086C';
 
-        dialogStyle.dialogFontFamily = 'Architects Daughter, cursive';
-        dialogStyle.dialogFontSize = '14';
+        dialogStyle.dialog['font-family'] = 'Architects Daughter, cursive';
+        dialogStyle.dialog['font-size.px'] = 14;
 
-        dialogStyle.dialogBorderRadius = 20;
+        dialogStyle.dialog['border-radius.px'] = 20;
 
         // Button style
-        dialogStyle.buttonBackgroundColor = '#611F8E';
-        dialogStyle.buttonBorderColor = '#44086C';
-        dialogStyle.buttonHoverColor = dialogStyle.buttonBorderColor;
+        dialogStyle.button.idle['background-color'] = '#611F8E';
+        dialogStyle.button.idle['color'] = '#FFFFFF';
 
-        dialogStyle.buttonBorderRadius = 10;
+        dialogStyle.button.idle['border-color'] = '#44086C';
+        dialogStyle.button.idle['border-radius.px'] = 10;
 
-        dialogStyle.buttonFontFamily = dialogStyle.dialogFontFamily;
-        dialogStyle.buttonFontSize = dialogStyle.dialogFontSize;
+        dialogStyle.button.idle['font-family'] = dialogStyle.dialog['font-family'];
+        dialogStyle.button.idle['font-size.px'] = dialogStyle.dialog['font-size.px'] = 14;
+        dialogStyle.button.idle['font-style'] = '#ffffff';
 
-        dialogStyle.buttonFontColor = '#ffffff';
+        dialogStyle.button.hover['background-color'] = dialogStyle.button.idle['border-color'];
 
         // Title style
-        dialogStyle.titleFontFamily = dialogStyle.dialogFontFamily;
+        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
 
         // Other buttons
         dialogStyle.closeButtonImage = 'assets/close.png';

@@ -69,17 +69,15 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private contentChanging: boolean = false;
     private dimensionsChanging: boolean = false;
 
-    // Background colour which changes on mouse events as we do not have :hover styles
-    private buttonBackgroundColour: string[] = ['', '', ''];
+    // Track which buttons are on or off
+    private buttonHighlighted: boolean[] = [false, false, false];
 
     //
-    // Initialisation
+    // Called to initialise the object
     //
     ngOnInit() {
-        // Save our default colours
-        for (let i = 0; i < this.buttonBackgroundColour.length; i++) {
-            this.buttonBackgroundColour[i] = this.dialogStyle.buttonBackgroundColor;
-        }
+        // Make sure the styles are set correctly
+        this.setStyle(this.dialogStyle);
     }
 
     //
@@ -92,13 +90,8 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     // Sets the style of the dialog
     //
     setStyle(dialogStyle: Ng2DynamicDialogStyle) {
-
         this.dialogStyle = dialogStyle;
-
-        // Save our button hovers
-        for (let i = 0; i < this.buttonBackgroundColour.length; i++) {
-            this.buttonBackgroundColour[i] = this.dialogStyle.buttonBackgroundColor;
-        }
+        this.duplicateIdleButtonStyles();
     }
 
     //
@@ -168,8 +161,8 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
             this.isActive = true;
 
             // Reset our default colours
-            for (let i = 0; i < this.buttonBackgroundColour.length; i++) {
-                this.buttonBackgroundColour[i] = this.dialogStyle.buttonBackgroundColor;
+            for (let i = 0; i < this.buttonHighlighted.length; i++) {
+                this.buttonHighlighted[i] = false;
             }
 
             // Let the client know
@@ -192,6 +185,27 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     //
     isInTransition(): boolean {
         return (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE);
+    }
+
+    //
+    // Duplicates any properties not in the button hover style from the idle style
+    //
+    private duplicateIdleButtonStyles() {
+
+        // Copy over and duplicate the idle properties in hover
+        for (let key in this.dialogStyle.button.idle) {
+
+            // If this property does not exist in the hover style, add it
+            if (this.dialogStyle.button.idle.hasOwnProperty(key) === true) {
+
+                let hoverValue: any = (<any>this.dialogStyle.button.hover)[key];
+                let idleValue: any = (<any>this.dialogStyle.button.idle)[key];
+
+                if (hoverValue == null) {
+                    (<any>this.dialogStyle.button.hover)[key] = idleValue;
+                }
+            }
+        }
     }
 
     //
@@ -417,8 +431,8 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private onButtonMouseOver(buttonIndex: number) {
         /* tslint:enable:no-unused-variable */
 
-        // Set the background colours
-        this.buttonBackgroundColour[buttonIndex] = this.dialogStyle.buttonHoverColor;
+        // Highlighted
+        this.buttonHighlighted[buttonIndex] = true;
 
         // Entered the button
         if (this.dialogCallbacks.onButtonEnter !== null) {
@@ -433,12 +447,63 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private onButtonMouseOut(buttonIndex: number) {
         /* tslint:enable:no-unused-variable */
 
-        // Set the background colours
-        this.buttonBackgroundColour[buttonIndex] = this.dialogStyle.buttonBackgroundColor;
+        // No longer highlighted
+        this.buttonHighlighted[buttonIndex] = false;
 
         // Left the button
         if (this.dialogCallbacks.onButtonExit !== null) {
             this.dialogCallbacks.onButtonExit();
         }
+    }
+
+    // Styles
+
+    //
+    // Called to set the style of the modal
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleModalDialog() {
+        /* tslint:enable:no-unused-variable */
+
+        // Add our properties
+        (<any>this.dialogStyle.dialog)['width.px'] = this.dialogWidth;
+        (<any>this.dialogStyle.dialog)['height.px'] = this.dialogHeight;
+
+        (<any>this.dialogStyle.dialog)['opacity'] = this.dialogOpacity;
+
+        return this.dialogStyle.dialog;
+    }
+
+    //
+    // Called to set the style of the title string of the dialog
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleTitle() {
+        /* tslint:enable:no-unused-variable */
+
+        // Return our title style
+        return this.dialogStyle.title;
+    }
+
+    //
+    // Called to set the style of a given button
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleButton(buttonIndex: number) {
+        /* tslint:enable:no-unused-variable */
+
+        // Simply return our style based on our behaviour
+        return this.buttonHighlighted[buttonIndex] === true ? this.dialogStyle.button.hover : this.dialogStyle.button.idle;
+    }
+
+    //
+    // Sets the style of the dialog background
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleBackground() {
+        /* tslint:enable:no-unused-variable */
+
+        // Return our background style
+        return this.dialogStyle.background;
     }
 }
