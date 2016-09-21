@@ -57,6 +57,10 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private lerpTransition: TsLerpTransition = TsLerpTransition.EaseOut;
     private lerpStyle: TsLerpStyle = TsLerpStyle.Quadratic;
 
+    // Dialog wrapper callbacks
+    private boundOnComponentCreated: Function;
+    private boundOnComponentDestroyed: Function;
+
     // Transition lerps
     private dialogTransitionLerp: TsLerp = new TsLerp();
 
@@ -80,6 +84,10 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     ngOnInit() {
         // Make sure the styles are set correctly
         this.setStyle(this.dialogStyle);
+
+        // Bind the callbacks we will pass to the component wrapper
+        this.boundOnComponentCreated = this.onComponentCreated.bind(this);
+        this.boundOnComponentDestroyed = this.onComponentDestroyed.bind(this);
     }
 
     //
@@ -362,6 +370,28 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
                 this.currentDialogContent = this.nextDialogContent;
             }
         }
+    }
+
+    //
+    // Called when a component content object is created
+    //
+    onComponentCreated(component: Component): void {
+
+        // See if we can get the callbacks
+        if (typeof ((<any>component).getDialogComponentCallbacks) !== 'undefined') {
+
+            // Get the callbacks from this component
+            let componentCallbacks: Ng2DynamicDialogCallbacks = (<any>component).getDialogComponentCallbacks();
+            this.callbackController.setComponentCallbacks(componentCallbacks);
+        }
+    }
+
+    //
+    // Called when a component content object is destroyed
+    //
+    onComponentDestroyed(): void {
+        // Remove the component callbacks
+        this.callbackController.setComponentCallbacks(null);
     }
 
     //

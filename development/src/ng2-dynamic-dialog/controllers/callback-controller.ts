@@ -14,14 +14,26 @@ export class CallbackController {
     // Sets the dialog level callbacks
     //
     setDialogCallbacks(dialogCallbacks: Ng2DynamicDialogCallbacks) {
-        this.dialogCallbacks = dialogCallbacks;
+
+        // If we've had nothing passed through, reset
+        if (dialogCallbacks === null) {
+            this.dialogCallbacks = new Ng2DynamicDialogCallbacks();
+        } else {
+            this.dialogCallbacks = dialogCallbacks;
+        }
     }
 
     //
     // Sets the component level callbacks
     //
     setComponentCallbacks(componentCallbacks: Ng2DynamicDialogCallbacks) {
-        this.componentCallbacks = componentCallbacks;
+
+        // If we've had nothing passed through, reset
+        if (componentCallbacks === null) {
+            this.componentCallbacks = new Ng2DynamicDialogCallbacks();
+        } else {
+            this.componentCallbacks = componentCallbacks;
+        }
     }
 
     //

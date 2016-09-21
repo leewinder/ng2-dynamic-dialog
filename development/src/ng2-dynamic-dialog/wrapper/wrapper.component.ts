@@ -26,6 +26,12 @@ export class Ng2DynamicDialogWrapperComponent implements OnChanges, OnInit, OnDe
     @Input()
     private componentType: any;
 
+    @Input()
+    private componentCreatedCallback: (component: Component) => void;
+
+    @Input()
+    private componentDestroyedCallback: () => void;
+
     //
     // Constructor
     //
@@ -65,11 +71,23 @@ export class Ng2DynamicDialogWrapperComponent implements OnChanges, OnInit, OnDe
             return;
         }
 
+        // If we have a component, destroy it first
         if (this.componentReference) {
             this.componentReference.destroy();
+
+            // Call the callback if needed
+            if (this.componentDestroyedCallback !== null) {
+                this.componentDestroyedCallback();
+            }
         }
 
+        // Create an instance of this component
         let componentFactory = this.resolver.resolveComponentFactory(this.componentType);
         this.componentReference = this.dynamicTarget.createComponent(componentFactory);
+
+        // If we need to, pass through the component we created
+        if (this.componentCreatedCallback !== null) {
+            this.componentCreatedCallback(this.componentReference.instance);
+        }
     }
 }
