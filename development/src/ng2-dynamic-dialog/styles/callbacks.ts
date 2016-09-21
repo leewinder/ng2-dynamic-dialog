@@ -1,30 +1,38 @@
 
 //
+// Callback return options
+//
+export enum CallbackResult {
+    CallSubsequent,     // Calls any subsequent callbacks as a result of this one
+    None,               // No specific result, nothing needs to be done
+}
+
+//
 // Dialog callbacks for event responses
 //
-export class Ng2DynamicDialogCallbacks {
+export class DialogCallbacks {
 
     // Button clicked callbacks
-    onButton1Clicked: () => void = null;
-    onButton2Clicked: () => void = null;
-    onButton3Clicked: () => void = null;
+    onButton1Clicked: () => CallbackResult = null;
+    onButton2Clicked: () => CallbackResult = null;
+    onButton3Clicked: () => CallbackResult = null;
 
-    onButtonExitClicked: () => void = null;
+    onButtonExitClicked: () => CallbackResult = null;
 
     // Button hover callbacks
-    onButtonEnter: () => void = null;
-    onButtonExit: () => void = null;
+    onButtonEnter: () => CallbackResult = null;
+    onButtonExit: () => CallbackResult = null;
 
     // Event callbacks
-    onDialogOpening: () => void = null;
-    onDialogOpened: () => void = null;
+    onDialogOpening: () => CallbackResult = null;
+    onDialogOpened: () => CallbackResult = null;
 
-    onDialogClosing: () => void = null;
-    onDialogClosed: () => void = null;
+    onDialogClosing: () => CallbackResult = null;
+    onDialogClosed: () => CallbackResult = null;
 
     // Transition callbacks
-    onTransitionDimensions: () => void = null;
+    onTransitionDimensions: () => CallbackResult = null;
 
-    onTransitionContentHide: () => void = null;
-    onTransitionContentShow: () => void = null;
+    onTransitionContentHide: () => CallbackResult = null;
+    onTransitionContentShow: () => CallbackResult = null;
 }

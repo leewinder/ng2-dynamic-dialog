@@ -1,8 +1,10 @@
-export { Ng2DynamicDialogModule } from './module/dialog.module';
+export { DialogModule as Ng2DynamicDialogModule } from './module/dialog.module';
 
-export { Ng2DynamicDialogComponent } from './dialog/dialog.component';
+export { DialogComponent as Ng2DynamicDialogComponent } from './dialog/dialog.component';
 
-export { Ng2DynamicDialogBehaviour } from './styles/behaviour';
-export { Ng2DynamicDialogCallbacks } from './styles/callbacks';
-export { Ng2DynamicDialogContent } from './styles/content';
-export { Ng2DynamicDialogStyle } from './styles/style';
+export { DialogBehaviour as Ng2DynamicDialogBehaviour } from './styles/behaviour';
+export { DialogContent as Ng2DynamicDialogContent } from './styles/content';
+export { DialogStyle as Ng2DynamicDialogStyle } from './styles/style';
+
+export { DialogCallbacks as Ng2DynamicDialogCallbacks } from './styles/callbacks';
+export { CallbackResult as Ng2DynamicDialogCallbackResult } from './styles/callbacks';

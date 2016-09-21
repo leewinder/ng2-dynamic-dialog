@@ -1,7 +1,7 @@
 // Imports
 import { Component } from '@angular/core';
 
-import { Ng2DynamicDialogComponent } from '../dialog/dialog.component';
+import { DialogComponent } from '../dialog/dialog.component';
 
 //
 // Dialog background component
@@ -14,10 +14,10 @@ import { Ng2DynamicDialogComponent } from '../dialog/dialog.component';
     templateUrl: 'background.component.html',
     styleUrls: ['background.component.css'],
 })
-export class Ng2DynamicDialogBackgroundComponent {
+export class BackgroundComponent {
 
     // Dialog being rendered over this background
-    constructor (private modalDialog: Ng2DynamicDialogComponent) {
+    constructor (private modalDialog: DialogComponent) {
 
     }
 }

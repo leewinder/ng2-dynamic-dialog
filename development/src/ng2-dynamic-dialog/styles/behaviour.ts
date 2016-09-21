@@ -2,7 +2,7 @@
 //
 // Requested behaviour for a dialog
 //
-export class Ng2DynamicDialogBehaviour {
+export class DialogBehaviour {
 
     // Show the dialog close when the user clicks outside
     exitOnOffDialogClick = true;

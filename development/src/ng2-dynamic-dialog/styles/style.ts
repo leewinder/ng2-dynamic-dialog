@@ -2,7 +2,7 @@
 //
 // Requested style for a dialog
 //
-export class Ng2DynamicDialogStyle {
+export class DialogStyle {
 
     // Background style
     background = {

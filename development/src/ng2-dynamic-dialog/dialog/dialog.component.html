@@ -48,7 +48,11 @@
             </div>
 
             <!-- Customisable component content -->
-            <ng2-dynamic-dialog-wrapper *ngIf="currentDialogContent.componentContent" [componentType]="currentDialogContent.componentContent"></ng2-dynamic-dialog-wrapper>
+            <ng2-dynamic-creator-component *ngIf="currentDialogContent.componentContent"
+                [componentType]="currentDialogContent.componentContent"
+                [componentCreatedCallback]="boundOnComponentCreated"
+                [componentDestroyedCallback]="boundOnComponentDestroyed">
+            </ng2-dynamic-creator-component>
 
         </div>
     </div>

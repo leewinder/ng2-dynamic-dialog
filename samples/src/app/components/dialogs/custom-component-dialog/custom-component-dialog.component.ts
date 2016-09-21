@@ -4,7 +4,9 @@ import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
 
 import { Ng2DynamicDialogContent } from 'ng2-dynamic-dialog';
 import { Ng2DynamicDialogStyle } from 'ng2-dynamic-dialog';
+
 import { Ng2DynamicDialogCallbacks } from 'ng2-dynamic-dialog';
+import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
 
 import { UserDetailsService } from './content/user-details/user-details.service';
 
@@ -160,26 +162,32 @@ export class CustomComponentDialogComponent implements OnInit {
     //
     // Called when the log in button is pressed
     //
-    private onLogInSelected() {
+    private onLogInSelected(): Ng2DynamicDialogCallbackResult {
+
         this.modalDialog.close();
+        return Ng2DynamicDialogCallbackResult.None;
     }
 
     //
     // Called when the user decide to sign up
     //
-    private onSignInNeededSelected() {
+    private onSignInNeededSelected(): Ng2DynamicDialogCallbackResult {
 
         // Before we go into the sign up dialog, can we help out the user and guess their name?
         this.guessUsernameFromEmail();
 
         // Get the login component so we can get the information the user has already inputed
         this.onSignUpSelected();
+
+        return Ng2DynamicDialogCallbackResult.None;
     }
 
     //
     // Called when the needs to sign up
     //
-    private onSignInSelcted() {
+    private onSignInSelcted(): Ng2DynamicDialogCallbackResult {
+
         this.modalDialog.close();
+        return Ng2DynamicDialogCallbackResult.None;
     }
 }
