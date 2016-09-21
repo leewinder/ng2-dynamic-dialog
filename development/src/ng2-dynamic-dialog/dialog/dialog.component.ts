@@ -229,9 +229,9 @@ export class DialogComponent implements AfterViewChecked, OnInit {
 
         // Should we start to fade?
         if (transitionState === this.dialogTransitionStates.TRANSITION_IN) {
-            this.dialogTransitionLerp.define([[0, 1]], this.dialogStyle.transitionTimeDialogs, this.lerpTransition, this.lerpStyle);
+            this.dialogTransitionLerp.define([[0, 1]], this.dialogBehaviour.transitionTimeDialogs, this.lerpTransition, this.lerpStyle);
         } else if (transitionState === this.dialogTransitionStates.TRANSITION_OUT) {
-            this.dialogTransitionLerp.define([[1, 0]], this.dialogStyle.transitionTimeDialogs, this.lerpTransition, this.lerpStyle);
+            this.dialogTransitionLerp.define([[1, 0]], this.dialogBehaviour.transitionTimeDialogs, this.lerpTransition, this.lerpStyle);
         }
 
         // Trigger the lerp update
@@ -259,21 +259,21 @@ export class DialogComponent implements AfterViewChecked, OnInit {
 
             let lerpValues = [[this.currentContent.width, this.nextContent.width],
                 [this.currentContent.height, this.nextContent.height]];
-            this.dialogTransitionLerp.define(lerpValues, this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
+            this.dialogTransitionLerp.define(lerpValues, this.dialogBehaviour.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
             this.callbackController.onTransitionDimensions();
 
         } else if (transitionState === this.contentTransitionStates.TRANSITION_OUT) {
 
-            this.dialogTransitionLerp.define([[1, 0]], this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
+            this.dialogTransitionLerp.define([[1, 0]], this.dialogBehaviour.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
             this.callbackController.onTransitionContentHide();
 
         } else if (transitionState === this.contentTransitionStates.TRANSITION_IN) {
 
-            this.dialogTransitionLerp.define([[0, 1]], this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
+            this.dialogTransitionLerp.define([[0, 1]], this.dialogBehaviour.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
             this.callbackController.onTransitionContentShow();

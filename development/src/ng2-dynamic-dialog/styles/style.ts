@@ -63,8 +63,4 @@ export class Style {
 
     // Other buttons
     closeButtonImage: string;
-
-    // Transitions
-    transitionTimeDialogs: number = 0.3;
-    transitionTimeContent: number = 0.3;
 }
