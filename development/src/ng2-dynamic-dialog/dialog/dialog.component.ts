@@ -8,6 +8,8 @@ import { Ng2DynamicDialogStyle } from '../styles/style';
 import { Ng2DynamicDialogBehaviour } from '../styles/behaviour';
 import { Ng2DynamicDialogCallbacks } from '../styles/callbacks';
 
+import { CallbackController } from '../controllers/callback-controller';
+
 //
 // Main dialog component
 //
@@ -50,7 +52,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private dialogStyle: Ng2DynamicDialogStyle = new Ng2DynamicDialogStyle();
     private dialogBehaviour: Ng2DynamicDialogBehaviour = new Ng2DynamicDialogBehaviour();
 
-    private dialogCallbacks: Ng2DynamicDialogCallbacks = new Ng2DynamicDialogCallbacks();
+    private callbackController: CallbackController = new CallbackController();
 
     private lerpTransition: TsLerpTransition = TsLerpTransition.EaseOut;
     private lerpStyle: TsLerpStyle = TsLerpStyle.Quadratic;
@@ -105,7 +107,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     // Sets the callbacks for this dialog
     //
     setCallbacks(dialogCallbacks: Ng2DynamicDialogCallbacks) {
-        this.dialogCallbacks = dialogCallbacks;
+        this.callbackController.setDialogCallbacks(dialogCallbacks);
     }
 
     //
@@ -166,9 +168,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
             }
 
             // Let the client know
-            if (this.dialogCallbacks.onDialogOpening !== null) {
-                this.dialogCallbacks.onDialogOpening();
-            }
+            this.callbackController.onDialogOpening();
         }
     }
 
@@ -254,27 +254,21 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
             this.dialogTransitionLerp.define(lerpValues, this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
-            if (this.dialogCallbacks.onTransitionDimensions !== null) {
-                this.dialogCallbacks.onTransitionDimensions();
-            }
+            this.callbackController.onTransitionDimensions();
 
         } else if (transitionState === this.contentTransitionStates.TRANSITION_OUT) {
 
             this.dialogTransitionLerp.define([[1, 0]], this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
-            if (this.dialogCallbacks.onTransitionContentHide !== null) {
-                this.dialogCallbacks.onTransitionContentHide();
-            }
+            this.callbackController.onTransitionContentHide();
 
         } else if (transitionState === this.contentTransitionStates.TRANSITION_IN) {
 
             this.dialogTransitionLerp.define([[0, 1]], this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
-            if (this.dialogCallbacks.onTransitionContentShow !== null) {
-                this.dialogCallbacks.onTransitionContentShow();
-            }
+            this.callbackController.onTransitionContentShow();
         }
 
         // Trigger the lerp update
@@ -309,15 +303,12 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
                     this.isActive = false;
 
                     // Let the client know
-                    if (this.dialogCallbacks.onDialogClosed !== null) {
-                        this.dialogCallbacks.onDialogClosed();
-                    }
+                    this.callbackController.onDialogClosed();
+
                 } else if (this.dialogTransition === this.dialogTransitionStates.TRANSITION_IN) {
 
                     // Let the client know
-                    if (this.dialogCallbacks.onDialogOpened !== null) {
-                        this.dialogCallbacks.onDialogOpened();
-                    }
+                    this.callbackController.onDialogOpened();
                 }
             }
 
@@ -381,16 +372,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
         /* tslint:enable:no-unused-variable */
 
         // Just call the right callbacks
-        if (buttonIndex === 0 && this.dialogCallbacks.onButton1Clicked !== null) {
-            this.dialogCallbacks.onButton1Clicked();
-        }
-        if (buttonIndex === 1 && this.dialogCallbacks.onButton2Clicked !== null) {
-            this.dialogCallbacks.onButton2Clicked();
-        }
-        if (buttonIndex === 2 && this.dialogCallbacks.onButton3Clicked !== null) {
-            this.dialogCallbacks.onButton3Clicked();
-        }
-
+        this.callbackController.onButtonClicked(buttonIndex);
     }
 
     //
@@ -411,14 +393,12 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
         }
 
         // Did we click the exit button
-        if (offDialogClick === false && this.dialogCallbacks.onButtonExitClicked !== null) {
-            this.dialogCallbacks.onButtonExitClicked();
+        if (offDialogClick === false) {
+            this.callbackController.onButtonExitClicked();
         }
 
         // We're exiting now
-        if (this.dialogCallbacks.onDialogClosing !== null) {
-            this.dialogCallbacks.onDialogClosing();
-        }
+        this.callbackController.onDialogClosing();
 
         // We are now transitioning out
         this.setDialogTransitionState(this.dialogTransitionStates.TRANSITION_OUT);
@@ -435,9 +415,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
         this.buttonHighlighted[buttonIndex] = true;
 
         // Entered the button
-        if (this.dialogCallbacks.onButtonEnter !== null) {
-            this.dialogCallbacks.onButtonEnter();
-        }
+        this.callbackController.onButtonEnter();
     }
 
     //
@@ -451,9 +429,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
         this.buttonHighlighted[buttonIndex] = false;
 
         // Left the button
-        if (this.dialogCallbacks.onButtonExit !== null) {
-            this.dialogCallbacks.onButtonExit();
-        }
+        this.callbackController.onButtonExit();
     }
 
     // Styles

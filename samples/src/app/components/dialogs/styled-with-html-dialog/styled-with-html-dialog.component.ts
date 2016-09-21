@@ -7,6 +7,8 @@ import { Ng2DynamicDialogStyle } from 'ng2-dynamic-dialog';
 import { Ng2DynamicDialogCallbacks } from 'ng2-dynamic-dialog';
 import { Ng2DynamicDialogBehaviour } from 'ng2-dynamic-dialog';
 
+import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
+
 @Component({
 
     moduleId: module.id,
@@ -160,16 +162,20 @@ export class StyledWithHtmlDialogComponent implements OnInit {
     //
     // Called when the button 2 is called
     //
-    private onButton2Selected() {
+    private onButton2Selected(): Ng2DynamicDialogCallbackResult {
+
         // Go back to the default content
         this.showDefaultDialogContent();
+        return Ng2DynamicDialogCallbackResult.None;
     }
 
     //
     // Called when the button 3 is called
     //
-    private onButton3Selected() {
+    private onButton3Selected(): Ng2DynamicDialogCallbackResult {
+
         // Go to the switched content
         this.showSwitchedDialogContent();
+        return Ng2DynamicDialogCallbackResult.None;
     }
 }
