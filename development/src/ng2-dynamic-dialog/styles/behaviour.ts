@@ -2,7 +2,7 @@
 //
 // Requested behaviour for a dialog
 //
-export class DialogBehaviour {
+export class Behaviour {
 
     // Show the dialog close when the user clicks outside
     exitOnOffDialogClick = true;

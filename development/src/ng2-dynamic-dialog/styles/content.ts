@@ -3,7 +3,7 @@ import { SafeHtml } from '@angular/platform-browser';
 //
 // Requested content for a dialog
 //
-export class DialogContent {
+export class Content {
 
     // Common content
     title: string;

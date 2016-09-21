@@ -2,7 +2,7 @@
 //
 // Requested style for a dialog
 //
-export class DialogStyle {
+export class Style {
 
     // Background style
     background = {

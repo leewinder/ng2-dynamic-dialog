@@ -1,5 +1,5 @@
 // Imports
-import { DialogCallbacks } from '../styles/callbacks';
+import { Callbacks } from '../styles/callbacks';
 import { CallbackResult } from '../styles/callbacks';
 
 //
@@ -7,17 +7,17 @@ import { CallbackResult } from '../styles/callbacks';
 //
 export class CallbackController {
 
-    private dialogCallbacks: DialogCallbacks = new DialogCallbacks();
-    private componentCallbacks: DialogCallbacks = new DialogCallbacks();
+    private dialogCallbacks: Callbacks = new Callbacks();
+    private componentCallbacks: Callbacks = new Callbacks();
 
     //
     // Sets the dialog level callbacks
     //
-    setDialogCallbacks(dialogCallbacks: DialogCallbacks) {
+    setCallbacks(dialogCallbacks: Callbacks) {
 
         // If we've had nothing passed through, reset
         if (dialogCallbacks === null) {
-            this.dialogCallbacks = new DialogCallbacks();
+            this.dialogCallbacks = new Callbacks();
         } else {
             this.dialogCallbacks = dialogCallbacks;
         }
@@ -26,11 +26,11 @@ export class CallbackController {
     //
     // Sets the component level callbacks
     //
-    setComponentCallbacks(componentCallbacks: DialogCallbacks) {
+    setComponentCallbacks(componentCallbacks: Callbacks) {
 
         // If we've had nothing passed through, reset
         if (componentCallbacks === null) {
-            this.componentCallbacks = new DialogCallbacks();
+            this.componentCallbacks = new Callbacks();
         } else {
             this.componentCallbacks = componentCallbacks;
         }

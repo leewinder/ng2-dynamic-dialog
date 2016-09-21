@@ -3,10 +3,10 @@ import { Component, AfterViewChecked, OnInit } from '@angular/core';
 
 import { TsLerp, TsLerpTransition, TsLerpStyle } from 'tslerp';
 
-import { DialogContent } from '../styles/content';
-import { DialogStyle } from '../styles/style';
-import { DialogBehaviour } from '../styles/behaviour';
-import { DialogCallbacks } from '../styles/callbacks';
+import { Content } from '../styles/content';
+import { Style } from '../styles/style';
+import { Behaviour } from '../styles/behaviour';
+import { Callbacks } from '../styles/callbacks';
 
 import { CallbackController } from '../controllers/callback-controller';
 
@@ -46,11 +46,11 @@ export class DialogComponent implements AfterViewChecked, OnInit {
     private contentTransition = this.contentTransitionStates.NONE;
 
     // Style and behaviour
-    private currentDialogContent: DialogContent;
-    private nextDialogContent: DialogContent;
+    private currentContent: Content;
+    private nextContent: Content;
 
-    private dialogStyle: DialogStyle = new DialogStyle();
-    private dialogBehaviour: DialogBehaviour = new DialogBehaviour();
+    private dialogStyle: Style = new Style();
+    private dialogBehaviour: Behaviour = new Behaviour();
 
     private callbackController: CallbackController = new CallbackController();
 
@@ -99,7 +99,7 @@ export class DialogComponent implements AfterViewChecked, OnInit {
     //
     // Sets the style of the dialog
     //
-    setStyle(dialogStyle: DialogStyle) {
+    setStyle(dialogStyle: Style) {
         this.dialogStyle = dialogStyle;
         this.duplicateIdleButtonStyles();
     }
@@ -107,21 +107,21 @@ export class DialogComponent implements AfterViewChecked, OnInit {
     //
     // Sets the behaviour of this dialog
     //
-    setBehaviour(dialogBehaviour: DialogBehaviour) {
+    setBehaviour(dialogBehaviour: Behaviour) {
         this.dialogBehaviour = dialogBehaviour;
     }
 
     //
     // Sets the callbacks for this dialog
     //
-    setCallbacks(dialogCallbacks: DialogCallbacks) {
-        this.callbackController.setDialogCallbacks(dialogCallbacks);
+    setCallbacks(Callbacks: Callbacks) {
+        this.callbackController.setCallbacks(Callbacks);
     }
 
     //
     // Shows the dialog
     //
-    show(dialogContent: DialogContent) {
+    show(Content: Content) {
 
         // Can't do anything if we're currently transitioning
         if (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE) {
@@ -132,14 +132,14 @@ export class DialogComponent implements AfterViewChecked, OnInit {
         if (this.isActive === true) {
 
             // Set what we'll show next
-            this.nextDialogContent = dialogContent;
+            this.nextContent = Content;
 
             // Has anything actually changes?
-            this.dimensionsChanging = (this.nextDialogContent.height !== this.currentDialogContent.height ||
-                this.nextDialogContent.width !== this.currentDialogContent.width);
-            this.contentChanging = (this.nextDialogContent.unsafeHtmlContent !== this.currentDialogContent.unsafeHtmlContent ||
-                this.nextDialogContent.safeHtmlContent !== this.currentDialogContent.safeHtmlContent ||
-                this.nextDialogContent.componentContent !== this.currentDialogContent.componentContent);
+            this.dimensionsChanging = (this.nextContent.height !== this.currentContent.height ||
+                this.nextContent.width !== this.currentContent.width);
+            this.contentChanging = (this.nextContent.unsafeHtmlContent !== this.currentContent.unsafeHtmlContent ||
+                this.nextContent.safeHtmlContent !== this.currentContent.safeHtmlContent ||
+                this.nextContent.componentContent !== this.currentContent.componentContent);
 
             // Set the right next state
             let contentTransition = this.contentTransitionStates.NONE;
@@ -156,12 +156,12 @@ export class DialogComponent implements AfterViewChecked, OnInit {
         } else {
 
             // Not active, so set the content and start to show the dialog
-            this.currentDialogContent = dialogContent;
+            this.currentContent = Content;
             this.setDialogTransitionState(this.dialogTransitionStates.TRANSITION_IN);
 
             // Set our other transition properties
-            this.dialogWidth = this.currentDialogContent.width;
-            this.dialogHeight = this.currentDialogContent.height;
+            this.dialogWidth = this.currentContent.width;
+            this.dialogHeight = this.currentContent.height;
 
             this.contentOpacity = 1;
 
@@ -257,8 +257,8 @@ export class DialogComponent implements AfterViewChecked, OnInit {
         // Set our states
         if (transitionState === this.contentTransitionStates.DIMENSIONS) {
 
-            let lerpValues = [[this.currentDialogContent.width, this.nextDialogContent.width],
-                [this.currentDialogContent.height, this.nextDialogContent.height]];
+            let lerpValues = [[this.currentContent.width, this.nextContent.width],
+                [this.currentContent.height, this.nextContent.height]];
             this.dialogTransitionLerp.define(lerpValues, this.dialogStyle.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
             // Dimension transition started
@@ -367,7 +367,7 @@ export class DialogComponent implements AfterViewChecked, OnInit {
 
             // Swap the content over if we're now moving into the state
             if (newContentTransitionState === this.contentTransitionStates.TRANSITION_IN) {
-                this.currentDialogContent = this.nextDialogContent;
+                this.currentContent = this.nextContent;
             }
         }
     }
@@ -381,7 +381,7 @@ export class DialogComponent implements AfterViewChecked, OnInit {
         if (typeof ((<any>component).getDialogComponentCallbacks) !== 'undefined') {
 
             // Get the callbacks from this component
-            let componentCallbacks: DialogCallbacks = (<any>component).getDialogComponentCallbacks();
+            let componentCallbacks: Callbacks = (<any>component).getDialogComponentCallbacks();
             this.callbackController.setComponentCallbacks(componentCallbacks);
         }
     }

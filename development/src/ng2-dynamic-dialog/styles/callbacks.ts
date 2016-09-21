@@ -10,7 +10,7 @@ export enum CallbackResult {
 //
 // Dialog callbacks for event responses
 //
-export class DialogCallbacks {
+export class Callbacks {
 
     // Button clicked callbacks
     onButton1Clicked: () => CallbackResult = null;
