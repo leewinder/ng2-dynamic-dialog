@@ -1,7 +1,7 @@
 // Imports
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { DialogComponent } from '../dialog/dialog.component';
+import { DisplayController } from '../controllers/display-controller';
 
 //
 // Dialog background component
@@ -16,8 +16,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class BackgroundComponent {
 
-    // Dialog being rendered over this background
-    constructor (private modalDialog: DialogComponent) {
-
-    }
+    /* tslint:disable:no-unused-variable */
+    @Input() private displayController: DisplayController;
+    /* tslint:enable:no-unused-variable */
 }
