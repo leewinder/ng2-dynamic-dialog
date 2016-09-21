@@ -10,10 +10,10 @@ import {Component, ComponentRef, Input, ViewContainerRef, ComponentFactoryResolv
 // Dynamic component loader component
 //
 @Component({
-    selector: 'ng2-dynamic-dialog-wrapper',
+    selector: 'ng2-dynamic-creator-component',
     template: `<div #dynamicTarget></div>`,
 })
-export class Ng2DynamicDialogWrapperComponent implements OnChanges, OnInit, OnDestroy {
+export class DynamicCreatorComponent implements OnChanges, OnInit, OnDestroy {
 
     // Private properties
     private componentReference: ComponentRef<any>;

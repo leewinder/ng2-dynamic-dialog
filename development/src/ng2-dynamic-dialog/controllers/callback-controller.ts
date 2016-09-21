@@ -1,5 +1,5 @@
 // Imports
-import { Ng2DynamicDialogCallbacks } from '../styles/callbacks';
+import { DialogCallbacks } from '../styles/callbacks';
 import { CallbackResult } from '../styles/callbacks';
 
 //
@@ -7,17 +7,17 @@ import { CallbackResult } from '../styles/callbacks';
 //
 export class CallbackController {
 
-    private dialogCallbacks: Ng2DynamicDialogCallbacks = new Ng2DynamicDialogCallbacks();
-    private componentCallbacks: Ng2DynamicDialogCallbacks = new Ng2DynamicDialogCallbacks();
+    private dialogCallbacks: DialogCallbacks = new DialogCallbacks();
+    private componentCallbacks: DialogCallbacks = new DialogCallbacks();
 
     //
     // Sets the dialog level callbacks
     //
-    setDialogCallbacks(dialogCallbacks: Ng2DynamicDialogCallbacks) {
+    setDialogCallbacks(dialogCallbacks: DialogCallbacks) {
 
         // If we've had nothing passed through, reset
         if (dialogCallbacks === null) {
-            this.dialogCallbacks = new Ng2DynamicDialogCallbacks();
+            this.dialogCallbacks = new DialogCallbacks();
         } else {
             this.dialogCallbacks = dialogCallbacks;
         }
@@ -26,11 +26,11 @@ export class CallbackController {
     //
     // Sets the component level callbacks
     //
-    setComponentCallbacks(componentCallbacks: Ng2DynamicDialogCallbacks) {
+    setComponentCallbacks(componentCallbacks: DialogCallbacks) {
 
         // If we've had nothing passed through, reset
         if (componentCallbacks === null) {
-            this.componentCallbacks = new Ng2DynamicDialogCallbacks();
+            this.componentCallbacks = new DialogCallbacks();
         } else {
             this.componentCallbacks = componentCallbacks;
         }

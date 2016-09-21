@@ -3,10 +3,10 @@ import { Component, AfterViewChecked, OnInit } from '@angular/core';
 
 import { TsLerp, TsLerpTransition, TsLerpStyle } from 'tslerp';
 
-import { Ng2DynamicDialogContent } from '../styles/content';
-import { Ng2DynamicDialogStyle } from '../styles/style';
-import { Ng2DynamicDialogBehaviour } from '../styles/behaviour';
-import { Ng2DynamicDialogCallbacks } from '../styles/callbacks';
+import { DialogContent } from '../styles/content';
+import { DialogStyle } from '../styles/style';
+import { DialogBehaviour } from '../styles/behaviour';
+import { DialogCallbacks } from '../styles/callbacks';
 
 import { CallbackController } from '../controllers/callback-controller';
 
@@ -21,7 +21,7 @@ import { CallbackController } from '../controllers/callback-controller';
     templateUrl: 'dialog.component.html',
     styleUrls: ['dialog.component.css'],
 })
-export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
+export class DialogComponent implements AfterViewChecked, OnInit {
 
     // Transition states
     private dialogTransitionStates = {
@@ -46,11 +46,11 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     private contentTransition = this.contentTransitionStates.NONE;
 
     // Style and behaviour
-    private currentDialogContent: Ng2DynamicDialogContent;
-    private nextDialogContent: Ng2DynamicDialogContent;
+    private currentDialogContent: DialogContent;
+    private nextDialogContent: DialogContent;
 
-    private dialogStyle: Ng2DynamicDialogStyle = new Ng2DynamicDialogStyle();
-    private dialogBehaviour: Ng2DynamicDialogBehaviour = new Ng2DynamicDialogBehaviour();
+    private dialogStyle: DialogStyle = new DialogStyle();
+    private dialogBehaviour: DialogBehaviour = new DialogBehaviour();
 
     private callbackController: CallbackController = new CallbackController();
 
@@ -99,7 +99,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     //
     // Sets the style of the dialog
     //
-    setStyle(dialogStyle: Ng2DynamicDialogStyle) {
+    setStyle(dialogStyle: DialogStyle) {
         this.dialogStyle = dialogStyle;
         this.duplicateIdleButtonStyles();
     }
@@ -107,21 +107,21 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
     //
     // Sets the behaviour of this dialog
     //
-    setBehaviour(dialogBehaviour: Ng2DynamicDialogBehaviour) {
+    setBehaviour(dialogBehaviour: DialogBehaviour) {
         this.dialogBehaviour = dialogBehaviour;
     }
 
     //
     // Sets the callbacks for this dialog
     //
-    setCallbacks(dialogCallbacks: Ng2DynamicDialogCallbacks) {
+    setCallbacks(dialogCallbacks: DialogCallbacks) {
         this.callbackController.setDialogCallbacks(dialogCallbacks);
     }
 
     //
     // Shows the dialog
     //
-    show(dialogContent: Ng2DynamicDialogContent) {
+    show(dialogContent: DialogContent) {
 
         // Can't do anything if we're currently transitioning
         if (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE) {
@@ -381,7 +381,7 @@ export class Ng2DynamicDialogComponent implements AfterViewChecked, OnInit {
         if (typeof ((<any>component).getDialogComponentCallbacks) !== 'undefined') {
 
             // Get the callbacks from this component
-            let componentCallbacks: Ng2DynamicDialogCallbacks = (<any>component).getDialogComponentCallbacks();
+            let componentCallbacks: DialogCallbacks = (<any>component).getDialogComponentCallbacks();
             this.callbackController.setComponentCallbacks(componentCallbacks);
         }
     }

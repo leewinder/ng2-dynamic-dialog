@@ -10,7 +10,7 @@ export enum CallbackResult {
 //
 // Dialog callbacks for event responses
 //
-export class Ng2DynamicDialogCallbacks {
+export class DialogCallbacks {
 
     // Button clicked callbacks
     onButton1Clicked: () => CallbackResult = null;

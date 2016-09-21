@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Ng2DynamicDialogBackgroundComponent } from '../background/background.component';
-import { Ng2DynamicDialogComponent } from '../dialog/dialog.component';
+import { BackgroundComponent } from '../background/background.component';
+import { DialogComponent } from '../dialog/dialog.component';
 
-import { Ng2DynamicDialogWrapperComponent } from '../wrapper/wrapper.component';
+import { DynamicCreatorComponent } from '../dynamic-creator/dynamic-creator.component';
 
 // Ng2 Dialog Module
 @NgModule({
@@ -13,16 +13,16 @@ import { Ng2DynamicDialogWrapperComponent } from '../wrapper/wrapper.component';
     ],
 
     declarations: [
-        Ng2DynamicDialogBackgroundComponent,
-        Ng2DynamicDialogComponent,
+        BackgroundComponent,
+        DialogComponent,
 
-        Ng2DynamicDialogWrapperComponent,
+        DynamicCreatorComponent,
     ],
 
     exports: [
-        Ng2DynamicDialogComponent,
+        DialogComponent,
     ],
 
     providers: [],
 })
-export class Ng2DynamicDialogModule { }
+export class DialogModule { }
