@@ -131,12 +131,19 @@ export class StyledWithHtmlDialogComponent implements OnInit {
 
         dialogStyle.button.general.hover['background-color'] = '#DDDDDD';
 
+        // Move the first button to the right so they are bunched
+        (<any>dialogStyle.button.individial[0].idle)['left.px'] = 250;
+
+        (<any>dialogStyle.button.individial[0].idle)['width.px'] = 90;
+        (<any>dialogStyle.button.individial[1].idle)['width.px'] = 90;
+
         // Title style
         dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
         (<any>dialogStyle.title)['font-weight'] = 'bold';
         dialogStyle.title['font-size.px'] = 20;
 
         (<any>dialogStyle.title)['text-align'] = 'left';
+        (<any>dialogStyle.title)['top.px'] = -5;
 
         // Cancel button style
         dialogStyle.cancelButton['source'] = 'assets/close.png';
