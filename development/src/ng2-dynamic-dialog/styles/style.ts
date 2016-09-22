@@ -31,25 +31,41 @@ export class Style {
 
     // Button style
     button = {
-        'idle': {
+        'general': {
+            'idle': {
 
-            'background-color': '#dddddd',
-            'color': '#000000',
+                'background-color': '#dddddd',
+                'color': '#000000',
 
-            'border-color': '#000000',
-            'border-radius.px': 5,
+                'border-color': '#000000',
+                'border-radius.px': 5,
 
-            'border-style': 'solid',
-            'border-width.px': 2,
+                'border-style': 'solid',
+                'border-width.px': 2,
 
-            'font-family': '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif',
-            'font-size.px': 14,
-            'font-style': 'normal',
+                'font-family': '"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif',
+                'font-size.px': 14,
+                'font-style': 'normal',
 
+            },
+            'hover': {
+                'background-color': '#ffffff',
+            },
         },
-        'hover': {
-            'background-color': '#ffffff',
-        },
+        'individial': [
+            {
+                'idle': {},
+                'hover': {},
+            },
+            {
+                'idle': {},
+                'hover': {},
+            },
+            {
+                'idle': {},
+                'hover': {},
+            },
+        ],
     };
 
     // Title style

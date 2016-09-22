@@ -99,16 +99,16 @@ export class CustomComponentDialogComponent implements OnInit {
 
         // Button style
         // Button style
-        dialogStyle.button.idle['background-color'] = '#00736F';
-        dialogStyle.button.idle['color'] = '#FFFFFF';
+        dialogStyle.button.general.idle['background-color'] = '#00736F';
+        dialogStyle.button.general.idle['color'] = '#FFFFFF';
 
-        dialogStyle.button.idle['border-color'] = '#005E5A';
+        dialogStyle.button.general.idle['border-color'] = '#005E5A';
 
-        dialogStyle.button.idle['font-family'] = dialogStyle.dialog['font-family'];
-        dialogStyle.button.idle['font-size.px'] = dialogStyle.dialog['font-size.px'];
-        dialogStyle.button.idle['font-style'] = '#ffffff';
+        dialogStyle.button.general.idle['font-family'] = dialogStyle.dialog['font-family'];
+        dialogStyle.button.general.idle['font-size.px'] = dialogStyle.dialog['font-size.px'];
+        dialogStyle.button.general.idle['font-style'] = '#ffffff';
 
-        dialogStyle.button.hover['background-color'] = dialogStyle.button.idle['border-color'];
+        dialogStyle.button.general.hover['background-color'] = dialogStyle.button.general.idle['border-color'];
 
         // Title style
         dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];

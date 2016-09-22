@@ -118,18 +118,18 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         (<any>dialogStyle.dialog)['box-shadow'] = '0px 0px 18px 3px rgba(120,120,120,1)';
 
         // Button style
-        dialogStyle.button.idle['background-color'] = '#FFFFFF';
-        dialogStyle.button.idle['color'] = '#000000';
+        dialogStyle.button.general.idle['background-color'] = '#FFFFFF';
+        dialogStyle.button.general.idle['color'] = '#000000';
 
-        (<any>dialogStyle.button.idle)['font-weight'] = 'bold';
+        (<any>dialogStyle.button.general.idle)['font-weight'] = 'bold';
 
-        dialogStyle.button.idle['border-width.px'] = 0;
-        dialogStyle.button.idle['border-radius.px'] = 0;
+        dialogStyle.button.general.idle['border-width.px'] = 0;
+        dialogStyle.button.general.idle['border-radius.px'] = 0;
 
-        dialogStyle.button.idle['font-family'] = dialogStyle.dialog['font-family'];
-        dialogStyle.button.idle['font-size.px'] = dialogStyle.dialog['font-size.px'] = 14;
+        dialogStyle.button.general.idle['font-family'] = dialogStyle.dialog['font-family'];
+        dialogStyle.button.general.idle['font-size.px'] = dialogStyle.dialog['font-size.px'] = 14;
 
-        dialogStyle.button.hover['background-color'] = '#DDDDDD';
+        dialogStyle.button.general.hover['background-color'] = '#DDDDDD';
 
         // Title style
         dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];

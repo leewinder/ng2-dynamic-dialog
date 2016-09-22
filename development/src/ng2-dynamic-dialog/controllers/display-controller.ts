@@ -382,16 +382,16 @@ export class DisplayController {
     private duplicateIdleButtonStyles() {
 
         // Copy over and duplicate the idle properties in hover
-        for (let key in this.dialogStyle.button.idle) {
+        for (let key in this.dialogStyle.button.general.idle) {
 
             // If this property does not exist in the hover style, add it
-            if (this.dialogStyle.button.idle.hasOwnProperty(key) === true) {
+            if (this.dialogStyle.button.general.idle.hasOwnProperty(key) === true) {
 
-                let hoverValue: any = (<any>this.dialogStyle.button.hover)[key];
-                let idleValue: any = (<any>this.dialogStyle.button.idle)[key];
+                let hoverValue: any = (<any>this.dialogStyle.button.general.hover)[key];
+                let idleValue: any = (<any>this.dialogStyle.button.general.idle)[key];
 
                 if (hoverValue == null) {
-                    (<any>this.dialogStyle.button.hover)[key] = idleValue;
+                    (<any>this.dialogStyle.button.general.hover)[key] = idleValue;
                 }
             }
         }
@@ -450,7 +450,7 @@ export class DisplayController {
 
         // Simply return our style based on our behaviour
         return this.currentButtonStates[buttonIndex] === this.buttonState.HOVER ?
-            this.dialogStyle.button.hover : this.dialogStyle.button.idle;
+            this.dialogStyle.button.general.hover : this.dialogStyle.button.general.idle;
     }
 
     //
