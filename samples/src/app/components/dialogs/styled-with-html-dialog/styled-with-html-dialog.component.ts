@@ -22,19 +22,20 @@ export class StyledWithHtmlDialogComponent implements OnInit {
     @ViewChild(Ng2DynamicDialogComponent)
     private modalDialog: Ng2DynamicDialogComponent;
 
-    private defaultHtmlContent: string = `<br>Dialog with a custom style specified using 'Ng2DynamicDialogStyle'.<br><br>
+    private defaultHtmlContent: string = `<br>Material-like dialog with a highly customised style constructed using
+        'Ng2DynamicDialogStyle'.<br><br>
 
-        A simple callback is also used for the buttons below to alter the contents on the fly.  This is
-        provided using 'Ng2DynamicDialogCallbacks'.<br><br><br><br>
+        Callbacks are also used for the all three buttons to alter the contents on the fly.  This is
+        provided by specifying dialog-level callbacks in 'Ng2DynamicDialogCallbacks'.<br><br>
 
         The ability to close the dialog by clicking outside the dialog has also been disabled
         using 'Ng2DynamicDialogBehaviour'`;
 
-    private switchedToHtmlContent: string = `<br>Dynamic content presented simply by showing the
+    private switchedToHtmlContent: string = `<br>Dynamic content is presented by showing the
         dialog again with different content.<br><br>
 
-        This content also uses a different button layout to specify the size and
-        location of the buttons available.<br><br>
+        This dialog also uses general and individual button layouts to specify the size,
+        location and style of the buttons available.<br><br>
 
         This is all done with 'Ng2DynamicDialogStyle'`;
 
@@ -65,7 +66,7 @@ export class StyledWithHtmlDialogComponent implements OnInit {
 
         let dialogContent = new Ng2DynamicDialogContent();
 
-        dialogContent.height = 300;
+        dialogContent.height = 320;
         dialogContent.width = 450;
 
         dialogContent.title = 'Custom Style Dialog';
@@ -83,7 +84,7 @@ export class StyledWithHtmlDialogComponent implements OnInit {
 
         let dialogContent = new Ng2DynamicDialogContent();
 
-        dialogContent.height = 230;
+        dialogContent.height = 270;
         dialogContent.width = 450;
 
         dialogContent.title = 'Custom Style Dialog';
@@ -109,6 +110,8 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         // Dialog style
         dialogStyle.dialog['font-family'] = 'Raleway';
         dialogStyle.dialog['font-size.px'] = 14;
+
+        (<any>dialogStyle.dialog)['line-height.%'] = 150;
 
         dialogStyle.dialog['color'] = '#999999';
 
