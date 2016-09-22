@@ -401,11 +401,13 @@ export class DisplayController {
             // If this property does not exist in the hover style, add it
             if (source.hasOwnProperty(key) === true) {
 
-                let hoverValue: any = (<any>destination)[key];
-                let idleValue: any = (<any>source)[key];
+                // Oull out our values
+                let destinationValue: any = (<any>destination)[key];
+                let sourceValue: any = (<any>source)[key];
 
-                if (hoverValue == null) {
-                    (<any>destination)[key] = idleValue;
+                // If the destination doesn't have this key, copy it over
+                if (destinationValue == null) {
+                    (<any>destination)[key] = sourceValue;
                 }
             }
         }
@@ -462,9 +464,19 @@ export class DisplayController {
     private setStyleButton(buttonIndex: number) {
         /* tslint:enable:no-unused-variable */
 
-        // Simply return our style based on our behaviour
-        return this.currentButtonStates[buttonIndex] === this.buttonState.HOVER ?
+        // Get the styles we will use
+        let generalStyle = this.currentButtonStates[buttonIndex] === this.buttonState.HOVER ?
             this.dialogStyle.button.general.hover : this.dialogStyle.button.general.idle;
+        let indivdualStyle = this.currentButtonStates[buttonIndex] === this.buttonState.HOVER ?
+            this.dialogStyle.button.individial[buttonIndex].hover : this.dialogStyle.button.individial[buttonIndex].idle;
+
+        // Combine the styles so we use the general styles, overridden by the specific button styles
+        let styleToUse = {};
+        this.copyObjectProperties(indivdualStyle, styleToUse);
+        this.copyObjectProperties(generalStyle, styleToUse);
+
+        // Return the style of this button
+        return styleToUse;
     }
 
     //
