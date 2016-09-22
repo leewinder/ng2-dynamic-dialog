@@ -79,7 +79,7 @@ export class DialogComponent implements OnInit {
     // Closes the dialog
     //
     close() {
-        this.displayController.close(true);
+        this.displayController.close(false);
     }
 
     //

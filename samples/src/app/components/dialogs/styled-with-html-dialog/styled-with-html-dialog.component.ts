@@ -22,15 +22,15 @@ export class StyledWithHtmlDialogComponent implements OnInit {
     @ViewChild(Ng2DynamicDialogComponent)
     private modalDialog: Ng2DynamicDialogComponent;
 
-    private defaultHtmlContent: string = `<center><br>Dialog with a custom style specified using 'Ng2DynamicDialogStyle'.<br><br>
+    private defaultHtmlContent: string = `<br>Dialog with a custom style specified using 'Ng2DynamicDialogStyle'.<br><br>
 
         A simple callback is also used for the buttons below to alter the contents on the fly.  This is
         provided using 'Ng2DynamicDialogCallbacks'.<br><br><br><br>
 
         The ability to close the dialog by clicking outside the dialog has also been disabled
-        using 'Ng2DynamicDialogBehaviour'</center>`;
+        using 'Ng2DynamicDialogBehaviour'`;
 
-    private switchedToHtmlContent: string = `<center><br>Dynamic content presented simply by showing the
+    private switchedToHtmlContent: string = `<br>Dynamic content presented simply by showing the
         dialog again with different content.<br><br>
 
         This content also uses a different button layout to specify the size and
@@ -87,7 +87,8 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         dialogContent.width = 450;
 
         dialogContent.title = 'Custom Style Dialog';
-        dialogContent.button2 = 'Cancel';
+        dialogContent.button2 = 'Go Back';
+        dialogContent.button1 = 'Exit';
 
         dialogContent.safeHtmlContent = this._sanitizer.bypassSecurityTrustHtml(this.switchedToHtmlContent);
 
@@ -102,31 +103,42 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         // Initialise the style of the dialog
         let dialogStyle = new Ng2DynamicDialogStyle();
 
-        // Dialog style
-        dialogStyle.dialog['border-color'] = '#44086C';
+        // Background style - we don't want one
+        dialogStyle.background['opacity'] = 0;
 
-        dialogStyle.dialog['font-family'] = 'Architects Daughter, cursive';
+        // Dialog style
+        dialogStyle.dialog['font-family'] = 'Raleway';
         dialogStyle.dialog['font-size.px'] = 14;
 
-        dialogStyle.dialog['border-radius.px'] = 20;
+        dialogStyle.dialog['color'] = '#999999';
+
+        dialogStyle.dialog['border-radius.px'] = 0;
+        dialogStyle.dialog['border-width.px'] = 0;
+
+        (<any>dialogStyle.dialog)['box-shadow'] = '0px 0px 18px 3px rgba(120,120,120,1)';
 
         // Button style
-        dialogStyle.button.idle['background-color'] = '#611F8E';
-        dialogStyle.button.idle['color'] = '#FFFFFF';
+        dialogStyle.button.idle['background-color'] = '#FFFFFF';
+        dialogStyle.button.idle['color'] = '#000000';
 
-        dialogStyle.button.idle['border-color'] = '#44086C';
-        dialogStyle.button.idle['border-radius.px'] = 10;
+        (<any>dialogStyle.button.idle)['font-weight'] = 'bold';
+
+        dialogStyle.button.idle['border-width.px'] = 0;
+        dialogStyle.button.idle['border-radius.px'] = 0;
 
         dialogStyle.button.idle['font-family'] = dialogStyle.dialog['font-family'];
         dialogStyle.button.idle['font-size.px'] = dialogStyle.dialog['font-size.px'] = 14;
-        dialogStyle.button.idle['font-style'] = '#ffffff';
 
-        dialogStyle.button.hover['background-color'] = dialogStyle.button.idle['border-color'];
+        dialogStyle.button.hover['background-color'] = '#DDDDDD';
 
         // Title style
         dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
+        (<any>dialogStyle.title)['font-weight'] = 'bold';
+        dialogStyle.title['font-size.px'] = 20;
 
-        // Other buttons
+        (<any>dialogStyle.title)['text-align'] = 'left';
+
+        // Cancel button style
         dialogStyle.cancelButton['source'] = 'assets/close.png';
 
         // Set it
@@ -141,6 +153,7 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         // Initialise the style of the dialog
         let dialogCallbacks = new Ng2DynamicDialogCallbacks();
 
+        dialogCallbacks.onButton1Clicked = () => this.onButton1Selected();
         dialogCallbacks.onButton2Clicked = () => this.onButton2Selected();
         dialogCallbacks.onButton3Clicked = () => this.onButton3Selected();
 
@@ -157,6 +170,16 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         dialogBehaviour.exitOnOffDialogClick = false;
 
         this.modalDialog.setBehaviour(dialogBehaviour);
+    }
+
+    //
+    // Called when the button 1 is called
+    //
+    private onButton1Selected(): Ng2DynamicDialogCallbackResult {
+
+        // Go back to the default content
+        this.modalDialog.close();
+        return Ng2DynamicDialogCallbackResult.None;
     }
 
     //
