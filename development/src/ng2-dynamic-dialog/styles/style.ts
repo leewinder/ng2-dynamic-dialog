@@ -61,6 +61,11 @@ export class Style {
         'font-style': 'normal',
     };
 
-    // Other buttons
-    closeButtonImage: string;
+    // Cancel button
+    cancelButton = {
+        'source': '',
+
+        'width.px': 25,
+        'height.px': 25,
+    };
 }

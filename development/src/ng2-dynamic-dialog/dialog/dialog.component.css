@@ -20,9 +20,6 @@
 /* Close button properties */
 .ng2-dynamic-dialog-modal-button-close{
 
-    width: 25px;
-    height: 25px;
-
     position: absolute;
     top: 0px;
     right: 0px;

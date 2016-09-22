@@ -37,7 +37,9 @@
             </div>
 
             <!-- Stock exit button -->
-            <img *ngIf="displayController.dialogStyle.closeButtonImage" class="ng2-dynamic-dialog-modal-button-close ng2-dynamic-dialog-selectable-option" (click)="displayController.close(false)" src="{{displayController.dialogStyle.closeButtonImage}}">
+            <img *ngIf="displayController.cancelButtonImage" class="ng2-dynamic-dialog-modal-button-close ng2-dynamic-dialog-selectable-option"
+            [ngStyle]="displayController.setStyleCancelButton()"
+            (click)="displayController.close(false)" src="{{displayController.cancelButtonImage}}">
 
             <!-- Customisable per-dialog content containing unsanitized HTML-->
             <div *ngIf="displayController.currentContent.unsafeHtmlContent" [innerHTML]="displayController.currentContent.unsafeHtmlContent">

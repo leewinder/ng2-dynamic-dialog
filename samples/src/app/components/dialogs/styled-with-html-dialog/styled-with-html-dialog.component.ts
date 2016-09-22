@@ -127,7 +127,7 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
 
         // Other buttons
-        dialogStyle.closeButtonImage = 'assets/close.png';
+        dialogStyle.cancelButton['source'] = 'assets/close.png';
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);

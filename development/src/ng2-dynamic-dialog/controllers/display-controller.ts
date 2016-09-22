@@ -61,6 +61,9 @@ export class DisplayController {
     private contentChanging: boolean = false;
     private dimensionsChanging: boolean = false;
 
+    // Cancel button properties
+    private cancelButtonImage: string = null;
+
     // Track which buttons are on or off
     private currentButtonStates: number[] = [this.buttonState.IDLE, this.buttonState.IDLE, this.buttonState.IDLE];
 
@@ -93,6 +96,9 @@ export class DisplayController {
 
         // Make sure our hover styles are duplicated
         this.duplicateIdleButtonStyles();
+
+        // Get our cancel button properties
+        this.getCancelButtonStyles();
     }
 
     //
@@ -392,6 +398,23 @@ export class DisplayController {
     }
 
     //
+    // Gets the properties of the cancel button
+    //
+    private getCancelButtonStyles() {
+
+        this.cancelButtonImage = null;
+        if (this.dialogStyle.cancelButton.source != null) {
+
+            // Do we have a string?
+            if (this.dialogStyle.cancelButton.source.length !== 0) {
+                this.cancelButtonImage = this.dialogStyle.cancelButton.source;
+            }
+
+            // Lose it from the properties
+            delete this.dialogStyle.cancelButton.source;
+        }
+    }
+    //
     // Called to set the style of the modal
     //
     /* tslint:disable:no-unused-variable */
@@ -439,5 +462,16 @@ export class DisplayController {
 
         // Return our background style
         return this.dialogStyle.background;
+    }
+
+    //
+    // Sets the style of the cancel button
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleCancelButton() {
+        /* tslint:enable:no-unused-variable */
+
+        // Return our background style
+        return this.dialogStyle.cancelButton;
     }
 }
