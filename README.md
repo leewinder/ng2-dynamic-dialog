@@ -19,7 +19,7 @@
 
 A dynamically adjusting, extensible dialog component for use with Angular 2 supporting raw HTML content and injected custom components.
 
-![](https://cloud.githubusercontent.com/assets/1649415/17697306/020f6b22-63ac-11e6-965a-e561cdcafd53.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18762632/7fafdd10-8101-11e6-96bf-d16995a6ffca.gif)
 
 <br>
 
@@ -169,7 +169,7 @@ export class DefaultWithHtmlDialogComponent {
 ```
 
 ### Triggering Dialogs With Custom Style
-![](https://cloud.githubusercontent.com/assets/1649415/17703101/6fe8ac50-63c8-11e6-8c4c-8f0321143e77.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18762714/f1b57faa-8101-11e6-82df-8d5620ed629f.gif)
 
 Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customise how the dialog looks.  This can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
@@ -180,38 +180,48 @@ Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customi
         // Initialise the style of the dialog
         let dialogStyle = new Ng2DynamicDialogStyle();
 
+        // Background style - we don't want one
+        dialogStyle.background['opacity'] = 0;
+
         // Dialog style
-        dialogStyle.dialogBorderColor = '#44086C';
+        dialogStyle.dialog['font-family'] = 'Raleway';
+        dialogStyle.dialog['font-size.px'] = 14;
 
-        dialogStyle.dialogFontFamily = 'Architects Daughter, cursive';
-        dialogStyle.dialogFontSize = '14';
+        ...
 
-        dialogStyle.dialogBorderRadius = 20;
+        dialogStyle.dialog['border-radius.px'] = 0;
+        dialogStyle.dialog['border-width.px'] = 0;
+
+        dialogStyle.dialog['box-shadow'] = '0px 0px 18px 3px rgba(120,120,120,1)';
 
         // Button style
-        dialogStyle.buttonBackgroundColor = '#611F8E';
-        dialogStyle.buttonBorderColor = '#44086C';
-        dialogStyle.buttonHoverColor = dialogStyle.buttonBorderColor;
+        dialogStyle.button.general.idle['background-color'] = '#FFFFFF';
+        dialogStyle.button.general.idle['color'] = '#000000';
 
-        dialogStyle.buttonBorderRadius = 10;
+        ...
 
-        dialogStyle.buttonFontFamily = dialogStyle.dialogFontFamily;
-        dialogStyle.buttonFontSize = dialogStyle.dialogFontSize;
+        // Move the first button to the right so they are bunched
+        dialogStyle.button.individial[0].idle['left.px'] = 250;
 
-        dialogStyle.buttonFontColor = '#ffffff';
+        dialogStyle.button.individial[0].idle['width.px'] = 90;
+        dialogStyle.button.individial[1].idle['width.px'] = 90;
 
         // Title style
-        dialogStyle.titleFontFamily = dialogStyle.dialogFontFamily;
+        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
 
-        // Other buttons
-        dialogStyle.closeButtonImage = 'assets/close.png';
+        ...
+
+        // Cancel button style
+        dialogStyle.cancelButton['source'] = 'assets/close.png';
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);
     }
 ```
 
-Once shown, the dialog will use the defined styles to present the dialog as required.  The available options can be seen in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts)
+Each element is styled using CSS properties which are then applied to the dialog when it is displayed.  The default styles specified can be seen in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts)
+
+For more information on custom styles and how they are used, see 'Styling Dialogs' below.
 
 ### Triggering Dialogs With Custom Components
 ![](https://cloud.githubusercontent.com/assets/1649415/17703216/d6144b42-63c8-11e6-8f1f-a1dc86ca4227.gif)
@@ -297,6 +307,7 @@ You can use ng2-dynamic-dialog to automatically transition between different dia
 
       dialogContent.safeHtmlContent = this._sanitizer.bypassSecurityTrustHtml(this.switchedToHtmlContent);
 
+      // This is called when the dialog is already shown, causing a transition from one to the other
       this.modalDialog.show(dialogContent);
   }
 ```
@@ -310,6 +321,9 @@ Automatic transitioning of states works for both HTML and custom component conte
 The dialog provides hooks to various events within the dialogs lifecycle using 'Ng2DynamicDialogCallbacks' and can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
 ```TypeScript
+import { Ng2DynamicDialogCallbacks } from 'ng2-dynamic-dialog';
+import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
+
   // Sets the callbacks of the dialog
   private setDialogCallbacks() {
 
@@ -317,18 +331,85 @@ The dialog provides hooks to various events within the dialogs lifecycle using '
       let dialogCallbacks = new Ng2DynamicDialogCallbacks();
 
       // Set the local callbacks for the buttons we are using
+      dialogCallbacks.onButton1Clicked = () => this.onButton1Selected();
       dialogCallbacks.onButton2Clicked = () => this.onButton2Selected();
       dialogCallbacks.onButton3Clicked = () => this.onButton3Selected();
 
       this.modalDialog.setCallbacks(dialogCallbacks);
   }
+  
+  // Called when the event is triggered
+  private onButton1Selected(): Ng2DynamicDialogCallbackResult {
+    
+    // Do what ever work is required
+
+    // Doesn't matter what you return in this callback, so just return .None
+    return Ng2DynamicDialogCallbackResult.None;
+  }
 ```
 
-When the user clicks either the 2nd or 3rd buttons the callbacks are automatically raised and the dialog can respond as needed.  In the above case, the buttons are used to transition between different dialog states.
+When the user clicks any of the buttons the callbacks are automatically raised and the dialog can respond as needed.  In the above case, the buttons are used to transition between different dialog states.
 
 Note the format of the how the callbacks are assigned, this is due to how `this` is [scoped in the transpiled JavaScript](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-does-this-get-orphaned-in-my-instance-methods).
 
 The available callbacks can be seen in [ng2-dynamic-dialog/styles/callbacks.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/callbacks.ts)
+
+### Component Level Control
+By default, the flow of events and input response is handled at the dialog level via the Ng2DynamicDialogComponent as described in the previous sections.  But there are times when a Custom Component will need to handle user input or control the behaviour of the dialog without passing that control back to the Ng2DynamicDialogComponent instance.
+
+When you specify a custom component, this component can define a couple of methods which will allow you to control the flow of behaviour at a per-component level.
+
+#### Component Level Callbacks
+To allow the component to respond to user events, define 'setComponentCallbacks' in your custom component.  This method will then be called when the component is created, and allows the component to return it's own instance of Ng2DynamicDialogCallbacks, which will override those defined by the dialog controller.
+
+```TypeScript
+import { Ng2DynamicDialogCallbacks } from 'ng2-dynamic-dialog';
+import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
+
+...
+
+  // Called when the component is created and wants to override the dialogs callbacks
+  setComponentCallbacks(): Ng2DynamicDialogCallbacks {
+    
+    // Declare a local component for button 1, so this components callback is called instead
+    let componentCallbacks = new Ng2DynamicDialogCallbacks();
+    componentCallbacks.onButton1Clicked = () => this.onButton1Selected();
+
+    // Send the callbacks back
+    return componentCallbacks;
+  }
+  
+  // Called when the component is created and wants to override the dialogs callbacks
+  private onButton1Selected(): Ng2DynamicDialogCallbackResult {
+    
+    // Do what ever work is required at the component level
+
+    // Return how the flow should continue
+    // Ng2DynamicDialogCallbackResult.CallSubsequent: Once this callback is done, call the dialog level callback also
+    // Ng2DynamicDialogCallbackResult.None: Once this callback is done, do not call any additional dialog level callbacks
+    
+    return Ng2DynamicDialogCallbackResult.None;
+  }
+```
+
+#### Component Level Control
+To allow the component to control the dialog (such as closing it, changing content or locking the content), define 'setDialogComponent'  in your custom component.  This method will then be called when the custom component is created, and passes through the Ng2DynamicDialogComponent used to control the dialog, allowing the component to call any methods required to control the dialog.
+
+```TypeScript
+import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
+
+...
+
+  // Called when the component is created and wants to override the dialogs callbacks
+  setDialogComponent(dialogComponent: Ng2DynamicDialogComponent): void {
+    
+    // Save the dialog component so we can call methods like .show, .close etc. at a later date
+    this.dialogComponent = dialogComponent;
+  }
+```
+
+
+### Styling Dialogs
 
 ### Modifying a dialogs behaviour
 
@@ -339,6 +420,13 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 <br>
 
 ## Change Log
+
+### x.y.z
+* Changed Ng2DynamicDialogStyle to take a map of CSS properties rather than directly referenced styles giving significantly more control over the style of dialogs
+* The background, cancel button and individual dialog buttons can now be styled using Ng2DynamicDialogStyle
+* Added option to override dialog callbacks at a custom component level
+* Added ability for a custom component to store the Ng2DynamicDialogComponent to allow per-component control of the dialog when needed
+* Updated the samples to show significantly more customisation on the Custom Style dialog example
 
 ### 0.1.0
 * Updated Angular dependancy to 2.0.0
