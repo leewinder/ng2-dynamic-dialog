@@ -381,17 +381,31 @@ export class DisplayController {
     //
     private duplicateIdleButtonStyles() {
 
+        // Copy the general properties
+        this.copyObjectProperties(this.dialogStyle.button.general.idle, this.dialogStyle.button.general.hover);
+
+        // Now duplicate the indivial buttons
+        for (let i = 0; i < this.dialogStyle.button.individial.length; ++i) {
+            this.copyObjectProperties(this.dialogStyle.button.individial[i].idle, this.dialogStyle.button.individial[i].hover);
+        }
+    }
+
+    //
+    // Copies the elements from one object into another
+    //
+    private copyObjectProperties(source: any, destination: any) {
+
         // Copy over and duplicate the idle properties in hover
-        for (let key in this.dialogStyle.button.general.idle) {
+        for (let key in source) {
 
             // If this property does not exist in the hover style, add it
-            if (this.dialogStyle.button.general.idle.hasOwnProperty(key) === true) {
+            if (source.hasOwnProperty(key) === true) {
 
-                let hoverValue: any = (<any>this.dialogStyle.button.general.hover)[key];
-                let idleValue: any = (<any>this.dialogStyle.button.general.idle)[key];
+                let hoverValue: any = (<any>destination)[key];
+                let idleValue: any = (<any>source)[key];
 
                 if (hoverValue == null) {
-                    (<any>this.dialogStyle.button.general.hover)[key] = idleValue;
+                    (<any>destination)[key] = idleValue;
                 }
             }
         }
