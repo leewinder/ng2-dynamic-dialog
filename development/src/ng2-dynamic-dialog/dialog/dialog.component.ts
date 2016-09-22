@@ -151,6 +151,11 @@ export class DialogComponent implements OnInit {
             let componentCallbacks: Callbacks = (<any>component).getDialogComponentCallbacks();
             this.callbackController.setComponentCallbacks(componentCallbacks);
         }
+
+        // Pass through this dialog if the component wants it
+        if (typeof ((<any>component).setDialogComponent) !== 'undefined') {
+            (<any>component).setDialogComponent(this);
+        }
     }
 
     //
