@@ -328,6 +328,21 @@ Automatic transitioning of states works for both HTML and custom component conte
 
 <br>
 
+### Locking dialogs
+
+Dialogs can be locked, which removes the buttons, stops users from closing the dialog and displays an optional progress icon.  This is useful when a dialog is communicating with servers or is otherwise busy and cannot be modified.
+![](https://cloud.githubusercontent.com/assets/1649415/18935096/b851fe5e-85d5-11e6-9ff3-219019b930a1.gif)
+
+Locking a dialog is as simple as calling [Ng2DynamicDialogComponent lock] or [Ng2DynamicDialogComponent unlock] to release it and can be seen in [locked-content.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-content/locked-content.component.ts).
+
+Once locked, the buttons will be removed and any custom components can hook into the 'Ng2DynamicDialogCallbacks' options to detect when the lock has started or finished and disable any custom elements that are currently being shown.
+
+Again, this can be seen in [locked-content.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-content/locked-content.component.ts).
+
+The locked icon is used if it has been provided in the Ng2DynamicDialogStyle object as described below in 'Styling Locked Icons'.
+
+<br>
+
 ### Responding to events
 
 The dialog provides hooks to various events within the dialogs lifecycle using 'Ng2DynamicDialogCallbacks' and can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
@@ -468,6 +483,28 @@ The cancel button is styled like any other element of the dialog with a single e
   
       // Cancel button image
       dialogStyle.cancelButton['source'] = 'assets/close.png';
+  
+      // Set it
+      this.modalDialog.setStyle(dialogStyle);
+  }
+```
+
+<br>
+
+#### Styling Locked Icons
+The locked icon is styled like any other element of the dialog with a single exception.  A special property - lockedIcon.source - is required to pass through the asset used to render the exit button.
+
+```TypeScript
+  // Sets the style of the dialog
+  private setDialogStyles() {
+  
+      // Initialise the style of the dialog
+      let dialogStyle = new Ng2DynamicDialogStyle();
+  
+      ...
+  
+      // Cancel button image
+      dialogStyle.lockedIcon['source'] = 'assets/locked.gif';
   
       // Set it
       this.modalDialog.setStyle(dialogStyle);
