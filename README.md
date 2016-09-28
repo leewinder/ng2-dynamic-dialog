@@ -19,7 +19,7 @@
 
 A dynamically adjusting, extensible dialog component for use with Angular 2 supporting raw HTML content and injected custom components.
 
-![](https://cloud.githubusercontent.com/assets/1649415/18762632/7fafdd10-8101-11e6-96bf-d16995a6ffca.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18934359/218a414c-85d1-11e6-958f-3de93f02e865.gif)
 
 <br>
 
@@ -106,7 +106,7 @@ export class AppModule { }
 <br>
 
 ### Triggering Basic Dialogs
-![](https://cloud.githubusercontent.com/assets/1649415/17703006/123c9a58-63c8-11e6-9acd-df1bde4dd555.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18934038/8a43d772-85cf-11e6-9c4d-2ada789db4ee.gif)
 
 The simplest way to show a dialog is to use the custom style and simply provide custom HTML which will fill in the content of the dialog.  This can be seen in [default-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/default-with-html-dialog/default-with-html-dialog.component.ts).
 
@@ -176,7 +176,7 @@ export class DefaultWithHtmlDialogComponent {
 <br>
 
 ### Triggering Dialogs With Custom Style
-![](https://cloud.githubusercontent.com/assets/1649415/18762714/f1b57faa-8101-11e6-82df-8d5620ed629f.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18934130/081fb4f4-85d0-11e6-8971-c9170218cf74.gif)
 
 Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customise how the dialog looks.  This can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
@@ -233,7 +233,7 @@ For more information on custom styles and how they are used, see 'Styling Dialog
 <br>
 
 ### Triggering Dialogs With Custom Components
-![](https://cloud.githubusercontent.com/assets/1649415/17703216/d6144b42-63c8-11e6-8f1f-a1dc86ca4227.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18934429/8f43d32e-85d1-11e6-9449-148ea0c30e6d.gif)
 
 If you have content that is more complicated than standard HTML can provide, or you need to provide internal behaviour within the dialog itself, you can pass components to the dialog to be rendered.  This will create an instance of your component within the dialog's HTML tree and behaves like any other instantiated component.
 
@@ -283,7 +283,7 @@ export class AppModule { }
 <br>
 
 ### Transitioning Between Dialogs
-![](https://cloud.githubusercontent.com/assets/1649415/17707331/d338c5ba-63d7-11e6-80e6-80ac1c87dd47.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18934640/da7e8e00-85d2-11e6-8bb1-46ec26639f4d.gif)
 
 You can use ng2-dynamic-dialog to automatically transition between different dialogs by changing the content of 'Ng2DynamicDialogContent' once the dialog is already being rendered.  A simple example of this can be seen in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
@@ -376,7 +376,7 @@ All dialogs, whether they are HTML or custom component dialogs, are styled using
 * Buttons (both generically and individually for both idle and hover states)
 * Cancel button
 
-![](https://cloud.githubusercontent.com/assets/1649415/18762714/f1b57faa-8101-11e6-82df-8d5620ed629f.gif)
+![](https://cloud.githubusercontent.com/assets/1649415/18934640/da7e8e00-85d2-11e6-8bb1-46ec26639f4d.gif)
 
 For every stylable element, you can provide CSS properties for each element which is applied when the dialog is displayed.  There is no restriction on which CSS elements can be defined within the Ng2DynamicDialogStyle object, offering significant control over how the dialog looks.
 
