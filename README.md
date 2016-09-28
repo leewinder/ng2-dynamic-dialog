@@ -484,6 +484,9 @@ When you specify a custom component, this component can define a couple of metho
 #### Component Level Callbacks
 To allow the component to respond to user events, define 'setComponentCallbacks' in your custom component.  This method will then be called when the component is created, and allows the component to return it's own instance of Ng2DynamicDialogCallbacks, which will override those defined by the dialog controller.
 
+Setting component level callbacks can be seen in [locked-content.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-content/locked-content.component.ts).
+
+
 ```TypeScript
 import { Ng2DynamicDialogCallbacks } from 'ng2-dynamic-dialog';
 import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
@@ -517,6 +520,8 @@ import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
 #### Component Level Control
 To allow the component to control the dialog (such as closing it, changing content or locking the content), define 'setDialogComponent'  in your custom component.  This method will then be called when the custom component is created, and passes through the Ng2DynamicDialogComponent used to control the dialog, allowing the component to call any methods required to control the dialog.
 
+Storing the dialog component can be seen in [locked-content.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-content/locked-content.component.ts).
+
 ```TypeScript
 import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
 
@@ -536,7 +541,7 @@ import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
 
 The overall behaviour of the dialog can be specified by using 'Ng2DynamicDialogBehaviour', and the available options can be seen in [ng2-dynamic-dialog/styles/behaviour.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/behaviour.ts).
 
-This structure can then be passed to the dialog using [Ng2DynamicDialogComponent setBehaviour].
+This structure can then be passed to the dialog using [Ng2DynamicDialogComponent setBehaviour] and is shown in [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts).
 
 <br>
 
