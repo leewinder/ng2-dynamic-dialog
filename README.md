@@ -548,6 +548,8 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 ## Change Log
 
 ### x.y.z
+* Updated to Typescript 2.0.x
+* Added support for locking and unlocking dialogs to disable user input when the dialog cannot be used (in sitiations where server communication is in progress etc.)
 * Changed Ng2DynamicDialogStyle to take a map of CSS properties rather than directly referenced styles giving significantly more control over the style of dialogs
 * The background, cancel button and individual dialog buttons can now be styled using Ng2DynamicDialogStyle
 * Added option to override dialog callbacks at a custom component level
