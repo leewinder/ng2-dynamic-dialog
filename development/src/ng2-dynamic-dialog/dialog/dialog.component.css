@@ -25,6 +25,17 @@
     right: 0px;
 }
 
+/* Locked icon properties */
+.ng2-dynamic-dialog-modal-icon-locked{
+
+    position: absolute;
+
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    bottom: 5px;
+}
+
 /* Inidiviual button properties */
 .ng2-dynamic-dialog-modal-button{
 
@@ -70,9 +81,4 @@
 
     text-align: center;
     vertical-align: middle;
-}
-
-/* Any selectable option properties */
-.ng2-dynamic-dialog-selectable-option {
-    cursor: pointer;
 }

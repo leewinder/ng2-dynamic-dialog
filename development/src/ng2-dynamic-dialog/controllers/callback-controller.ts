@@ -98,6 +98,22 @@ export class CallbackController {
         this.triggerCallback(this.dialogCallbacks.onTransitionContentShow, this.componentCallbacks.onTransitionContentShow);
     }
 
+    onContentLock() {
+        this.triggerCallback(this.dialogCallbacks.onContentLocking, this.componentCallbacks.onContentLocking);
+    }
+
+    onContentUnlock() {
+        this.triggerCallback(this.dialogCallbacks.onContentUnlocking, this.componentCallbacks.onContentUnlocking);
+    }
+
+    onContentLocked() {
+        this.triggerCallback(this.dialogCallbacks.onContentLocked, this.componentCallbacks.onContentLocked);
+    }
+
+    onContentUnlocked() {
+        this.triggerCallback(this.dialogCallbacks.onContentUnlocked, this.componentCallbacks.onContentUnlocked);
+    }
+
     //
     // Triigers the component and/or dialog callbacks
     //

@@ -84,4 +84,12 @@ export class Style {
         'width.px': 25,
         'height.px': 25,
     };
+
+    // Locked icon
+    lockedIcon = {
+        'source': '',
+
+        'width.px': 50,
+        'height.px': 50,
+    };
 }

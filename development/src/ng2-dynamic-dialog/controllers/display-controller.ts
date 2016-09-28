@@ -13,6 +13,7 @@ export class DisplayController {
     // Transition states
     public dialogTransitionStates = {
         NONE: 0,
+
         TRANSITION_IN: 1,
         TRANSITION_OUT: 2,
     };
@@ -24,11 +25,22 @@ export class DisplayController {
         TRANSITION_OUT: 2,
 
         DIMENSIONS: 3,
+
+        LOCKING_OUT: 4,
+        LOCKING_IN: 5,
+
+        UNLOCKING_OUT: 6,
+        UNLOCKING_IN: 7,
     };
 
     public buttonState = {
         IDLE: 0,
         HOVER: 1,
+    };
+
+    public lockState = {
+        LOCK: 0,
+        UNLOCK: 1,
     };
 
     // Styles
@@ -57,19 +69,26 @@ export class DisplayController {
     private dialogHeight: number = 0;
 
     private contentOpacity: number = 0;
+    private lockedIconOpacity: number = 0;
+    private buttonOpacity: number = 0;
 
     private contentChanging: boolean = false;
     private dimensionsChanging: boolean = false;
 
-    // Cancel button properties
+    // Button and icon properties
     private cancelButtonImage: string = null;
+    private lockedIconImage: string = null;
 
-    // Track which buttons are on or off
+    // Track our state
     private currentButtonStates: number[] = [this.buttonState.IDLE, this.buttonState.IDLE, this.buttonState.IDLE];
+    private currentLockState: number = this.lockState.UNLOCK;
 
     // Callbacks
     private dialogShownCallback: () => void;
     private dialogClosedCallback: (offDialogClick: boolean) => void;
+
+    private contentLockedCallback: () => void;
+    private contentUnlockedCallback: () => void;
 
     private dialogTransitionCallback: (transitionState: number) => void;
     private contentTransitionCallback: (transitionState: number) => void;
@@ -97,8 +116,9 @@ export class DisplayController {
         // Make sure our hover styles are duplicated
         this.duplicateIdleButtonStyles();
 
-        // Get our cancel button properties
+        // Get our button properties
         this.getCancelButtonStyles();
+        this.getLockedIconStyles();
     }
 
     //
@@ -118,12 +138,16 @@ export class DisplayController {
     // Sets the event callbacks
     //
     setEventCallbacks(dialogShownCallback: () => void, dialogClosedCallback: (offDialogClick: boolean) => void,
+        contentLockedCallback: () => void, contentUnockedCallback: () => void,
         dialogTransitionCallback: (transitionState: number) => void,
         contentTransitionCallback: (transitionState: number) => void) {
 
         // Just save them
         this.dialogShownCallback = dialogShownCallback;
         this.dialogClosedCallback = dialogClosedCallback;
+
+        this.contentLockedCallback = contentLockedCallback;
+        this.contentUnlockedCallback = contentUnockedCallback;
 
         this.dialogTransitionCallback = dialogTransitionCallback;
         this.contentTransitionCallback = contentTransitionCallback;
@@ -141,8 +165,8 @@ export class DisplayController {
     //
     show(content: Content) {
 
-        // Can't do anything if we're currently transitioning
-        if (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE) {
+        // Can't do it if we're already in transition
+        if (this.inTransition() === true) {
             return;
         }
 
@@ -182,6 +206,8 @@ export class DisplayController {
             this.dialogHeight = this.currentContent.height;
 
             this.contentOpacity = 1;
+            this.buttonOpacity = 1;
+            this.lockedIconOpacity = 0;
 
             this.dimensionsChanging = false;
             this.contentChanging = false;
@@ -205,8 +231,13 @@ export class DisplayController {
     //
     close(offDialogClick: boolean) {
 
-        // Can't close if we're currently transitioning
-        if (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE) {
+        // Can't do it if we're already in transition
+        if (this.inTransition() === true) {
+            return;
+        }
+
+        // If we have no buttons, we can't quit
+        if (this.buttonOpacity <= 0) {
             return;
         }
 
@@ -222,6 +253,30 @@ export class DisplayController {
 
         // We are now transitioning out
         this.setDialogTransitionState(this.dialogTransitionStates.TRANSITION_OUT);
+    }
+
+    //
+    // Locks or unlocks the dialog
+    //
+    lock(lockState: number): void {
+
+        // Can't do it if we're already in transition
+        if (this.inTransition() === true) {
+            return;
+        }
+
+        // If we're in the same state, don't bother
+        if (lockState === this.currentLockState) {
+            return;
+        }
+        this.currentLockState = lockState;
+
+        // We are now transitioning our lock state
+        if (lockState === this.lockState.LOCK) {
+            this.setContentTransitionState(this.contentTransitionStates.LOCKING_OUT);
+        } else if (lockState === this.lockState.UNLOCK) {
+            this.setContentTransitionState(this.contentTransitionStates.UNLOCKING_OUT);
+        }
     }
 
     //
@@ -273,12 +328,19 @@ export class DisplayController {
         if (transitionState === this.contentTransitionStates.DIMENSIONS) {
 
             let lerpValues = [[this.currentContent.width, this.nextContent.width],
-                [this.currentContent.height, this.nextContent.height]];
+            [this.currentContent.height, this.nextContent.height]];
             this.dialogTransitionLerp.define(lerpValues, this.dialogBehaviour.transitionTimeContent, this.lerpTransition, this.lerpStyle);
 
-        } else if (transitionState === this.contentTransitionStates.TRANSITION_OUT) {
+        } else if (transitionState === this.contentTransitionStates.TRANSITION_OUT ||
+            transitionState === this.contentTransitionStates.LOCKING_OUT ||
+            transitionState === this.contentTransitionStates.UNLOCKING_OUT) {
+
             this.dialogTransitionLerp.define([[1, 0]], this.dialogBehaviour.transitionTimeContent, this.lerpTransition, this.lerpStyle);
-        } else if (transitionState === this.contentTransitionStates.TRANSITION_IN) {
+
+        } else if (transitionState === this.contentTransitionStates.TRANSITION_IN ||
+            transitionState === this.contentTransitionStates.LOCKING_IN ||
+            transitionState === this.contentTransitionStates.UNLOCKING_IN) {
+
             this.dialogTransitionLerp.define([[0, 1]], this.dialogBehaviour.transitionTimeContent, this.lerpTransition, this.lerpStyle);
         }
 
@@ -335,9 +397,24 @@ export class DisplayController {
 
             // Save our opacity
             this.contentOpacity = results[0];
+
+        } else if (this.contentTransition === this.contentTransitionStates.LOCKING_IN ||
+            this.contentTransition === this.contentTransitionStates.UNLOCKING_OUT) {
+
+            // Save our opacity
+            this.lockedIconOpacity = results[0];
+            this.buttonOpacity = 0;
+
+        } else if (this.contentTransition === this.contentTransitionStates.LOCKING_OUT ||
+            this.contentTransition === this.contentTransitionStates.UNLOCKING_IN) {
+
+            // Save our opacity
+            this.buttonOpacity = results[0];
+            this.lockedIconOpacity = 0;
+
         }
 
-        // If we finished, we're good
+        // If we finished, what state is next?
         if (finished === true) {
 
             // We need to figure out if we're going into another content state
@@ -363,6 +440,14 @@ export class DisplayController {
 
                 // Done
                 this.contentChanging = false;
+            } else if (this.contentTransition === this.contentTransitionStates.LOCKING_OUT) {
+                newContentTransitionState = this.contentTransitionStates.LOCKING_IN;
+            } else if (this.contentTransition === this.contentTransitionStates.LOCKING_IN) {
+                this.contentLockedCallback();
+            } else if (this.contentTransition === this.contentTransitionStates.UNLOCKING_OUT) {
+                newContentTransitionState = this.contentTransitionStates.UNLOCKING_IN;
+            } else if (this.contentTransition === this.contentTransitionStates.UNLOCKING_IN) {
+                this.contentUnlockedCallback();
             }
 
             // Set the new content state
@@ -430,6 +515,25 @@ export class DisplayController {
             delete this.dialogStyle.cancelButton.source;
         }
     }
+
+    //
+    // Gets the properties of the locked icon
+    //
+    private getLockedIconStyles() {
+
+        this.lockedIconImage = null;
+        if (this.dialogStyle.lockedIcon.source != null) {
+
+            // Do we have a string?
+            if (this.dialogStyle.lockedIcon.source.length !== 0) {
+                this.lockedIconImage = this.dialogStyle.lockedIcon.source;
+            }
+
+            // Lose it from the properties
+            delete this.dialogStyle.lockedIcon.source;
+        }
+    }
+
     //
     // Called to set the style of the modal
     //
@@ -475,6 +579,16 @@ export class DisplayController {
         this.copyObjectProperties(indivdualStyle, styleToUse);
         this.copyObjectProperties(generalStyle, styleToUse);
 
+        // Add the opacity
+        (<any>styleToUse)['opacity'] = this.buttonOpacity;
+
+        // Are we in transition or not?
+        if (this.inTransition() === true) {
+            (<any>styleToUse)['cursor'] = 'default';
+        } else {
+            (<any>styleToUse)['cursor'] = 'pointer';
+        }
+
         // Return the style of this button
         return styleToUse;
     }
@@ -497,7 +611,29 @@ export class DisplayController {
     private setStyleCancelButton() {
         /* tslint:enable:no-unused-variable */
 
+        // Add the opacity
+        (<any>this.dialogStyle.cancelButton)['opacity'] = this.buttonOpacity;
+
+        // Are we in transition or not?
+        if (this.inTransition() === true) {
+            (<any>this.dialogStyle.cancelButton)['cursor'] = 'default';
+        } else {
+            (<any>this.dialogStyle.cancelButton)['cursor'] = 'pointer';
+        }
+
         // Return our background style
         return this.dialogStyle.cancelButton;
+    }
+
+    //
+    // Sets the style of the locked icon
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleLockedIcon() {
+        /* tslint:enable:no-unused-variable */
+
+        // Return our locked icon style
+        (<any>this.dialogStyle.lockedIcon)['opacity'] = this.lockedIconOpacity;
+        return this.dialogStyle.lockedIcon;
     }
 }

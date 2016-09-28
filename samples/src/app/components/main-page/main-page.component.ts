@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CustomComponentDialogComponent } from '../dialogs/custom-component-dialog/custom-component-dialog.component';
 import { DefaultWithHtmlDialogComponent } from '../dialogs/default-with-html-dialog/default-with-html-dialog.component';
 import { StyledWithHtmlDialogComponent } from '../dialogs/styled-with-html-dialog/styled-with-html-dialog.component';
+import { LockedComponentDialogComponent } from '../dialogs/locked-component-dialog/locked-component-dialog.component';
 
 @Component({
 
@@ -18,6 +19,7 @@ export class MainPageComponent {
     @ViewChild(CustomComponentDialogComponent) private customComponentDialog: CustomComponentDialogComponent;
     @ViewChild(DefaultWithHtmlDialogComponent) private defaultWithHtmlDialog: DefaultWithHtmlDialogComponent;
     @ViewChild(StyledWithHtmlDialogComponent) private styledWithHtmlDialog: StyledWithHtmlDialogComponent;
+    @ViewChild(LockedComponentDialogComponent) private lockableDialog: LockedComponentDialogComponent;
 
     //
     // Called when the user requests the default dialog
@@ -38,5 +40,12 @@ export class MainPageComponent {
     //
     requested_component_dialog() {
         this.customComponentDialog.requestUserSignIn();
+    }
+
+    //
+    // Called when the user requests the lockable dialog
+    //
+    requested_lockable_dialog() {
+        this.lockableDialog.show();
     }
 }

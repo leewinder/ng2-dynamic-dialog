@@ -1,0 +1,18 @@
+<br>
+<form class="locked-content-dialog">
+    <div class="form-group">
+        <label for="accountEmail">Email Address</label>
+        <input [disabled]="!enableEmailEntry" type="text" class="form-control sample-form-entry" required [(ngModel)]="email" name="emailAddress" placeholder="you@somewhere.com">
+    </div>
+    <div class="form-group">
+        <label for="accountPassword">Password</label>
+        <input [disabled]="!enablePasswordEntry" type="password" class="form-control sample-form-entry" required [(ngModel)]="password" name="password">
+    </div>
+    <div class="locked-content-description">
+        <p>By locking a dialog you disable the users ability to close the dialog and optionally lock the dialogs content.</p>
+        <br>
+        <p>Useful when you are communicating with servers or doing off-site work and the dialog content needs to stay constent.</p>
+        <br>
+        <p *ngIf="secondsToUnlock > 0">Dialog will unlock in {{secondsToUnlock}} seconds...</p>
+    </div>
+</form>

@@ -40,8 +40,15 @@ export class DialogComponent implements OnInit {
 
         // Set our event callbacks
         this.displayController.setEventCallbacks(
+            // Dialog display callbacks
             () => this.onDialogShown(),
             (offDialogClick: boolean) => this.onDialogClosed(offDialogClick),
+
+            // Locking callbacks
+            () => this.onContentLocked(),
+            () => this.onContentUnlocked(),
+
+            // Transition callbacks
             (transitionState: number) => this.onDialogTransition(transitionState),
             (transitionState: number) => this.onContentTransition(transitionState)
         );
@@ -83,6 +90,22 @@ export class DialogComponent implements OnInit {
     }
 
     //
+    // Locks the dialog to user interaction
+    //
+    lock() {
+        this.displayController.lock(this.displayController.lockState.LOCK);
+        this.callbackController.onContentLock();
+    }
+
+    //
+    // Unlocks the dialog to user interaction
+    //
+    unlock() {
+        this.displayController.lock(this.displayController.lockState.UNLOCK);
+        this.callbackController.onContentUnlock();
+    }
+
+    //
     // Returns if we're in a transition state and can't be modified
     //
     inTransition(): boolean {
@@ -112,6 +135,22 @@ export class DialogComponent implements OnInit {
     }
 
     //
+    // Called when the dialog is fully locked
+    //
+    private onContentLocked() {
+        // Let the client know
+        this.callbackController.onContentLocked();
+    }
+
+    //
+    // Called when the dialog is fully unlocked
+    //
+    private onContentUnlocked() {
+        // Let the client know
+        this.callbackController.onContentUnlocked();
+    }
+
+    //
     // Called when the dialog itself is transitioning
     //
     private onDialogTransition(transitionState: number) {
@@ -136,6 +175,10 @@ export class DialogComponent implements OnInit {
             this.callbackController.onTransitionContentShow();
         } else if (transitionState === this.displayController.contentTransitionStates.TRANSITION_OUT) {
             this.callbackController.onTransitionContentHide();
+        } else if (transitionState === this.displayController.contentTransitionStates.LOCKING_OUT) {
+            this.callbackController.onContentLock();
+        } else if (transitionState === this.displayController.contentTransitionStates.UNLOCKING_OUT) {
+            this.callbackController.onContentUnlock();
         }
     }
 
@@ -162,6 +205,7 @@ export class DialogComponent implements OnInit {
     // Called when a component content object is destroyed
     //
     private onComponentDestroyed(): void {
+
         // Remove the component callbacks
         this.callbackController.setComponentCallbacks(null);
     }

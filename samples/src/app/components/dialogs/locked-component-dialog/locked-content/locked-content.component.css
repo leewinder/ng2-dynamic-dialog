@@ -1,0 +1,18 @@
+.locked-content-dialog {
+
+    font-family: "Raleway";
+}
+
+.locked-content-description {
+
+    text-align: left;
+    color: #979797;
+
+    font-size: 12px;
+
+    padding-top:5px;
+}
+
+.sample-form-entry:disabled {
+  border-left: 5px solid #777777;
+}

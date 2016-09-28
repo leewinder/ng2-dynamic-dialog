@@ -35,4 +35,11 @@ export class Callbacks {
 
     onTransitionContentHide: () => CallbackResult = null;
     onTransitionContentShow: () => CallbackResult = null;
+
+    // Lock states
+    onContentLocking: () => CallbackResult = null;
+    onContentLocked: () => CallbackResult = null;
+
+    onContentUnlocking: () => CallbackResult = null;
+    onContentUnlocked: () => CallbackResult = null;
 }
