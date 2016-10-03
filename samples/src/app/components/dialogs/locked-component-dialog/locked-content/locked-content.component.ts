@@ -61,7 +61,7 @@ export class LockedContentComponent {
     private onLockSelected(): Ng2DynamicDialogCallbackResult {
 
         // Lock it and start the timer
-        this.dialogComponent.lock();
+        this.dialogComponent.lock(false);
         return Ng2DynamicDialogCallbackResult.None;
     }
 
@@ -98,7 +98,7 @@ export class LockedContentComponent {
             if (this.secondsToUnlock === 0) {
 
                 // Done
-                this.dialogComponent.unlock();
+                this.dialogComponent.unlock(false);
                 clearInterval(this.setIntervalHandle);
             }
         }, 1000);

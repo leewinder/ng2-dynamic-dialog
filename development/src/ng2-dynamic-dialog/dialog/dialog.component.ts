@@ -92,17 +92,23 @@ export class DialogComponent implements OnInit {
     //
     // Locks the dialog to user interaction
     //
-    lock() {
-        this.displayController.lock(this.displayController.lockState.LOCK);
-        this.callbackController.onContentLock();
+    lock(instant: boolean) {
+
+        this.displayController.lock(this.displayController.lockState.LOCK, instant, () => {
+            this.callbackController.onContentLock();
+        });
+
     }
 
     //
     // Unlocks the dialog to user interaction
     //
-    unlock() {
-        this.displayController.lock(this.displayController.lockState.UNLOCK);
-        this.callbackController.onContentUnlock();
+    unlock(instant: boolean) {
+
+        this.displayController.lock(this.displayController.lockState.UNLOCK, instant, () => {
+            this.callbackController.onContentUnlock();
+        });
+
     }
 
     //

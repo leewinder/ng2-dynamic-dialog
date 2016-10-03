@@ -258,7 +258,15 @@ export class DisplayController {
     //
     // Locks or unlocks the dialog
     //
-    lock(lockState: number): void {
+    lock(lockState: number, instant: boolean, lockStartedCallback: () => void): void {
+
+        // Do we want to do this instantly?
+        if (instant === true) {
+
+            // Trigger it and we're done
+            this.triggerInstantLock(lockState, lockStartedCallback);
+            return;
+        }
 
         // Can't do it if we're already in transition
         if (this.inTransition() === true) {
@@ -270,6 +278,11 @@ export class DisplayController {
             return;
         }
         this.currentLockState = lockState;
+
+        // Let the client know we're doing it
+        if (lockStartedCallback != null) {
+            lockStartedCallback();
+        }
 
         // We are now transitioning our lock state
         if (lockState === this.lockState.LOCK) {
@@ -284,6 +297,37 @@ export class DisplayController {
     //
     inTransition(): boolean {
         return (this.dialogTransition !== this.dialogTransitionStates.NONE || this.contentTransition !== this.contentTransitionStates.NONE);
+    }
+
+    //
+    // Performs an instant lock or unlock
+    //
+    private triggerInstantLock(lockState: number, lockStartedCallback: () => void) {
+
+        // We can't do anything if we're already transitioning the lock transition already
+        if (this.contentTransition === this.contentTransitionStates.LOCKING_IN ||
+            this.contentTransition === this.contentTransitionStates.LOCKING_OUT ||
+            this.contentTransition === this.contentTransitionStates.UNLOCKING_IN ||
+            this.contentTransition === this.contentTransitionStates.UNLOCKING_OUT) {
+
+            // We can't do anything here
+            return;
+        }
+
+        // We can lock, but do it straight away
+        this.lockedIconOpacity = (lockState === this.lockState.LOCK ? 1 : 0);
+        this.buttonOpacity = (lockState === this.lockState.LOCK ? 0 : 1);
+
+        // It's started
+        if (lockStartedCallback != null) {
+            lockStartedCallback();
+        }
+
+        // And it's done...
+        let callbackToCall = (lockState === this.lockState.LOCK ? this.contentLockedCallback : this.contentUnlockedCallback);
+        if (callbackToCall != null) {
+            callbackToCall();
+        }
     }
 
     //

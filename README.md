@@ -333,7 +333,9 @@ Automatic transitioning of states works for both HTML and custom component conte
 Dialogs can be locked, which removes the buttons, stops users from closing the dialog and displays an optional progress icon.  This is useful when a dialog is communicating with servers or is otherwise busy and cannot be modified.
 ![](https://cloud.githubusercontent.com/assets/1649415/18935096/b851fe5e-85d5-11e6-9ff3-219019b930a1.gif)
 
-Locking a dialog is as simple as calling [Ng2DynamicDialogComponent lock] or [Ng2DynamicDialogComponent unlock] to release it and can be seen in [locked-content.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-content/locked-content.component.ts).
+Locking a dialog is as simple as calling [Ng2DynamicDialogComponent lock(instant: boolean)] or [Ng2DynamicDialogComponent unlock(instant: boolean)] to release it and can be seen in [locked-content.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-content/locked-content.component.ts).
+
+The boolean parameter specifies if the lock should be instant or whether there should be a transition between the current and next state.  Regardless of whether true or false is provided, the callback order is the same.
 
 Once locked, the buttons will be removed and any custom components can hook into the 'Ng2DynamicDialogCallbacks' options to detect when the lock has started or finished and disable any custom elements that are currently being shown.
 
@@ -583,6 +585,9 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 <br>
 
 ## Change Log
+
+### x.y.z
+* The dialogs lock/unlock function now takes a boolean to indicate whether a lock should be instant or via a transition
 
 ### 1.0.0
 * Added callback owners, which allow a dialog callback to identify which object will be called next if Ng2DynamicDialogCallbackResult.CallSubsequent is returned.
