@@ -34,7 +34,7 @@ ng2-dynamic-dialog has the following additional dependancies
 ## Installation
 1. Add the package to your 'dependencies' list in `package.json` and run `npm install`
 
-  `"ng2-dynamic-dialog": "^0.9.0"`
+  `"ng2-dynamic-dialog": "^1.0.0"`
   
   Optionally, you can manually install the package using the npm command line
 
@@ -583,6 +583,9 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 <br>
 
 ## Change Log
+
+### 1.0.0
+* Added callback owners, which allow a dialog callback to identify which object will be called next if Ng2DynamicDialogCallbackResult.CallSubsequent is returned.
 
 ### 0.9.0
 * Updated to Typescript 2.0.x
