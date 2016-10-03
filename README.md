@@ -586,7 +586,7 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 
 ## Change Log
 
-### x.y.z
+### 1.1.0
 * The dialogs lock/unlock function now takes a boolean to indicate whether a lock should be instant or via a transition
 
 ### 1.0.0
