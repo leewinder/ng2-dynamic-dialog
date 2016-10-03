@@ -4,6 +4,7 @@ import { Ng2DynamicDialogComponent } from 'ng2-dynamic-dialog';
 
 import { Ng2DynamicDialogContent } from 'ng2-dynamic-dialog';
 import { Ng2DynamicDialogStyle } from 'ng2-dynamic-dialog';
+import { Ng2DynamicDialogCallbacks } from 'ng2-dynamic-dialog';
 
 import { LockedContentComponent } from './locked-content/locked-content.component';
 
@@ -24,6 +25,7 @@ export class LockedComponentDialogComponent implements OnInit {
     ngOnInit() {
 
         this.setDialogStyles();
+        this.setDialogCallbacks();
     }
 
     // Shows the dialog
@@ -98,5 +100,19 @@ export class LockedComponentDialogComponent implements OnInit {
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);
+    }
+
+    //
+    // Sets the callbacks for this dialog
+    //
+    private setDialogCallbacks() {
+
+        // We're not setting any callbacks, just showing how an owner can be passed to a component callback
+        let dialogCallbacks: Ng2DynamicDialogCallbacks = new Ng2DynamicDialogCallbacks();
+        dialogCallbacks.owner = this;
+
+        // Set the callbacks
+        this.modalDialog.setCallbacks(dialogCallbacks);
+
     }
 }

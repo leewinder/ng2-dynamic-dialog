@@ -37,7 +37,7 @@ export class LockedContentComponent {
         let componentCallbacks = new Ng2DynamicDialogCallbacks();
 
         componentCallbacks.onButton1Clicked = () => this.onLockSelected();
-        componentCallbacks.onButton2Clicked = () => this.onCloseSelected();
+        componentCallbacks.onButton2Clicked = (nextOwner: any) => this.onCloseSelected(nextOwner);
 
         componentCallbacks.onContentLocking = () => this.onContentLocking();
         componentCallbacks.onContentLocked = () => this.onContentLocked();
@@ -68,7 +68,7 @@ export class LockedContentComponent {
     //
     // Called when the user decide to sign up
     //
-    private onCloseSelected(): Ng2DynamicDialogCallbackResult {
+    private onCloseSelected(nextOwner: any): Ng2DynamicDialogCallbackResult {
 
         this.dialogComponent.close();
         return Ng2DynamicDialogCallbackResult.None;

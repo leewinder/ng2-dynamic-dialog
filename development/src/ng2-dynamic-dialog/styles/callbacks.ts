@@ -12,34 +12,37 @@ export enum CallbackResult {
 //
 export class Callbacks {
 
-    // Button clicked callbacks
-    onButton1Clicked: () => CallbackResult = null;
-    onButton2Clicked: () => CallbackResult = null;
-    onButton3Clicked: () => CallbackResult = null;
+    // Owner of these callbacks
+    owner: any = null;
 
-    onButtonExitClicked: () => CallbackResult = null;
+    // Button clicked callbacks
+    onButton1Clicked: (nextOwner: any) => CallbackResult = null;
+    onButton2Clicked: (nextOwner: any) => CallbackResult = null;
+    onButton3Clicked: (nextOwner: any) => CallbackResult = null;
+
+    onButtonExitClicked: (nextOwner: any) => CallbackResult = null;
 
     // Button hover callbacks
-    onButtonEnter: () => CallbackResult = null;
-    onButtonExit: () => CallbackResult = null;
+    onButtonEnter: (nextOwner: any) => CallbackResult = null;
+    onButtonExit: (nextOwner: any) => CallbackResult = null;
 
     // Event callbacks
-    onDialogOpening: () => CallbackResult = null;
-    onDialogOpened: () => CallbackResult = null;
+    onDialogOpening: (nextOwner: any) => CallbackResult = null;
+    onDialogOpened: (nextOwner: any) => CallbackResult = null;
 
-    onDialogClosing: () => CallbackResult = null;
-    onDialogClosed: () => CallbackResult = null;
+    onDialogClosing: (nextOwner: any) => CallbackResult = null;
+    onDialogClosed: (nextOwner: any) => CallbackResult = null;
 
     // Transition callbacks
-    onTransitionDimensions: () => CallbackResult = null;
+    onTransitionDimensions: (nextOwner: any) => CallbackResult = null;
 
-    onTransitionContentHide: () => CallbackResult = null;
-    onTransitionContentShow: () => CallbackResult = null;
+    onTransitionContentHide: (nextOwner: any) => CallbackResult = null;
+    onTransitionContentShow: (nextOwner: any) => CallbackResult = null;
 
     // Lock states
-    onContentLocking: () => CallbackResult = null;
-    onContentLocked: () => CallbackResult = null;
+    onContentLocking: (nextOwner: any) => CallbackResult = null;
+    onContentLocked: (nextOwner: any) => CallbackResult = null;
 
-    onContentUnlocking: () => CallbackResult = null;
-    onContentUnlocked: () => CallbackResult = null;
+    onContentUnlocking: (nextOwner: any) => CallbackResult = null;
+    onContentUnlocked: (nextOwner: any) => CallbackResult = null;
 }
