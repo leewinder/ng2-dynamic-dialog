@@ -318,6 +318,9 @@ export class DisplayController {
         this.lockedIconOpacity = (lockState === this.lockState.LOCK ? 1 : 0);
         this.buttonOpacity = (lockState === this.lockState.LOCK ? 0 : 1);
 
+        // Save our lock state
+        this.currentLockState = lockState;
+
         // It's started
         if (lockStartedCallback != null) {
             lockStartedCallback();
