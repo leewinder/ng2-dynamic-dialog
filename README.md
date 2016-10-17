@@ -187,46 +187,24 @@ Once a dialog is being triggered, you can use 'Ng2DynamicDialogStyle' to customi
         // Initialise the style of the dialog
         let dialogStyle = new Ng2DynamicDialogStyle();
 
-        // Background style - we don't want one
-        dialogStyle.background['opacity'] = 0;
+        dialogStyle.background = 'ng2-dynamic-dialog-samples-custom-style-background';
+        dialogStyle.dialog = 'ng2-dynamic-dialog-samples-custom-style-dialog';
+        dialogStyle.title = 'ng2-dynamic-dialog-samples-custom-style-title';
 
-        // Dialog style
-        dialogStyle.dialog['font-family'] = 'Raleway';
-        dialogStyle.dialog['font-size.px'] = 14;
+        dialogStyle.buttonClose.image = 'assets/close.png';
 
-        ...
+        dialogStyle.button.general.idle = 'ng2-dynamic-dialog-samples-custom-style-button';
+        dialogStyle.button.general.hover = 'ng2-dynamic-dialog-samples-custom-style-button:hover';
 
-        dialogStyle.dialog['border-radius.px'] = 0;
-        dialogStyle.dialog['border-width.px'] = 0;
-
-        dialogStyle.dialog['box-shadow'] = '0px 0px 18px 3px rgba(120,120,120,1)';
-
-        // Button style
-        dialogStyle.button.general.idle['background-color'] = '#FFFFFF';
-        dialogStyle.button.general.idle['color'] = '#000000';
-
-        ...
-
-        // Move the first button to the right so they are bunched
-        dialogStyle.button.individial[0].idle['left.px'] = 250;
-
-        dialogStyle.button.individial[0].idle['width.px'] = 90;
-        dialogStyle.button.individial[1].idle['width.px'] = 90;
-
-        // Title style
-        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
-
-        ...
-
-        // Cancel button style
-        dialogStyle.cancelButton['source'] = 'assets/close.png';
+        dialogStyle.button.individial[0].idle = 'ng2-dynamic-dialog-samples-custom-style-button-0';
+        dialogStyle.button.individial[1].idle = 'ng2-dynamic-dialog-samples-custom-style-button-1';
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);
     }
 ```
 
-Each element is styled using CSS properties which are then applied to the dialog when it is displayed.  The default styles specified can be seen in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts)
+Each element is styled providing the name of an existing CSS class which is then applied to the dialog when it is displayed.  The default styles specified can be seen in [ng2-dynamic-dialog/background/background.component.css](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/background/background.component.css) and [ng2-dynamic-dialog/dialog/dialog.component.css](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/dialog/dialog.component.css)
 
 For more information on custom styles and how they are used, see 'Styling Dialogs' below.
 
@@ -391,52 +369,109 @@ All dialogs, whether they are HTML or custom component dialogs, are styled using
 * Dialog body and content
 * Title
 * Buttons (both generically and individually for both idle and hover states)
+* Button text
 * Cancel button
+* Locked icon
 
 ![](https://cloud.githubusercontent.com/assets/1649415/18934640/da7e8e00-85d2-11e6-8bb1-46ec26639f4d.gif)
 
-For every stylable element, you can provide CSS properties for each element which is applied when the dialog is displayed.  There is no restriction on which CSS elements can be defined within the Ng2DynamicDialogStyle object, offering significant control over how the dialog looks.
+For every stylable element, you can provide a CSS style which is applied when the dialog is displayed.  There is no restriction on which CSS attributes can be defined within the custom CSS styles, offering significant control over how the dialog looks.
 
-There are two examples of using styles within the library and samples
-* [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts) - Shows the available objects that can be defined on a per dialog basis
-* [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts) - Shows how the dialog uses Ng2DynamicDialogStyle to override pre-defined CSS properties and add new properties where needed
+The following shows how one of the samples defines the styles using CSS classes and then defines them using Ng2DynamicDialogStyle
+* [styled-with-html-dialog.component.css](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.css)
+* [styled-with-html-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/develop/samples/src/app/components/dialogs/styled-with-html-dialog/styled-with-html-dialog.component.ts)
+
+
+#### CSS Class Priorities
+
+When applying styles, multiple CSS classes can be provided, each of which build up on the properties of another.  For example, given the following in-built style for the dialog background
+
+```
+.ng2-dynamic-dialog-background {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #000000;
+    opacity: 0.4;
+}
+```
+
+If the user want's to provide their own styles, those attributes will (if already defined in the in-built style- be over-ridden.  So if the client style looks like the following
+
+```
+.my-ng2-dynamic-dialog-background-override {
+
+    background: #FF0000;
+}
+```
+
+The final applied style will be the following
+
+```
+{
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #FF0000;  // This colour in the final style is now over-ridden
+    opacity: 0.4;
+}
+```
 
 #### Styling Buttons
 The buttons contained within the dialog require a bit more work to be fully styled due to the various states they can be in
 * Generic button style either idle or hovered
 * Individual button style either idle or hovered
 
-As a result, the Ng2DynamicDialogStyle.buttons member requires properties for general idle and hover states, plus allowing you to specify idle and hover states for the individual buttons within the dialog.  The structure you can modify is defined in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts).
+As a result, the Ng2DynamicDialogStyle.buttons member requires styles for general idle and hover states, plus allowing you to specify idle and hover states for the individual buttons within the dialog.  The structure you can modify is defined in [ng2-dynamic-dialog/styles/style.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/development/src/ng2-dynamic-dialog/styles/style.ts).
 
 ```TypeScript
-  // Button style
-  button = {
-      'general': {
-          'idle': {},
-          'hover': {},
-      },
-      'individial': [
-          {
-              'idle': {},
-              'hover': {},
-          },
-          {
-              'idle': {},
-              'hover': {},
-          },
-          {
-              'idle': {},
-              'hover': {},
-          },
-      ],
-  };
+    // Button style
+    button = {
+        general: {
+            idle: '',
+            hover: '',
+        },
+        individial: [
+            {
+                idle: '',
+                hover: '',
+            },
+            {
+                idle: '',
+                hover: '',
+            },
+            {
+                idle: '',
+                hover: '',
+            },
+        ],
+    };
 ```
 
 There is also a hierarchy to how the button styles are used
-* Regardless of type, the 'hover' style first copies the properties of the idle style (meaning you do not need to duplicate properties, only the differences).  But the 'hover' property overrides any idle properties if they are defined/
-* Whether idle or hover, individial's 'hover' or 'idle' style is combined with the general 'hover' or 'idle' style with the individual style taking priority.
+* The in-built idle button style is applied first
+* The users idle button is then applied if provided
+* The in-built button specific style is then applied
+* The users button specific style is then applied if provided
+* If the button is currently in a hover state
+ * The in-built hover style is applied
+ * The users hover style is applied
 
-This boils down to having to define all the required style properties in the general.idle object, defining only the differences required on a hover or per-button basis.
+As with all over styles, later styles build on-top of previous styles meaning only changes to the style of the button need to be defined.
 
 ```TypeScript
   // Sets the style of the dialog
@@ -444,26 +479,15 @@ This boils down to having to define all the required style properties in the gen
   
       // Initialise the style of the dialog
       let dialogStyle = new Ng2DynamicDialogStyle();
-  
+      
       ...
   
-      // Button style
-      dialogStyle.button.general.idle['background-color'] = '#FFFFFF';
-      dialogStyle.button.general.idle['color'] = '#000000';
-  
-      dialogStyle.button.general.idle['border-width.px'] = 0;
-      dialogStyle.button.general.idle['border-radius.px'] = 0;
-  
-      // The button will be a different colour when hovered, otherwise it's identical to the general state
-      dialogStyle.button.general.hover['background-color'] = '#DDDDDD';
-  
-      // We'd like the first and second button to be slightly different, but the rest of  
-      // the style will be identical to the general style (either idle or hovered)
-      (<any>dialogStyle.button.individial[0].idle)['left.px'] = 250;
-  
-      (<any>dialogStyle.button.individial[0].idle)['width.px'] = 90;
-      (<any>dialogStyle.button.individial[1].idle)['width.px'] = 90;
-  
+      dialogStyle.button.general.idle = 'ng2-dynamic-dialog-samples-custom-style-button';
+      dialogStyle.button.general.hover = 'ng2-dynamic-dialog-samples-custom-style-button:hover';
+
+      dialogStyle.button.individial[0].idle = 'ng2-dynamic-dialog-samples-custom-style-button-0';
+      dialogStyle.button.individial[1].idle = 'ng2-dynamic-dialog-samples-custom-style-button-1';
+      
       ...
   
       // Set it
@@ -471,46 +495,35 @@ This boils down to having to define all the required style properties in the gen
   }
 ```
 
-#### Styling Cancel Buttons
-The cancel button is styled like any other element of the dialog with a single exception.  A special property - cancelButton.source - is required to pass through the asset used to render the exit button.
+#### Styling Cancel Buttons and Locked Icons
+The cancel button and locked icon is styled like any other property using the 'style' element of Ng2DynamicDialogStyle.buttonClose or Ng2DynamicDialogStyle.iconLocked.  You also need to specify the image using the 'image' element.
 
-```TypeScript
-  // Sets the style of the dialog
-  private setDialogStyles() {
-  
-      // Initialise the style of the dialog
-      let dialogStyle = new Ng2DynamicDialogStyle();
-  
-      ...
-  
-      // Cancel button image
-      dialogStyle.cancelButton['source'] = 'assets/close.png';
-  
-      // Set it
-      this.modalDialog.setStyle(dialogStyle);
-  }
+```
+    buttonClose = {
+        style: '',
+        image: '',
+    };
+    iconLocked = {
+        style: '',
+        image: '',
+    };
 ```
 
-<br>
-
-#### Styling Locked Icons
-The locked icon is styled like any other element of the dialog with a single exception.  A special property - lockedIcon.source - is required to pass through the asset used to render the exit button.
+This can be seen in [locked-component-dialog.component.ts](https://github.com/leewinder/ng2-dynamic-dialog/blob/master/samples/src/app/components/dialogs/locked-component-dialog/locked-component-dialog.component.ts)
 
 ```TypeScript
-  // Sets the style of the dialog
-  private setDialogStyles() {
-  
-      // Initialise the style of the dialog
-      let dialogStyle = new Ng2DynamicDialogStyle();
-  
-      ...
-  
-      // Cancel button image
-      dialogStyle.lockedIcon['source'] = 'assets/locked.gif';
-  
-      // Set it
-      this.modalDialog.setStyle(dialogStyle);
-  }
+     private setDialogStyles() {
+
+        ...
+
+        dialogStyle.buttonClose.image = 'assets/close.png';
+        dialogStyle.iconLocked.image = 'assets/locked-icon.gif';
+
+        ...
+
+        // Set it
+        this.modalDialog.setStyle(dialogStyle);
+    }
 ```
 
 <br>
