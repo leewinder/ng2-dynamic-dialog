@@ -34,7 +34,7 @@ ng2-dynamic-dialog has the following additional dependancies
 ## Installation
 1. Add the package to your 'dependencies' list in `package.json` and run `npm install`
 
-  `"ng2-dynamic-dialog": "^1.0.0"`
+  `"ng2-dynamic-dialog": "^2.0.0"`
   
   Optionally, you can manually install the package using the npm command line
 
@@ -603,6 +603,9 @@ This structure can then be passed to the dialog using [Ng2DynamicDialogComponent
 <br>
 
 ## Change Log
+
+### 2.0.0
+* Dialogs are now styled using CSS classes rather then TypeScript defined properties
 
 ### 1.1.1
 * Bug fix: Made sure the lock state was correctly set when an instant lock was triggered
