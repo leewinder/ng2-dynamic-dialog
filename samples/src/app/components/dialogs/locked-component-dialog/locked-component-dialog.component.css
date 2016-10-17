@@ -1,0 +1,46 @@
+.ng2-dynamic-dialog-samples-locked-component-background {
+    opacity: 0;
+}
+
+.ng2-dynamic-dialog-samples-locked-component-dialog {
+
+    font-family: Raleway;
+    font-size: 14px;
+
+    line-height: 150%;
+
+    color: #999999;
+
+    border-radius: 0px;
+    border-width: 0px;
+
+    box-shadow: 0px 0px 18px 3px rgba(120,120,120,1);
+}
+
+.ng2-dynamic-dialog-samples-locked-component-title {
+
+    font-family: Raleway;
+    font-weight: bold;
+    font-size: 20px;
+
+    text-align: left;
+    top: -15px;
+}
+
+.ng2-dynamic-dialog-samples-locked-component-button {
+
+    background-color: #FFFFFF;
+    color: #000000;
+
+    font-weight: bold;
+
+    border-width: 0px;
+    border-radius: 0px;
+
+    font-family: Raleway;
+    font-size: 14px;
+}
+
+.ng2-dynamic-dialog-samples-locked-component-button:hover {
+    background-color: #DDDDDD;
+}

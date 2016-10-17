@@ -6,12 +6,12 @@
     <ng2-dynamic-dialog-background [displayController]="displayController" [style.opacity]="displayController.dialogOpacity"></ng2-dynamic-dialog-background>
 
     <!-- Main dialog body -->
-    <div class="ng2-dynamic-dialog-modal" [ngStyle]="displayController.setStyleModalDialog()">
+    <div [ngStyle]="displayController.setStyleModalDialog()">
 
         <div [style.opacity]="displayController.contentOpacity">
 
             <!-- Dialog title -->
-            <div *ngIf="displayController.currentContent.title" class="ng2-dynamic-dialog-modal-title" [ngStyle]="displayController.setStyleTitle()">
+            <div *ngIf="displayController.currentContent.title" [ngStyle]="displayController.setStyleTitle()">
                 {{displayController.currentContent.title}}
             </div>
 
@@ -19,32 +19,33 @@
             <div *ngIf="displayController.currentContent.button1 && displayController.buttonOpacity > 0" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button1"
             (click)="onButtonClicked(0)" [ngStyle]="displayController.setStyleButton(0)"
             (mouseover)='onButtonMouseOver(0)' (mouseout)='onButtonMouseOut(0)'>
-                <div class="ng2-dynamic-dialog-modal-button-text" >{{displayController.currentContent.button1}}</div>
+                <div [ngStyle]="displayController.setStyleButtonText()">{{displayController.currentContent.button1}}</div>
             </div>
 
             <!-- Button 2, bottom right -->
             <div *ngIf="displayController.currentContent.button2 && displayController.buttonOpacity > 0" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button2"
             (click)="onButtonClicked(1)" [ngStyle]="displayController.setStyleButton(1)"
             (mouseover)='onButtonMouseOver(1)' (mouseout)='onButtonMouseOut(1)'>
-                <div class="ng2-dynamic-dialog-modal-button-text">{{displayController.currentContent.button2}}</div>
+                <div [ngStyle]="displayController.setStyleButtonText()">{{displayController.currentContent.button2}}</div>
             </div>
 
             <!-- 3rd button, across the entire dialog -->
             <div *ngIf="displayController.currentContent.button3 && displayController.buttonOpacity > 0" class="ng2-dynamic-dialog-modal-button ng2-dynamic-dialog-modal-button-button3"
             (click)="onButtonClicked(2)" [ngStyle]="displayController.setStyleButton(2)"
             (mouseover)='onButtonMouseOver(2)' (mouseout)='onButtonMouseOut(2)'>
-                <div class="ng2-dynamic-dialog-modal-button-text">{{displayController.currentContent.button3}}</div>
+                <div [ngStyle]="displayController.setStyleButtonText()">{{displayController.currentContent.button3}}</div>
             </div>
 
             <!-- Stock exit button -->
-            <img *ngIf="displayController.cancelButtonImage && displayController.buttonOpacity > 0" class="ng2-dynamic-dialog-modal-button-close"
-            [ngStyle]="displayController.setStyleCancelButton()"
-            (click)="displayController.close(false)" src="{{displayController.cancelButtonImage}}">
+            <img *ngIf="displayController.dialogStyle.buttonClose.image && displayController.buttonOpacity > 0"
+            [ngStyle]="displayController.setStyleCloseButton()"
+            (click)="displayController.close(false)"
+            src="{{displayController.dialogStyle.buttonClose.image}}">
 
             <!-- Locked icon -->
-            <img *ngIf="displayController.lockedIconImage && displayController.lockedIconOpacity > 0" class="ng2-dynamic-dialog-modal-icon-locked"
+            <img *ngIf="displayController.dialogStyle.iconLocked.image && displayController.lockedIconOpacity > 0"
             [ngStyle]="displayController.setStyleLockedIcon()"
-            src="{{displayController.lockedIconImage}}">
+            src="{{displayController.dialogStyle.iconLocked.image}}">
 
             <!-- Customisable per-dialog content containing unsanitized HTML-->
             <div *ngIf="displayController.currentContent.unsafeHtmlContent" [innerHTML]="displayController.currentContent.unsafeHtmlContent">

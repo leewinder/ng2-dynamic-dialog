@@ -1,32 +1,56 @@
 /* Full dialog layout properties */
-.ng2-dynamic-dialog-modal{
+.ng2-dynamic-dialog-modal {
 
     position: fixed;
 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    background-color: #ffffff;
+    color: #000000;
+
+    border-color: #000000;
+    border-radius: 15px;
+
+    border-style: solid;
+    border-width: 7px;
+
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+
+    padding: 20px;
 }
 
 /* Title positioning */
-.ng2-dynamic-dialog-modal-title{
+.ng2-dynamic-dialog-modal-title {
 
     position: relative;
     text-align: center;
 
     top: -15px;
+
+    color: #000000;
+
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-style: normal;
 }
 
 /* Close button properties */
-.ng2-dynamic-dialog-modal-button-close{
+.ng2-dynamic-dialog-modal-button-close {
 
     position: absolute;
     top: 0px;
     right: 0px;
+
+    width: 25px;
+    height: 25px;
 }
 
 /* Locked icon properties */
-.ng2-dynamic-dialog-modal-icon-locked{
+.ng2-dynamic-dialog-modal-icon-locked {
 
     position: absolute;
 
@@ -34,18 +58,54 @@
     transform: translate(-50%, 0%);
 
     bottom: 5px;
+
+    width: 50px;
+    height: 50px;
 }
 
-/* Inidiviual button properties */
-.ng2-dynamic-dialog-modal-button{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Generic button properties */
+.ng2-dynamic-dialog-modal-button {
 
     width: 130px;
     height: 40px;
+    
     line-height: 40px;
+
+    background-color: #dddddd;
+    color: #000000;
+
+    border-color: #000000;
+    border-radius: 5px;
+
+    border-style: solid;
+    border-width: 2px;
+
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+}
+
+.ng2-dynamic-dialog-modal-button:hover {
+    background-color: #ffffff;
 }
 
 /* Button 1 (bottom left) */
-.ng2-dynamic-dialog-modal-button-button1{
+.ng2-dynamic-dialog-modal-button-button-0 {
 
     position: absolute;
 
@@ -54,7 +114,7 @@
 }
 
 /* Button 2 (bottom right) */
-.ng2-dynamic-dialog-modal-button-button2{
+.ng2-dynamic-dialog-modal-button-button-1 {
 
     position: absolute;
 
@@ -63,7 +123,7 @@
 }
 
 /* Button 3 (bottom) */
-.ng2-dynamic-dialog-modal-button-button3{
+.ng2-dynamic-dialog-modal-button-button-2 {
 
     position: absolute;
     width: auto;
@@ -75,7 +135,7 @@
 }
 
 /* Text on all buttons */
-.ng2-dynamic-dialog-modal-button-text{
+.ng2-dynamic-dialog-modal-button-text {
 
     position: relative;
 

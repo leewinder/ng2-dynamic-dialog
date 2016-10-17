@@ -1,6 +1,6 @@
 // Imports
-import { Callbacks } from '../styles/callbacks';
-import { CallbackResult } from '../styles/callbacks';
+import { Callbacks } from '../../styles/callbacks';
+import { CallbackResult } from '../../styles/callbacks';
 
 //
 // Controls the management of callbacks

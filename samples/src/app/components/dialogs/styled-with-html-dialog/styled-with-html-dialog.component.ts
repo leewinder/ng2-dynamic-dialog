@@ -104,52 +104,17 @@ export class StyledWithHtmlDialogComponent implements OnInit {
         // Initialise the style of the dialog
         let dialogStyle = new Ng2DynamicDialogStyle();
 
-        // Background style - we don't want one
-        dialogStyle.background['opacity'] = 0;
+        dialogStyle.background = 'ng2-dynamic-dialog-samples-custom-style-background';
+        dialogStyle.dialog = 'ng2-dynamic-dialog-samples-custom-style-dialog';
+        dialogStyle.title = 'ng2-dynamic-dialog-samples-custom-style-title';
 
-        // Dialog style
-        dialogStyle.dialog['font-family'] = 'Raleway';
-        dialogStyle.dialog['font-size.px'] = 14;
+        dialogStyle.buttonClose.image = 'assets/close.png';
 
-        (<any>dialogStyle.dialog)['line-height.%'] = 150;
+        dialogStyle.button.general.idle = 'ng2-dynamic-dialog-samples-custom-style-button';
+        dialogStyle.button.general.hover = 'ng2-dynamic-dialog-samples-custom-style-button:hover';
 
-        dialogStyle.dialog['color'] = '#999999';
-
-        dialogStyle.dialog['border-radius.px'] = 0;
-        dialogStyle.dialog['border-width.px'] = 0;
-
-        (<any>dialogStyle.dialog)['box-shadow'] = '0px 0px 18px 3px rgba(120,120,120,1)';
-
-        // Button style
-        dialogStyle.button.general.idle['background-color'] = '#FFFFFF';
-        dialogStyle.button.general.idle['color'] = '#000000';
-
-        (<any>dialogStyle.button.general.idle)['font-weight'] = 'bold';
-
-        dialogStyle.button.general.idle['border-width.px'] = 0;
-        dialogStyle.button.general.idle['border-radius.px'] = 0;
-
-        dialogStyle.button.general.idle['font-family'] = dialogStyle.dialog['font-family'];
-        dialogStyle.button.general.idle['font-size.px'] = dialogStyle.dialog['font-size.px'] = 14;
-
-        dialogStyle.button.general.hover['background-color'] = '#DDDDDD';
-
-        // Move the first button to the right so they are bunched
-        (<any>dialogStyle.button.individial[0].idle)['left.px'] = 250;
-
-        (<any>dialogStyle.button.individial[0].idle)['width.px'] = 90;
-        (<any>dialogStyle.button.individial[1].idle)['width.px'] = 90;
-
-        // Title style
-        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
-        (<any>dialogStyle.title)['font-weight'] = 'bold';
-        dialogStyle.title['font-size.px'] = 20;
-
-        (<any>dialogStyle.title)['text-align'] = 'left';
-        (<any>dialogStyle.title)['top.px'] = -5;
-
-        // Cancel button style
-        dialogStyle.cancelButton['source'] = 'assets/close.png';
+        dialogStyle.button.individial[0].idle = 'ng2-dynamic-dialog-samples-custom-style-button-0';
+        dialogStyle.button.individial[1].idle = 'ng2-dynamic-dialog-samples-custom-style-button-1';
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);

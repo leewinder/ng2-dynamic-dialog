@@ -54,7 +54,7 @@ export class CustomComponentDialogComponent implements OnInit {
         dialogContent.button2 = 'Sign Up';
 
         // Set the dimensions to adequatly cover the components render area
-        dialogContent.height = 300;
+        dialogContent.height = 320;
         dialogContent.width = 300;
 
         // Pass through the type of component you wish to be rendered inside the dialog
@@ -75,7 +75,7 @@ export class CustomComponentDialogComponent implements OnInit {
         dialogContent.title = 'Sign Up for an Account';
         dialogContent.button3 = 'Sign Up';
 
-        dialogContent.height = 650;
+        dialogContent.height = 670;
         dialogContent.width = 430;
 
         dialogContent.componentContent = SignUpComponent;
@@ -91,30 +91,13 @@ export class CustomComponentDialogComponent implements OnInit {
         // Initialise the style of the dialog
         let dialogStyle = new Ng2DynamicDialogStyle();
 
-        // Dialog style
-        dialogStyle.dialog['border-color'] = '#005E5A';
+        dialogStyle.dialog = 'ng2-dynamic-dialog-samples-custom-component-dialog';
+        dialogStyle.title = 'ng2-dynamic-dialog-samples-custom-component-title';
 
-        dialogStyle.dialog['font-family'] = 'Architects Daughter, cursive';
-        dialogStyle.dialog['font-size.px'] = 18;
+        dialogStyle.buttonClose.image = 'assets/close.png';
 
-        // Button style
-        // Button style
-        dialogStyle.button.general.idle['background-color'] = '#00736F';
-        dialogStyle.button.general.idle['color'] = '#FFFFFF';
-
-        dialogStyle.button.general.idle['border-color'] = '#005E5A';
-
-        dialogStyle.button.general.idle['font-family'] = dialogStyle.dialog['font-family'];
-        dialogStyle.button.general.idle['font-size.px'] = dialogStyle.dialog['font-size.px'];
-        dialogStyle.button.general.idle['font-style'] = '#ffffff';
-
-        dialogStyle.button.general.hover['background-color'] = dialogStyle.button.general.idle['border-color'];
-
-        // Title style
-        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
-
-        // Other buttons
-        dialogStyle.cancelButton['source'] = 'assets/close.png';
+        dialogStyle.button.general.idle = 'ng2-dynamic-dialog-samples-custom-component-button';
+        dialogStyle.button.general.hover = 'ng2-dynamic-dialog-samples-custom-component-button:hover';
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);

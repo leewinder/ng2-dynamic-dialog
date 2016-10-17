@@ -1,7 +1,7 @@
 // Imports
 import { Component, Input } from '@angular/core';
 
-import { DisplayController } from '../controllers/display-controller';
+import { DisplayController } from '../controllers/display-controller/display-controller';
 
 //
 // Dialog background component

@@ -6,8 +6,8 @@ import { Style } from '../styles/style';
 import { Behaviour } from '../styles/behaviour';
 import { Callbacks } from '../styles/callbacks';
 
-import { DisplayController } from '../controllers/display-controller';
-import { CallbackController } from '../controllers/callback-controller';
+import { DisplayController } from '../controllers/display-controller/display-controller';
+import { CallbackController } from '../controllers/callback-controller/callback-controller';
 
 //
 // Main dialog component

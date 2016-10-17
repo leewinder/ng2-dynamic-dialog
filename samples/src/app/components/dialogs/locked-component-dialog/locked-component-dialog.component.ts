@@ -57,46 +57,15 @@ export class LockedComponentDialogComponent implements OnInit {
         let dialogStyle = new Ng2DynamicDialogStyle();
 
         // Background style - we don't want one
-        dialogStyle.background['opacity'] = 0;
+        dialogStyle.background = 'ng2-dynamic-dialog-samples-locked-component-background';
+        dialogStyle.dialog = 'ng2-dynamic-dialog-samples-locked-component-dialog';
+        dialogStyle.title = 'ng2-dynamic-dialog-samples-locked-component-title';
 
-        // Dialog style
-        dialogStyle.dialog['font-family'] = 'Raleway';
-        dialogStyle.dialog['font-size.px'] = 14;
+        dialogStyle.buttonClose.image = 'assets/close.png';
+        dialogStyle.iconLocked.image = 'assets/locked-icon.gif';
 
-        (<any>dialogStyle.dialog)['line-height.%'] = 150;
-
-        dialogStyle.dialog['color'] = '#999999';
-
-        dialogStyle.dialog['border-radius.px'] = 0;
-        dialogStyle.dialog['border-width.px'] = 0;
-
-        (<any>dialogStyle.dialog)['box-shadow'] = '0px 0px 18px 3px rgba(120,120,120,1)';
-
-        // Button style
-        dialogStyle.button.general.idle['background-color'] = '#FFFFFF';
-        dialogStyle.button.general.idle['color'] = '#000000';
-
-        (<any>dialogStyle.button.general.idle)['font-weight'] = 'bold';
-
-        dialogStyle.button.general.idle['border-width.px'] = 0;
-        dialogStyle.button.general.idle['border-radius.px'] = 0;
-
-        dialogStyle.button.general.idle['font-family'] = dialogStyle.dialog['font-family'];
-        dialogStyle.button.general.idle['font-size.px'] = dialogStyle.dialog['font-size.px'] = 14;
-
-        dialogStyle.button.general.hover['background-color'] = '#DDDDDD';
-
-        // Title style
-        dialogStyle.title['font-family'] = dialogStyle.dialog['font-family'];
-        (<any>dialogStyle.title)['font-weight'] = 'bold';
-        dialogStyle.title['font-size.px'] = 20;
-
-        (<any>dialogStyle.title)['text-align'] = 'left';
-        (<any>dialogStyle.title)['top.px'] = -5;
-
-        // Cancel button styles
-        dialogStyle.cancelButton['source'] = 'assets/close.png';
-        dialogStyle.lockedIcon['source'] = 'assets/locked-icon.gif';
+        dialogStyle.button.general.idle = 'ng2-dynamic-dialog-samples-locked-component-button';
+        dialogStyle.button.general.hover = 'ng2-dynamic-dialog-samples-locked-component-button:hover';
 
         // Set it
         this.modalDialog.setStyle(dialogStyle);

@@ -1,9 +1,13 @@
 // Imports
 import { TsLerp, TsLerpTransition, TsLerpStyle } from 'tslerp';
 
-import { Style } from '../styles/style';
-import { Behaviour } from '../styles/behaviour';
-import { Content } from '../styles/content';
+import { StyleSheets } from '../../style-sheets/style-sheets';
+
+import { Style } from '../../styles/style';
+import { Behaviour } from '../../styles/behaviour';
+import { Content } from '../../styles/content';
+
+import { CachedDisplayStyles } from './cached-display-styles';
 
 //
 // Controls the display of the dialog
@@ -75,13 +79,12 @@ export class DisplayController {
     private contentChanging: boolean = false;
     private dimensionsChanging: boolean = false;
 
-    // Button and icon properties
-    private cancelButtonImage: string = null;
-    private lockedIconImage: string = null;
-
     // Track our state
     private currentButtonStates: number[] = [this.buttonState.IDLE, this.buttonState.IDLE, this.buttonState.IDLE];
     private currentLockState: number = this.lockState.UNLOCK;
+
+    // Merged styles
+    private cachedStyles: CachedDisplayStyles = new CachedDisplayStyles();
 
     // Callbacks
     private dialogShownCallback: () => void;
@@ -97,8 +100,6 @@ export class DisplayController {
     // Constructor
     //
     constructor() {
-        // Make sure our hover styles are duplicated
-        this.duplicateIdleButtonStyles();
     }
 
     //
@@ -113,12 +114,8 @@ export class DisplayController {
             this.dialogStyle = dialogStyle;
         }
 
-        // Make sure our hover styles are duplicated
-        this.duplicateIdleButtonStyles();
-
-        // Get our button properties
-        this.getCancelButtonStyles();
-        this.getLockedIconStyles();
+        // When we set a new style, we clear the cached styles
+        this.cachedStyles.clear();
     }
 
     //
@@ -509,76 +506,29 @@ export class DisplayController {
     }
 
     //
-    // Duplicates any properties not in the button hover style from the idle style
+    // Sets the style of the dialog background
     //
-    private duplicateIdleButtonStyles() {
+    /* tslint:disable:no-unused-variable */
+    private setStyleBackground() {
+        /* tslint:enable:no-unused-variable */
 
-        // Copy the general properties
-        this.copyObjectProperties(this.dialogStyle.button.general.idle, this.dialogStyle.button.general.hover);
+        // If we don't have a cached style, generate it
+        if (this.cachedStyles.background === null) {
 
-        // Now duplicate the indivial buttons
-        for (let i = 0; i < this.dialogStyle.button.individial.length; ++i) {
-            this.copyObjectProperties(this.dialogStyle.button.individial[i].idle, this.dialogStyle.button.individial[i].hover);
-        }
-    }
-
-    //
-    // Copies the elements from one object into another
-    //
-    private copyObjectProperties(source: any, destination: any) {
-
-        // Copy over and duplicate the idle properties in hover
-        for (let key in source) {
-
-            // If this property does not exist in the hover style, add it
-            if (source.hasOwnProperty(key) === true) {
-
-                // Oull out our values
-                let destinationValue: any = (<any>destination)[key];
-                let sourceValue: any = (<any>source)[key];
-
-                // If the destination doesn't have this key, copy it over
-                if (destinationValue == null) {
-                    (<any>destination)[key] = sourceValue;
-                }
-            }
-        }
-    }
-
-    //
-    // Gets the properties of the cancel button
-    //
-    private getCancelButtonStyles() {
-
-        this.cancelButtonImage = null;
-        if (this.dialogStyle.cancelButton.source != null) {
-
-            // Do we have a string?
-            if (this.dialogStyle.cancelButton.source.length !== 0) {
-                this.cancelButtonImage = this.dialogStyle.cancelButton.source;
+            // Get the list of styles we will use, in the order that we will apply them
+            let styleList: string[] = [
+                'ng2-dynamic-dialog-background',
+            ];
+            if (this.dialogStyle.background != null && this.dialogStyle.background.length > 0) {
+                styleList.push(this.dialogStyle.background);
             }
 
-            // Lose it from the properties
-            delete this.dialogStyle.cancelButton.source;
+            // Get the styles we'll use
+            let styleToUse = StyleSheets.mergeStyles(styleList);
+            this.cachedStyles.background = styleToUse;
         }
-    }
 
-    //
-    // Gets the properties of the locked icon
-    //
-    private getLockedIconStyles() {
-
-        this.lockedIconImage = null;
-        if (this.dialogStyle.lockedIcon.source != null) {
-
-            // Do we have a string?
-            if (this.dialogStyle.lockedIcon.source.length !== 0) {
-                this.lockedIconImage = this.dialogStyle.lockedIcon.source;
-            }
-
-            // Lose it from the properties
-            delete this.dialogStyle.lockedIcon.source;
-        }
+        return this.cachedStyles.background;
     }
 
     //
@@ -588,13 +538,30 @@ export class DisplayController {
     private setStyleModalDialog() {
         /* tslint:enable:no-unused-variable */
 
-        // Add our properties
-        (<any>this.dialogStyle.dialog)['width.px'] = this.dialogWidth;
-        (<any>this.dialogStyle.dialog)['height.px'] = this.dialogHeight;
+        // If we don't have a cached style, generate it
+        if (this.cachedStyles.dialog === null) {
 
-        (<any>this.dialogStyle.dialog)['opacity'] = this.dialogOpacity;
+            // Get the list of styles we will use, in the order that we will apply them
+            let styleList: string[] = [
+                'ng2-dynamic-dialog-modal',
+            ];
+            if (this.dialogStyle.dialog != null && this.dialogStyle.dialog.length > 0) {
+                styleList.push(this.dialogStyle.dialog);
+            }
 
-        return this.dialogStyle.dialog;
+            // Get the styles we'll use
+            let styleToUse: any = StyleSheets.mergeStyles(styleList);
+            this.cachedStyles.dialog = styleToUse;
+        }
+
+        // Modify the style for our transitions
+        this.cachedStyles.dialog['width.px'] = this.dialogWidth;
+        this.cachedStyles.dialog['height.px'] = this.dialogHeight;
+
+        this.cachedStyles.dialog['opacity'] = this.dialogOpacity;
+
+        // Return the style of this dialog
+        return this.cachedStyles.dialog;
     }
 
     //
@@ -604,72 +571,60 @@ export class DisplayController {
     private setStyleTitle() {
         /* tslint:enable:no-unused-variable */
 
-        // Return our title style
-        return this.dialogStyle.title;
+        // If we don't have a cached style, generate it
+        if (this.cachedStyles.title === null) {
+
+            // Get the list of styles we will use, in the order that we will apply them
+            let styleList: string[] = [
+                'ng2-dynamic-dialog-modal-title',
+            ];
+            if (this.dialogStyle.title != null && this.dialogStyle.title.length > 0) {
+                styleList.push(this.dialogStyle.title);
+            }
+
+            // Get the styles we'll use
+            let styleToUse = StyleSheets.mergeStyles(styleList);
+            this.cachedStyles.title = styleToUse;
+        }
+
+        return this.cachedStyles.title;
     }
 
     //
-    // Called to set the style of a given button
+    // Sets the style of the close button
     //
     /* tslint:disable:no-unused-variable */
-    private setStyleButton(buttonIndex: number) {
+    private setStyleCloseButton() {
         /* tslint:enable:no-unused-variable */
 
-        // Get the styles we will use
-        let generalStyle = this.currentButtonStates[buttonIndex] === this.buttonState.HOVER ?
-            this.dialogStyle.button.general.hover : this.dialogStyle.button.general.idle;
-        let indivdualStyle = this.currentButtonStates[buttonIndex] === this.buttonState.HOVER ?
-            this.dialogStyle.button.individial[buttonIndex].hover : this.dialogStyle.button.individial[buttonIndex].idle;
+        // If we don't have a cached style, generate it
+        if (this.cachedStyles.closeButton === null) {
 
-        // Combine the styles so we use the general styles, overridden by the specific button styles
-        let styleToUse = {};
-        this.copyObjectProperties(indivdualStyle, styleToUse);
-        this.copyObjectProperties(generalStyle, styleToUse);
+            // Get the list of styles we will use, in the order that we will apply them
+            let styleList: string[] = [
+                'ng2-dynamic-dialog-modal-button-close',
+            ];
+            if (this.dialogStyle.buttonClose.style != null && this.dialogStyle.buttonClose.style.length > 0) {
+                styleList.push(this.dialogStyle.buttonClose.style);
+            }
+
+            // Get the styles we'll use
+            let styleToUse: any = StyleSheets.mergeStyles(styleList);
+            this.cachedStyles.closeButton = styleToUse;
+        }
 
         // Add the opacity
-        (<any>styleToUse)['opacity'] = this.buttonOpacity;
+        this.cachedStyles.closeButton['opacity'] = this.buttonOpacity;
 
         // Are we in transition or not?
         if (this.inTransition() === true) {
-            (<any>styleToUse)['cursor'] = 'default';
+            this.cachedStyles.closeButton['cursor'] = 'default';
         } else {
-            (<any>styleToUse)['cursor'] = 'pointer';
+            this.cachedStyles.closeButton['cursor'] = 'pointer';
         }
 
-        // Return the style of this button
-        return styleToUse;
-    }
-
-    //
-    // Sets the style of the dialog background
-    //
-    /* tslint:disable:no-unused-variable */
-    private setStyleBackground() {
-        /* tslint:enable:no-unused-variable */
-
-        // Return our background style
-        return this.dialogStyle.background;
-    }
-
-    //
-    // Sets the style of the cancel button
-    //
-    /* tslint:disable:no-unused-variable */
-    private setStyleCancelButton() {
-        /* tslint:enable:no-unused-variable */
-
-        // Add the opacity
-        (<any>this.dialogStyle.cancelButton)['opacity'] = this.buttonOpacity;
-
-        // Are we in transition or not?
-        if (this.inTransition() === true) {
-            (<any>this.dialogStyle.cancelButton)['cursor'] = 'default';
-        } else {
-            (<any>this.dialogStyle.cancelButton)['cursor'] = 'pointer';
-        }
-
-        // Return our background style
-        return this.dialogStyle.cancelButton;
+        // Return the style we'll use
+        return this.cachedStyles.closeButton;
     }
 
     //
@@ -679,8 +634,108 @@ export class DisplayController {
     private setStyleLockedIcon() {
         /* tslint:enable:no-unused-variable */
 
-        // Return our locked icon style
-        (<any>this.dialogStyle.lockedIcon)['opacity'] = this.lockedIconOpacity;
-        return this.dialogStyle.lockedIcon;
+        // If we don't have a cached style, generate it
+        if (this.cachedStyles.lockedImage === null) {
+
+            // Get the list of styles we will use, in the order that we will apply them
+            let styleList: string[] = [
+                'ng2-dynamic-dialog-modal-icon-locked',
+            ];
+            if (this.dialogStyle.iconLocked.style != null && this.dialogStyle.iconLocked.style.length > 0) {
+                styleList.push(this.dialogStyle.iconLocked.style);
+            }
+
+            // Get the styles we'll use
+            let styleToUse: any = StyleSheets.mergeStyles(styleList);
+            this.cachedStyles.lockedImage = styleToUse;
+        }
+
+        // Add our opacity
+        this.cachedStyles.lockedImage['opacity'] = this.lockedIconOpacity;
+
+        // Return the style we'll use
+        return this.cachedStyles.lockedImage;
+    }
+
+    //
+    // Sets the style of the button test
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleButtonText() {
+        /* tslint:enable:no-unused-variable */
+
+        // If we don't have a cached style, generate it
+        if (this.cachedStyles.buttonText === null) {
+
+            // Get the list of styles we will use, in the order that we will apply them
+            let styleList: string[] = [
+                'ng2-dynamic-dialog-modal-button-text',
+            ];
+            if (this.dialogStyle.buttonText != null && this.dialogStyle.buttonText.length > 0) {
+                styleList.push(this.dialogStyle.buttonText);
+            }
+
+            // Get the styles we'll use
+            let styleToUse = StyleSheets.mergeStyles(styleList);
+            this.cachedStyles.buttonText = styleToUse;
+        }
+
+        return this.cachedStyles.buttonText;
+    }
+
+    //
+    // Called to set the style of a given button
+    //
+    /* tslint:disable:no-unused-variable */
+    private setStyleButton(buttonIndex: number) {
+        /* tslint:enable:no-unused-variable */
+
+        // Build up the list of styles we need to apply
+        let styleList: string[] = [
+            'ng2-dynamic-dialog-modal-button',
+        ];
+
+        // Apply the users idle state
+        if (this.dialogStyle.button.general.idle != null && this.dialogStyle.button.general.idle.length > 0) {
+            styleList.push(this.dialogStyle.button.general.idle);
+        }
+
+        // Apply the button specific state
+        let individualButtonStyle = `ng2-dynamic-dialog-modal-button-button-${buttonIndex}`;
+        styleList.push(individualButtonStyle);
+
+        // Add the users individual style
+        let usersIndividualStyle = this.dialogStyle.button.individial[buttonIndex];
+        if (usersIndividualStyle.idle != null && usersIndividualStyle.idle.length > 0) {
+            styleList.push(usersIndividualStyle.idle);
+        }
+
+        // Apply the hover state if we need to
+        if (this.currentButtonStates[buttonIndex] === this.buttonState.HOVER) {
+
+            // Default state
+            styleList.push('ng2-dynamic-dialog-modal-button:hover');
+
+            // Apply the users hover state
+            if (this.dialogStyle.button.general.hover != null && this.dialogStyle.button.general.hover.length > 0) {
+                styleList.push(this.dialogStyle.button.general.hover);
+            }
+        }
+
+        // Get the styles we'll use
+        let styleToUse: any = StyleSheets.mergeStyles(styleList);
+
+        // Add the opacity
+        styleToUse['opacity'] = this.buttonOpacity;
+
+        // Are we in transition or not?
+        if (this.inTransition() === true) {
+            styleToUse['cursor'] = 'default';
+        } else {
+            styleToUse['cursor'] = 'pointer';
+        }
+
+        // Return the style of this button
+        return styleToUse;
     }
 }

@@ -1,0 +1,31 @@
+.ng2-dynamic-dialog-samples-custom-component-dialog {
+    
+    border-color: #005E5A;
+
+    font-family: Architects Daughter, cursive;
+    font-size: 18px;
+}
+
+.ng2-dynamic-dialog-samples-custom-component-title {
+    font-family: Architects Daughter, cursive;
+}
+
+.ng2-dynamic-dialog-samples-custom-component-button {
+
+    background-color: #00736F;
+    color: #FFFFFF;
+
+    border-color: #005E5A;
+
+    font-family: Architects Daughter, cursive;
+    font-size: 18px;
+    font-style: #ffffff;
+}
+
+.ng2-dynamic-dialog-samples-custom-component-button:hover {
+    background-color: #005E5A;
+}
+
+
+
+

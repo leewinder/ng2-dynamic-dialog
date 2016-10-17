@@ -30,7 +30,7 @@ export class DefaultWithHtmlDialogComponent {
         Note that raw HTML will be sanitized by default.</center>`;
 
         dialogContent.width = 450;
-        dialogContent.height = 220;
+        dialogContent.height = 250;
 
         this.modalDialog.show(dialogContent);
     }
