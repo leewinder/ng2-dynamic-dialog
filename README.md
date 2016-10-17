@@ -526,6 +526,11 @@ This can be seen in [locked-component-dialog.component.ts](https://github.com/le
     }
 ```
 
+#### CSS Class Naming Recommendations
+To apply the class styles to the dialog, ng2-dynamic-dialog is required to search though all the available styles. modify them and apply them in the correct order.  As such, there are a number of recommendations on how the styles should be defined
+* Give them a unique and descriptive name - if there is a style name clash, there is a chance the wrong one will be used.  As such, giving the style a name which identifies it clearly is recommended (e.g. [project-name]-dialog-style-override-[dialog-element]
+* Define a single style for all dialogs if they share the same look - since the style needs to be found before being used, having to find the same style multiple times can cause performance issues
+
 <br>
 
 ### Component Level Control
