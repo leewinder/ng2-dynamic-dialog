@@ -7,7 +7,7 @@ import { LockedComponentDialogComponent } from '../dialogs/locked-component-dial
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'main-page',
 
     templateUrl: 'main-page.component.html',

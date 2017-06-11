@@ -8,7 +8,7 @@ import { DisplayController } from '../controllers/display-controller/display-con
 //
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'ng2-dynamic-dialog-background',
 
     templateUrl: 'background.component.html',
