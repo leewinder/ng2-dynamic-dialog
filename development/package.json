@@ -1,6 +1,6 @@
 {
     "name": "ng2-dynamic-dialog",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "license": "MIT",
     "description": "A dynamically updating modal dialog for use in Angular 2 applications",
     "private": false,
