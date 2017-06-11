@@ -9,6 +9,7 @@ branches:
   only:
     - master
     - develop
+    - /^feature\/.*$/
 
 # Build both library and samples
 # We want any of these steps to fail the entire build
