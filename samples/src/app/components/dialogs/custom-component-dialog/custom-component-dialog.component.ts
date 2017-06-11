@@ -15,7 +15,7 @@ import { SignUpComponent } from './content/signup/signup.component';
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'custom-component-dialog',
 
     templateUrl: 'custom-component-dialog.component.html',

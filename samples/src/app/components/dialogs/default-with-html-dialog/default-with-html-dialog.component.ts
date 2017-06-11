@@ -5,7 +5,7 @@ import { Ng2DynamicDialogContent } from 'ng2-dynamic-dialog';
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'default-with-html-dialog',
 
     templateUrl: 'default-with-html-dialog.component.html',

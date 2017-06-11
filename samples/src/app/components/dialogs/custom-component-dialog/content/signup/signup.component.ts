@@ -4,7 +4,7 @@ import { UserDetailsService } from '../user-details/user-details.service';
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'custom-component-dialog-signup-content',
 
     templateUrl: 'signup.component.html',
