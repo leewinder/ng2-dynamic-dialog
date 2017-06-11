@@ -1,8 +1,6 @@
-#!/usr/bin/python
+""" Simple set of functions to support running commands on the CLI """
 
-#
-# Simple set of functions to support running commands on the CLI
-#
+#!/usr/bin/python
 
 # Imports
 import os
@@ -10,8 +8,9 @@ import subprocess
 
 #
 # Gets the current root directory of the project
-# 
+#
 def get_project_root():
+    """ Gets the current root directory of the project """
 
     # Get the path to our source
     file_name = os.path.basename(__file__)
@@ -25,13 +24,14 @@ def get_project_root():
 # Runs a command line program
 #
 def run_command_line(command_folder, command, args):
+    """ Runs a command line program """
 
     # Change to our folder
     os.chdir(command_folder)
 
     # Build up our command arguments
     command_and_args = [command]
-    if (args):
+    if args:
         for argument in args:
             command_and_args.append(argument)
 
@@ -43,23 +43,23 @@ def run_command_line(command_folder, command, args):
 
     # Output what we're running
     print command_being_run
-    
+
     # Run our command
     proc = subprocess.Popen(command_and_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     std_out, std_err = proc.communicate()
 
     # Output the comment results
-    if (len(std_out) != 0):
+    if not std_out:
         print command_being_run + " standard output"
         print std_out + "\n"
 
-    if (len(std_err) != 0):
+    if not std_err:
         print command_being_run + " standard error"
         print std_err + "\n"
 
     # Did we succeed?
-    if (proc.returncode != 0):
+    if proc.returncode != 0:
         print command_being_run + " failed with a return code of " + str(proc.returncode)
-    
+
     # Return our return code
     return proc.returncode, std_out, std_err
