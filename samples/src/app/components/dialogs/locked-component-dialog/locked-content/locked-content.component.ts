@@ -8,7 +8,7 @@ import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'locked-content',
 
     templateUrl: 'locked-content.component.html',

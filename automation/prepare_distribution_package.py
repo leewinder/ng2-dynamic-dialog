@@ -1,12 +1,10 @@
+""" Builds up a release package ready to be built or distributed by NPM.  The distributable content
+is taken from the development folder to make it easier to strip out unneeded package content. """
 #!/usr/bin/python
 
-#
-# Builds up a release package ready to be built or distributed by NPM.  The distributable content
-# is taken from the development folder to make it easier to strip out unneeded package content.
-#
-
 # Imports
-import shutil, os
+import os
+import shutil
 import fnmatch
 import distutils.dir_util
 import cli
@@ -15,9 +13,10 @@ import cli
 # Finds all files with a specific extension
 #
 def remove_all_files(directory, extension):
+    """ Finds all files with a specific extension """
 
     # Delete everything in the source folders
-    for root, dirnames, filenames in os.walk(directory):
+    for root, _, filenames in os.walk(directory):
         for filename in fnmatch.filter(filenames, extension):
             file_path = os.path.join(root, filename)
             os.remove(file_path)
@@ -27,6 +26,7 @@ def remove_all_files(directory, extension):
 # Removes all the build files so we can do a clean build
 #
 def clean_build_files():
+    """ Removes all the build files so we can do a clean build """
 
     # Get our path
     source_folder = cli.get_project_root() + '/development/src'
@@ -39,17 +39,19 @@ def clean_build_files():
 # Builds the Typescript project
 #
 def build_project():
+    """ Builds the Typescript project """
 
     config_root = cli.get_project_root() + '/development/'
 
-    return_code, std_out, std_err = cli.run_command_line(config_root, "tsc", ['-p', 'tsconfig-ci.json'])
-    if (return_code != 0):
+    return_code, _, _ = cli.run_command_line(config_root, "tsc", ['-p', 'tsconfig-ci.json'])
+    if return_code != 0:
         exit(return_code)
 
 #
 # Gets the main package folder
 #
 def create_package_folder():
+    """ Gets the main package folder """
 
     # Get the path to the distribution package
     root_path = cli.get_project_root() + '/release'
@@ -66,8 +68,9 @@ def create_package_folder():
 # Main entry function
 #
 def main():
+    """ Main entry function """
 
-    # Clean up our current build files 
+    # Clean up our current build files
     clean_build_files()
 
     # Build the project
@@ -84,8 +87,9 @@ def main():
     shutil.copyfile(root_folder + 'development/package.json', distribution_folder + 'package.json')
 
     # Copy over all the source files
-    distutils.dir_util.copy_tree(root_folder + 'development/src/ng2-dynamic-dialog', distribution_folder)
-    
+    distutils.dir_util.copy_tree(root_folder + 'development/src/ng2-dynamic-dialog',
+                                 distribution_folder)
+
 
 #
 # Main entry point

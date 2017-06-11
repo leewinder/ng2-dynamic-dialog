@@ -10,7 +10,7 @@ import { LockedContentComponent } from './locked-content/locked-content.componen
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'locked-component-dialog',
 
     templateUrl: 'locked-component-dialog.component.html',

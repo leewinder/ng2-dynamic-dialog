@@ -14,7 +14,7 @@ import { CallbackController } from '../controllers/callback-controller/callback-
 //
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'ng2-dynamic-dialog-modal',
 
     templateUrl: 'dialog.component.html',

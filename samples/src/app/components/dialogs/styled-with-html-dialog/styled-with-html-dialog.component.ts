@@ -11,7 +11,7 @@ import { Ng2DynamicDialogCallbackResult } from 'ng2-dynamic-dialog';
 
 @Component({
 
-    moduleId: module.id,
+    moduleId: __filename,
     selector: 'styled-with-html-dialog',
 
     templateUrl: 'styled-with-html-dialog.component.html',
