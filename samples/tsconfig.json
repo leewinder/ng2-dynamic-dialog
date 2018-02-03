@@ -12,7 +12,14 @@
         "removeComments": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "watch": true
+        "watch": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2016",
+            "dom"
+        ]
     },
     "exclude": [
         "node_modules"

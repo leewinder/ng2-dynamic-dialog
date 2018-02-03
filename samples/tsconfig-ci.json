@@ -15,7 +15,14 @@
         "watch": false,
         "diagnostics": true,
         "listFiles": true,
-        "pretty": false
+        "pretty": false,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2016",
+            "dom"
+        ]
     },
     "exclude": [
         "node_modules"
