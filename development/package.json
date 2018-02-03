@@ -1,14 +1,14 @@
 {
     "name": "ng2-dynamic-dialog",
-    "version": "2.1.0",
+    "version": "4.0.0",
     "license": "MIT",
-    "description": "A dynamically updating modal dialog for use in Angular 2 applications",
+    "description": "A dynamically updating modal dialog for use in Angular applications",
     "private": false,
     "homepage": "https://github.com/leewinder/ng2-dynamic-dialog",
     "author": {
         "name": "Lee Winder",
         "email": "lee.winder@gmail.com",
-        "url": "www.leewinder.co.uk"
+        "url": "http://www.leewinder.co.uk"
     },
     "repository": {
         "type": "git",
@@ -25,10 +25,6 @@
         "dialog",
         "modal"
     ],
-    "scripts": {
-        "postinstall": "typings install",
-        "typings": "typings"
-    },
     "peerDependencies": {
         "@angular/common": "^4.1.3",
         "@angular/compiler": "^4.1.3",
@@ -37,7 +33,7 @@
         "core-js": "^2.4.1",
         "rxjs": "^5.4.0",
         "systemjs": "0.19.27",
-        "tslerp": "^1.0.5",
+        "tslerp": "^2.0.0",
         "zone.js": "^0.8.4"
     },
     "dependencies": {
@@ -48,13 +44,15 @@
         "core-js": "^2.4.1",
         "rxjs": "^5.4.0",
         "systemjs": "0.19.27",
-        "tslerp": "^1.0.5",
+        "tslerp": "^2.0.0",
         "zone.js": "^0.8.4"
     },
     "devDependencies": {
+        "@types/core-js": "^0.9.44",
+        "@types/jasmine": "^2.8.3",
+        "@types/node": "^8.5.7",
         "concurrently": "^2.2.0",
-        "typescript": "^2.3.2",
-        "typings": "^1.3.2",
+        "typescript": "^2.6.2",
         "codelyzer": "0.0.28",
         "tslint": "3.15.1"
     }
